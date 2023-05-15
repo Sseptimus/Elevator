@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://c6m3fhad1yx6y"]
+
+[ext_resource type="Texture2D" uid="uid://dkj4q0hblw3ee" path="res://Assets/Img/icon.svg" id="1_6yedr"]
+[ext_resource type="Script" path="res://Scripts/enemy_script.cs" id="1_im4qr"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kk6kc"]
+size = Vector2(128, 128)
+
+[node name="Enemy" type="Area2D"]
+script = ExtResource("1_im4qr")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(1, 0.266667, 0.388235, 1)
+texture = ExtResource("1_6yedr")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+shape = SubResource("RectangleShape2D_kk6kc")
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]

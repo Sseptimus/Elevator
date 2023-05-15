@@ -4,10 +4,11 @@ using System;
 public partial class player_script : Area2D
 {
 	float speed = 300;
+	AnimationPlayer attack_anim;
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
-
+		attack_anim = GetNode<AnimationPlayer>("Sprite2D/AnimationPlayer");
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -27,5 +28,8 @@ public partial class player_script : Area2D
 		velocity.X *= (float)delta;
 		velocity.Y *= (float)delta;
 		Position += velocity;
+		if(Input.IsActionPressed("Attack")){
+			attack_anim.Play("Player_melee");
+		}
 	}
 }
