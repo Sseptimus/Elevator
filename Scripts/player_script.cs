@@ -3,7 +3,7 @@ using System;
 
 public partial class player_script : Area2D
 {
-	float speed = 300;
+	float speed = 400;
 	AnimationPlayer attack_anim;
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
@@ -30,6 +30,11 @@ public partial class player_script : Area2D
 		Position += velocity;
 		if(Input.IsActionPressed("Attack")){
 			attack_anim.Play("Player_melee");
+		}
+	}
+	public void _on_attack_hitbox_container_area_entered(Area2D area){
+		if(area.Name == "Enemy"){
+			area.QueueFree();
 		}
 	}
 }

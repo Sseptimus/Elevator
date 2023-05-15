@@ -20,9 +20,4 @@ public partial class enemy_script : Area2D
 		MoveLocalX(200*(float)delta);
 		
 	}
-	public void _on_area_entered(Area2D area){
-		if(area.Name == "attack_hitbox"){
-			QueueFree();
-		}
-	}
 }

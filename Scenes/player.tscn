@@ -6,7 +6,7 @@
 
 [sub_resource type="Animation" id="Animation_yn8dk"]
 resource_name = "Player_melee"
-length = 0.75
+length = 0.5
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -14,7 +14,7 @@ tracks/0/path = NodePath(".:texture")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0.1, 0.6),
+"times": PackedFloat32Array(0, 0.5),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [ExtResource("3_0r08r"), ExtResource("1_e84a1")]
@@ -22,14 +22,14 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("../attack_hitbox:monitorable")
+tracks/1/path = NodePath("Attack_hitbox_container/CollisionShape2D:disabled")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.6),
-"transitions": PackedFloat32Array(1, 1, 1),
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
 "update": 1,
-"values": [false, true, false]
+"values": [false, true]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_tsjid"]
@@ -37,30 +37,33 @@ _data = {
 "Player_melee": SubResource("Animation_yn8dk")
 }
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_skk0r"]
-size = Vector2(128, 128)
-
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mvs16"]
 size = Vector2(23, 65)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_skk0r"]
+size = Vector2(128, 128)
 
 [node name="Player" type="Area2D"]
 script = ExtResource("1_6ovbg")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("3_0r08r")
+texture = ExtResource("1_e84a1")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite2D"]
 libraries = {
 "": SubResource("AnimationLibrary_tsjid")
 }
 
+[node name="Attack_hitbox_container" type="Area2D" parent="Sprite2D"]
+position = Vector2(35, 0)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite2D/Attack_hitbox_container"]
+position = Vector2(-0.5, 0.5)
+shape = SubResource("RectangleShape2D_mvs16")
+disabled = true
+
 [node name="Player_hitbox" type="CollisionShape2D" parent="."]
 visible = false
 shape = SubResource("RectangleShape2D_skk0r")
 
-[node name="attack_hitbox" type="Area2D" parent="."]
-position = Vector2(35, 0)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="attack_hitbox"]
-position = Vector2(-0.5, 0.5)
-shape = SubResource("RectangleShape2D_mvs16")
+[connection signal="area_entered" from="Sprite2D/Attack_hitbox_container" to="." method="_on_attack_hitbox_container_area_entered"]
