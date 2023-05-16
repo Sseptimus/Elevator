@@ -7,11 +7,11 @@ public partial class player_script : Area2D
 	AnimationPlayer attack_anim;
 	String facing;
 	Sprite2D sprite;
+	public int health = 100;
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
 		attack_anim = GetNode<AnimationPlayer>("Sprite2D/AnimationPlayer");
-		//sprite = GetNode<Sprite2D>("Sprite2D");
 		
 		
 	}
@@ -39,6 +39,9 @@ public partial class player_script : Area2D
 		Position += velocity;
 		if(Input.IsActionPressed("Attack")){
 			attack_anim.Play("Player_melee");
+		}
+		if(health<=0){
+			QueueFree();
 		}
 	}
 	public void _on_attack_hitbox_container_area_entered(Area2D area){
