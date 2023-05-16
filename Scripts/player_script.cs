@@ -22,31 +22,28 @@ public partial class player_script : Area2D
 		Vector2 velocity = Vector2.Zero;
 		if(Input.IsActionPressed("ui_up")){
 			velocity.Y -= 1;
-			facing = "Up";
+			RotationDegrees = -90;
 		}if(Input.IsActionPressed("ui_down")){
 			velocity.Y += 1;
-			facing = "Down";
+			RotationDegrees = 90;
 		}if(Input.IsActionPressed("ui_left")){
 			velocity.X -= 1;
-			facing = "Left";
+			RotationDegrees = 180;
 		}if(Input.IsActionPressed("ui_right")){
 			velocity.X += 1;
-			facing = "Right";
+			RotationDegrees = 0;
 		}
 		velocity = velocity.Normalized() * speed;
 		velocity.X *= (float)delta;
 		velocity.Y *= (float)delta;
 		Position += velocity;
 		if(Input.IsActionPressed("Attack")){
-			attack_anim.Play($"Player_melee_{facing}");
+			attack_anim.Play("Player_melee");
 		}
 	}
 	public void _on_attack_hitbox_container_area_entered(Area2D area){
 		if(area.Name == "Enemy"){
 			area.QueueFree();
 		}
-	public void attack(){
-
-	}
 	}
 }

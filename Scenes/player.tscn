@@ -1,15 +1,11 @@
-[gd_scene load_steps=17 format=3 uid="uid://d4cjdtwgoct4o"]
+[gd_scene load_steps=8 format=3 uid="uid://d4cjdtwgoct4o"]
 
 [ext_resource type="Script" path="res://Scripts/player_script.cs" id="1_6ovbg"]
 [ext_resource type="Texture2D" uid="uid://bitk0lf6q5tr0" path="res://Assets/Img/Player_Idle.png" id="2_3nab4"]
-[ext_resource type="Texture2D" uid="uid://cy44b3yyq756o" path="res://Assets/Img/Player_Attack_Down.png" id="2_h3cj0"]
 [ext_resource type="Texture2D" uid="uid://ccpc2ojig4so6" path="res://Assets/Img/Player_Attack_Right.png" id="3_drexb"]
-[ext_resource type="Texture2D" uid="uid://jm6uiscv5m4x" path="res://Assets/Img/Player_Attack_Up.png" id="5_tajnu"]
-[ext_resource type="Texture2D" uid="uid://bc8muknc8y37h" path="res://Assets/Img/Player_Attack_Left.png" id="6_4sgud"]
 
-[sub_resource type="Animation" id="Animation_yn8dk"]
-resource_name = "Player_melee"
-length = 1.5
+[sub_resource type="Animation" id="Animation_pdaxm"]
+resource_name = "Player_melee_Down"
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -25,88 +21,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Attack_hitbox_container/Melee_hitbox_right:disabled")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.5),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [false, true]
-}
-
-[sub_resource type="Animation" id="Animation_wuhxu"]
-resource_name = "Player_melee_Up"
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:texture")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.5),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [ExtResource("5_tajnu"), ExtResource("2_3nab4")]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Attack_hitbox_container/Melee_hitbox_up:disabled")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.5),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [false, true]
-}
-
-[sub_resource type="Animation" id="Animation_3pgru"]
-resource_name = "Player_melee_Left"
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:texture")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.5),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [ExtResource("6_4sgud"), ExtResource("2_3nab4")]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Attack_hitbox_container/Melee_hitbox_left:disabled")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.5),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [false, true]
-}
-
-[sub_resource type="Animation" id="Animation_pdaxm"]
-resource_name = "Player_melee_Down"
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:texture")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.5),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [ExtResource("2_h3cj0"), ExtResource("2_3nab4")]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Attack_hitbox_container/Melee_hitbox_down:disabled")
+tracks/1/path = NodePath("Attack_hitbox_container/Melee_hitbox:disabled")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -118,23 +33,11 @@ tracks/1/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_tsjid"]
 _data = {
-"Player_melee_Down": SubResource("Animation_pdaxm"),
-"Player_melee_Left": SubResource("Animation_3pgru"),
-"Player_melee_Right": SubResource("Animation_yn8dk"),
-"Player_melee_Up": SubResource("Animation_wuhxu")
+"Player_melee": SubResource("Animation_pdaxm")
 }
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mvs16"]
 size = Vector2(18, 79)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_6ddl2"]
-size = Vector2(72.2223, 17)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_kb833"]
-size = Vector2(15.5556, 77)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_hf3bq"]
-size = Vector2(72.2223, 18)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_skk0r"]
 size = Vector2(52, 51)
@@ -154,24 +57,9 @@ libraries = {
 position = Vector2(36, 0)
 scale = Vector2(1.08, 1)
 
-[node name="Melee_hitbox_right" type="CollisionShape2D" parent="Sprite2D/Attack_hitbox_container"]
+[node name="Melee_hitbox" type="CollisionShape2D" parent="Sprite2D/Attack_hitbox_container"]
 position = Vector2(3.8147e-06, 0)
 shape = SubResource("RectangleShape2D_mvs16")
-disabled = true
-
-[node name="Melee_hitbox_up" type="CollisionShape2D" parent="Sprite2D/Attack_hitbox_container"]
-position = Vector2(-34.2593, -36.5)
-shape = SubResource("RectangleShape2D_6ddl2")
-disabled = true
-
-[node name="Melee_hitbox_left" type="CollisionShape2D" parent="Sprite2D/Attack_hitbox_container"]
-position = Vector2(-66.2963, 0.5)
-shape = SubResource("RectangleShape2D_kb833")
-disabled = true
-
-[node name="Melee_hitbox_down" type="CollisionShape2D" parent="Sprite2D/Attack_hitbox_container"]
-position = Vector2(-32.4074, 36)
-shape = SubResource("RectangleShape2D_hf3bq")
 disabled = true
 
 [node name="Player_hitbox" type="CollisionShape2D" parent="."]
