@@ -7,12 +7,12 @@ public partial class player_script : Area2D
 	AnimationPlayer attack_anim;
 	String facing;
 	Sprite2D sprite;
-	public int health = 100;
+	TextureProgressBar health;
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
 		attack_anim = GetNode<AnimationPlayer>("Sprite2D/AnimationPlayer");
-		
+		health = GetNode<TextureProgressBar>("Health_Bar_Container/Health_Bar");
 		
 	}
 
@@ -40,13 +40,15 @@ public partial class player_script : Area2D
 		if(Input.IsActionPressed("Attack")){
 			attack_anim.Play("Player_melee");
 		}
-		if(health<=0){
+		if(health.Value<=0){
 			QueueFree();
+			GetTree().Quit();
 		}
+		health.GetParent<Node2D>().GlobalRotationDegrees = 0;
 	}
 	public void _on_attack_hitbox_container_area_entered(Area2D area){
 		if(area.Name == "Enemy"){
-			area.QueueFree();
+			GetTree().Root.GetNode<TextureProgressBar>($"Movement_Test/{area.Name}/Health_Bar_Container/Health_Bar").Value -= 10;
 		}
 	}
 }

@@ -1,7 +1,8 @@
-[gd_scene load_steps=8 format=3 uid="uid://c6m3fhad1yx6y"]
+[gd_scene load_steps=9 format=3 uid="uid://c6m3fhad1yx6y"]
 
 [ext_resource type="Texture2D" uid="uid://dkj4q0hblw3ee" path="res://Assets/Img/icon.svg" id="1_6yedr"]
 [ext_resource type="Script" path="res://Scripts/enemy_script.cs" id="1_im4qr"]
+[ext_resource type="PackedScene" uid="uid://dtawpwuctqr5o" path="res://Scenes/heath_bar.tscn" id="2_klv58"]
 [ext_resource type="Texture2D" uid="uid://bitk0lf6q5tr0" path="res://Assets/Img/Player_Idle.png" id="3_1nqvy"]
 
 [sub_resource type="Animation" id="Animation_f3j38"]
@@ -46,6 +47,16 @@ size = Vector2(27, 128)
 [node name="Enemy" type="Area2D"]
 script = ExtResource("1_im4qr")
 
+[node name="Health_Bar_Container" type="Node2D" parent="."]
+
+[node name="Health_Bar" parent="Health_Bar_Container" instance=ExtResource("2_klv58")]
+offset_left = -47.0
+offset_top = -85.0
+offset_right = 18.0
+offset_bottom = -20.0
+
+[node name="Area2D" type="Area2D" parent="."]
+
 [node name="Sprite2D" type="Sprite2D" parent="."]
 modulate = Color(1, 0.266667, 0.388235, 1)
 texture = ExtResource("1_6yedr")
@@ -63,8 +74,10 @@ shape = SubResource("RectangleShape2D_kk6kc")
 [node name="Melee_hitbox" type="CollisionShape2D" parent="Hitbox_container"]
 position = Vector2(80.5, 0)
 shape = SubResource("RectangleShape2D_rxklx")
+disabled = true
 
 [node name="Sword" type="Sprite2D" parent="."]
+visible = false
 modulate = Color(1, 0, 1, 1)
 show_behind_parent = true
 position = Vector2(81, -2.38419e-07)
