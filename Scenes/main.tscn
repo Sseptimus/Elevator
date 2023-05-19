@@ -1,18 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://dgwpekxuoq0n0"]
+[gd_scene load_steps=2 format=3 uid="uid://dgwpekxuoq0n0"]
 
 [ext_resource type="PackedScene" uid="uid://cbstqs0dx321q" path="res://Scenes/background.tscn" id="1_q2pee"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_adpci"]
-size = Vector2(109, 1088)
 
 [node name="Main" type="Node2D"]
 
 [node name="Background" parent="." instance=ExtResource("1_q2pee")]
 offset_right = 1920.0
 offset_bottom = 1080.0
-
-[node name="RigidBody2D" type="RigidBody2D" parent="."]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D"]
-position = Vector2(53.5, 534)
-shape = SubResource("RectangleShape2D_adpci")

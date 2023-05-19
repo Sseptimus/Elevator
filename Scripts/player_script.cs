@@ -3,7 +3,8 @@ using System;
 
 public partial class player_script : CharacterBody2D
 {
-	public const float Speed = 300.0f;
+	[Export]
+	public float Speed = 300.0f;
 	
 	AnimationPlayer anim;
 	String facing;
@@ -50,8 +51,7 @@ public partial class player_script : CharacterBody2D
 			RotationDegrees = 180;
 			break;
 		}
-		Velocity = velocity;
-		MoveAndSlide();
+		
 		if(Input.IsActionPressed("Attack")){
 			if(!attack_waiting && anim.CurrentAnimation == ""){
 				anim.Play("Player_melee");
@@ -67,9 +67,10 @@ public partial class player_script : CharacterBody2D
 		if(Input.IsActionPressed("Dash")){
 			if(anim.CurrentAnimation == ""){
 				anim.Play("Player_dash");
-				
 			}
 		}
+		Velocity = velocity;
+		MoveAndSlide();
 			
 		
 		if(health.Value<=0){
