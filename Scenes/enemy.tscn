@@ -45,6 +45,7 @@ size = Vector2(128, 128)
 size = Vector2(27, 128)
 
 [node name="Enemy" type="Area2D"]
+scale = Vector2(0.75, 0.75)
 script = ExtResource("1_im4qr")
 
 [node name="Health_Bar_Container" type="Node2D" parent="."]
@@ -54,8 +55,6 @@ offset_left = -47.0
 offset_top = -85.0
 offset_right = 18.0
 offset_bottom = -20.0
-
-[node name="Area2D" type="Area2D" parent="."]
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 modulate = Color(1, 0.266667, 0.388235, 1)
