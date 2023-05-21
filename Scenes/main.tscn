@@ -1,9 +1,72 @@
-[gd_scene load_steps=2 format=3 uid="uid://dgwpekxuoq0n0"]
+[gd_scene load_steps=9 format=3 uid="uid://dgwpekxuoq0n0"]
 
+[ext_resource type="Script" path="res://Scripts/main_script.cs" id="1_kqcge"]
 [ext_resource type="PackedScene" uid="uid://cbstqs0dx321q" path="res://Scenes/background.tscn" id="1_q2pee"]
+[ext_resource type="PackedScene" uid="uid://b3j7rftutygbs" path="res://Scenes/player.tscn" id="2_58wfl"]
+[ext_resource type="PackedScene" uid="uid://c6m3fhad1yx6y" path="res://Scenes/enemy.tscn" id="3_wk727"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_okouw"]
+size = Vector2(636, 102)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fx1q5"]
+size = Vector2(107, 978)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_t2mcr"]
+size = Vector2(89, 978)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hj7em"]
+size = Vector2(1724, 0)
 
 [node name="Main" type="Node2D"]
+script = ExtResource("1_kqcge")
 
 [node name="Background" parent="." instance=ExtResource("1_q2pee")]
 offset_right = 1920.0
 offset_bottom = 1080.0
+
+[node name="Front_Wall_Left" type="StaticBody2D" parent="."]
+collision_layer = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Front_Wall_Left"]
+position = Vector2(319, 51)
+shape = SubResource("RectangleShape2D_okouw")
+
+[node name="Doors" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Doors"]
+position = Vector2(962, 51)
+shape = SubResource("RectangleShape2D_okouw")
+
+[node name="Front_Wall_Right" type="StaticBody2D" parent="."]
+collision_layer = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Front_Wall_Right"]
+position = Vector2(1602, 51)
+shape = SubResource("RectangleShape2D_okouw")
+
+[node name="Left_Wall" type="StaticBody2D" parent="."]
+collision_layer = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Left_Wall"]
+position = Vector2(53.5, 591)
+shape = SubResource("RectangleShape2D_fx1q5")
+
+[node name="Right_Wall" type="StaticBody2D" parent="."]
+collision_layer = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Right_Wall"]
+position = Vector2(1875.5, 591)
+shape = SubResource("RectangleShape2D_t2mcr")
+
+[node name="Bottom_Wall" type="StaticBody2D" parent="."]
+collision_layer = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Bottom_Wall"]
+position = Vector2(969, 1080)
+shape = SubResource("RectangleShape2D_hj7em")
+
+[node name="Player" parent="." instance=ExtResource("2_58wfl")]
+position = Vector2(765, 502)
+
+[node name="Enemy" parent="." instance=ExtResource("3_wk727")]
+position = Vector2(1256, 603)

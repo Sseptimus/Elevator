@@ -111,6 +111,10 @@ size = Vector2(52, 51)
 size = Vector2(52, 51)
 
 [node name="Player" type="CharacterBody2D"]
+z_index = 1
+collision_layer = 5
+collision_mask = 5
+collision_priority = 0.01
 script = ExtResource("1_6ovbg")
 
 [node name="Health_Bar_Container" type="Node2D" parent="."]

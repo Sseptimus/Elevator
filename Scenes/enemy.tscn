@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://c6m3fhad1yx6y"]
+[gd_scene load_steps=10 format=3 uid="uid://c6m3fhad1yx6y"]
 
 [ext_resource type="Texture2D" uid="uid://dkj4q0hblw3ee" path="res://Assets/Img/icon.svg" id="1_6yedr"]
 [ext_resource type="Script" path="res://Scripts/enemy_script.cs" id="1_im4qr"]
@@ -11,7 +11,7 @@ length = 2.0
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("../Sword:visible")
+tracks/0/path = NodePath("../Hitbox_container/Sword:visible")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -38,14 +38,18 @@ _data = {
 "Enemy_melee": SubResource("Animation_f3j38")
 }
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_kk6kc"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_x2kyo"]
 size = Vector2(128, 128)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_rxklx"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_oa4bp"]
 size = Vector2(27, 128)
 
-[node name="Enemy" type="Area2D"]
-scale = Vector2(0.75, 0.75)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_57q5t"]
+size = Vector2(128, 128)
+
+[node name="Enemy" type="CharacterBody2D"]
+collision_layer = 6
+collision_mask = 6
 script = ExtResource("1_im4qr")
 
 [node name="Health_Bar_Container" type="Node2D" parent="."]
@@ -55,6 +59,7 @@ offset_left = -47.0
 offset_top = -85.0
 offset_right = 18.0
 offset_bottom = -20.0
+metadata/_edit_use_anchors_ = true
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 modulate = Color(1, 0.266667, 0.388235, 1)
@@ -65,17 +70,14 @@ libraries = {
 "": SubResource("AnimationLibrary_kxphm")
 }
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("RectangleShape2D_kk6kc")
+[node name="Enemy_hitbox_container" type="Area2D" parent="."]
+
+[node name="Enemy_hitbox" type="CollisionShape2D" parent="Enemy_hitbox_container"]
+shape = SubResource("RectangleShape2D_x2kyo")
 
 [node name="Hitbox_container" type="Area2D" parent="."]
 
-[node name="Melee_hitbox" type="CollisionShape2D" parent="Hitbox_container"]
-position = Vector2(80.5, 0)
-shape = SubResource("RectangleShape2D_rxklx")
-disabled = true
-
-[node name="Sword" type="Sprite2D" parent="."]
+[node name="Sword" type="Sprite2D" parent="Hitbox_container"]
 visible = false
 modulate = Color(1, 0, 1, 1)
 show_behind_parent = true
@@ -83,4 +85,10 @@ position = Vector2(81, -2.38419e-07)
 scale = Vector2(0.521635, 2.47596)
 texture = ExtResource("3_1nqvy")
 
-[connection signal="area_entered" from="Hitbox_container" to="." method="_on_hitbox_container_area_entered"]
+[node name="Melee_hitbox" type="CollisionShape2D" parent="Hitbox_container"]
+position = Vector2(80.5, 0)
+shape = SubResource("RectangleShape2D_oa4bp")
+disabled = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_57q5t")

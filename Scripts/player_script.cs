@@ -85,60 +85,8 @@ public partial class player_script : CharacterBody2D
 		attack_waiting = false;	
 	}	
 	public void _on_attack_hitbox_container_area_entered(Area2D area){
-		if(area.Name == "Enemy"){
-			GetTree().Root.GetNode<TextureProgressBar>($"Movement_Test/{area.Name}/Health_Bar_Container/Health_Bar").Value -= 10;
+		if(area.Name == "Enemy_hitbox_container"){
+			GetTree().Root.GetNode<TextureProgressBar>($"Main/{area.GetParent().Name}/Health_Bar_Container/Health_Bar").Value -= 10;
 		}
 	}
 }
-/*
-using Godot;
-using System;
-
-public partial class player_script : CharacterBody2D
-{
-	float speed = 400;
-	AnimationPlayer anim;
-	String facing;
-	Sprite2D sprite;
-	TextureProgressBar health;
-	Vector2 ScreenSize;
-	bool attack_waiting = false;
-	
-
-	// Called every frame. 'delta' is the elapsed time since the previous frame.
-	public override void _PhysicsProcess(double delta)
-	{
-		
-		Vector2 inputDirection = Input.GetVector("ui_left", "ui_right", "ui_up", "ui_down");
-        Velocity = inputDirection * speed;
-		MoveAndSlide();
-		if(Input.IsActionPressed("Attack")){
-			if(!attack_waiting && anim.CurrentAnimation == ""){
-				anim.Play("Player_melee");
-				attack_delay();
-			}
-			
-		}
-		if(Input.IsActionPressed("Block")){
-			if(anim.CurrentAnimation == ""){
-				anim.Play("Player_block");
-			}
-		}
-		if(Input.IsActionPressed("Dash")){
-			if(anim.CurrentAnimation == ""){
-				anim.Play("Player_dash");
-				
-			}
-		}
-			
-		
-		if(health.Value<=0){
-			QueueFree();
-			GetTree().Quit();
-		}
-		health.GetParent<Node2D>().GlobalRotationDegrees = 0;
-	}
-	
-	
-}
-*/
