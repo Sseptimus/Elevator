@@ -1,16 +1,16 @@
-[gd_scene load_steps=14 format=3 uid="uid://b3j7rftutygbs"]
+[gd_scene load_steps=17 format=3 uid="uid://bj6mub4f7wd3a"]
 
 [ext_resource type="Script" path="res://Scripts/player_script.cs" id="1_6ovbg"]
 [ext_resource type="PackedScene" uid="uid://dtawpwuctqr5o" path="res://Scenes/heath_bar.tscn" id="2_0a5tg"]
 [ext_resource type="Texture2D" uid="uid://bitk0lf6q5tr0" path="res://Assets/Img/Player_Idle.png" id="2_3nab4"]
-[ext_resource type="Texture2D" uid="uid://ccpc2ojig4so6" path="res://Assets/Img/Player_Attack_Right.png" id="3_drexb"]
+[ext_resource type="Texture2D" uid="uid://bgos56fgujlga" path="res://Assets/Img/Player_Attack_Quick.png" id="3_gyu04"]
+[ext_resource type="Texture2D" uid="uid://ccpc2ojig4so6" path="res://Assets/Img/Player_Attack_Power.png" id="3_s5stt"]
 [ext_resource type="Texture2D" uid="uid://dqoy70hwk0pfm" path="res://Assets/Img/Player_Block.png" id="4_f4jm0"]
 [ext_resource type="Texture2D" uid="uid://bscyordj5ybnu" path="res://Assets/Img/Player_Dash.png" id="5_ikbkq"]
 
 [sub_resource type="Animation" id="Animation_k257y"]
 resource_name = "Player_dash"
 length = 0.75
-step = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -30,7 +30,7 @@ tracks/1/path = NodePath(".:texture")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0.001, 0.7),
+"times": PackedFloat32Array(0, 0.7),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [ExtResource("4_f4jm0"), ExtResource("2_3nab4")]
@@ -79,12 +79,12 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0.001, 0.5),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
-"values": [ExtResource("3_drexb"), ExtResource("2_3nab4")]
+"values": [ExtResource("3_s5stt"), ExtResource("2_3nab4")]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Attack_hitbox_container/Melee_hitbox:disabled")
+tracks/1/path = NodePath("Power_attack_hitbox_container/power_melee_hitbox:disabled")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -94,12 +94,44 @@ tracks/1/keys = {
 "values": [false, true]
 }
 
+[sub_resource type="Animation" id="Animation_x0s55"]
+resource_name = "Player_quick_melee"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Quick_attack_hitbox_container/quick_melee_hitbox:disabled")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:texture")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [ExtResource("3_gyu04"), ExtResource("2_3nab4")]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_tsjid"]
 _data = {
 "Player_block": SubResource("Animation_k257y"),
 "Player_dash": SubResource("Animation_3lco5"),
-"Player_melee": SubResource("Animation_pdaxm")
+"Player_power_melee": SubResource("Animation_pdaxm"),
+"Player_quick_melee": SubResource("Animation_x0s55")
 }
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3p8r7"]
+size = Vector2(12.963, 17)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lnxrd"]
 size = Vector2(18, 79)
@@ -107,15 +139,17 @@ size = Vector2(18, 79)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0u7sv"]
 size = Vector2(52, 51)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_2q7tf"]
-size = Vector2(52, 51)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cgkw7"]
+size = Vector2(52, 6)
 
 [node name="Player" type="CharacterBody2D"]
 z_index = 1
 collision_layer = 5
 collision_mask = 5
 collision_priority = 0.01
+safe_margin = 0.1
 script = ExtResource("1_6ovbg")
+Speed = 1200.0
 
 [node name="Health_Bar_Container" type="Node2D" parent="."]
 
@@ -134,12 +168,20 @@ libraries = {
 "": SubResource("AnimationLibrary_tsjid")
 }
 
-[node name="Attack_hitbox_container" type="Area2D" parent="Sprite2D"]
+[node name="Quick_attack_hitbox_container" type="Area2D" parent="Sprite2D"]
 position = Vector2(36, 0)
 scale = Vector2(1.08, 1)
 
-[node name="Melee_hitbox" type="CollisionShape2D" parent="Sprite2D/Attack_hitbox_container"]
-position = Vector2(3.8147e-06, 0)
+[node name="quick_melee_hitbox" type="CollisionShape2D" parent="Sprite2D/Quick_attack_hitbox_container"]
+position = Vector2(1.85185, -2.5)
+shape = SubResource("RectangleShape2D_3p8r7")
+disabled = true
+
+[node name="Power_attack_hitbox_container" type="Area2D" parent="Sprite2D"]
+
+[node name="power_melee_hitbox" type="CollisionShape2D" parent="Sprite2D/Power_attack_hitbox_container"]
+position = Vector2(36, 0)
+scale = Vector2(1.08, 1)
 shape = SubResource("RectangleShape2D_lnxrd")
 disabled = true
 
@@ -150,8 +192,8 @@ position = Vector2(0, -0.5)
 shape = SubResource("RectangleShape2D_0u7sv")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
-position = Vector2(0, -0.5)
-shape = SubResource("RectangleShape2D_2q7tf")
+position = Vector2(0, 22)
+shape = SubResource("RectangleShape2D_cgkw7")
 
-[connection signal="area_entered" from="Sprite2D/Attack_hitbox_container" to="." method="_on_attack_hitbox_container_area_entered"]
+[connection signal="area_entered" from="Sprite2D/Quick_attack_hitbox_container" to="." method="_on_quick_attack_hitbox_container_area_entered"]
+[connection signal="area_entered" from="Sprite2D/Power_attack_hitbox_container" to="." method="_on_power_attack_hitbox_container_area_entered"]

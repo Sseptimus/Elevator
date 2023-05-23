@@ -1,7 +1,7 @@
-[gd_scene load_steps=10 format=3 uid="uid://c6m3fhad1yx6y"]
+[gd_scene load_steps=10 format=3 uid="uid://b17h7a6noshxu"]
 
 [ext_resource type="Texture2D" uid="uid://dkj4q0hblw3ee" path="res://Assets/Img/icon.svg" id="1_6yedr"]
-[ext_resource type="Script" path="res://Scripts/enemy_script.cs" id="1_im4qr"]
+[ext_resource type="Script" path="res://Scripts/dumb_enemy_script.cs" id="1_irgx6"]
 [ext_resource type="PackedScene" uid="uid://dtawpwuctqr5o" path="res://Scenes/heath_bar.tscn" id="2_klv58"]
 [ext_resource type="Texture2D" uid="uid://bitk0lf6q5tr0" path="res://Assets/Img/Player_Idle.png" id="3_1nqvy"]
 
@@ -44,13 +44,15 @@ size = Vector2(128, 128)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_oa4bp"]
 size = Vector2(27, 128)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_57q5t"]
-size = Vector2(128, 128)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_a1k07"]
+size = Vector2(20, 2.8125)
 
-[node name="Enemy" type="CharacterBody2D"]
+[node name="Dumb_Enemy" type="CharacterBody2D"]
+scale = Vector2(0.5, 0.5)
 collision_layer = 6
 collision_mask = 6
-script = ExtResource("1_im4qr")
+safe_margin = 0.1
+script = ExtResource("1_irgx6")
 
 [node name="Health_Bar_Container" type="Node2D" parent="."]
 
@@ -59,6 +61,8 @@ offset_left = -47.0
 offset_top = -85.0
 offset_right = 18.0
 offset_bottom = -20.0
+max_value = 60.0
+value = 60.0
 metadata/_edit_use_anchors_ = true
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
@@ -91,4 +95,15 @@ shape = SubResource("RectangleShape2D_oa4bp")
 disabled = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("RectangleShape2D_57q5t")
+position = Vector2(0, 55)
+scale = Vector2(6.32, 6.4)
+shape = SubResource("RectangleShape2D_a1k07")
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+target_desired_distance = 0.1
+navigation_layers = 7
+avoidance_enabled = true
+
+[node name="NavigationObstacle2D" type="NavigationObstacle2D" parent="."]
+
+[connection signal="area_entered" from="Hitbox_container" to="." method="_on_hitbox_container_area_entered"]

@@ -1,9 +1,9 @@
-[gd_scene load_steps=9 format=3 uid="uid://dgwpekxuoq0n0"]
+[gd_scene load_steps=10 format=3 uid="uid://dymubtquxmn83"]
 
 [ext_resource type="Script" path="res://Scripts/main_script.cs" id="1_kqcge"]
 [ext_resource type="PackedScene" uid="uid://cbstqs0dx321q" path="res://Scenes/background.tscn" id="1_q2pee"]
-[ext_resource type="PackedScene" uid="uid://b3j7rftutygbs" path="res://Scenes/player.tscn" id="2_58wfl"]
-[ext_resource type="PackedScene" uid="uid://c6m3fhad1yx6y" path="res://Scenes/enemy.tscn" id="3_wk727"]
+[ext_resource type="PackedScene" uid="uid://bj6mub4f7wd3a" path="res://Scenes/player.tscn" id="2_58wfl"]
+[ext_resource type="PackedScene" uid="uid://b17h7a6noshxu" path="res://Scenes/dumb_enemy_melee.tscn" id="3_wk727"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_okouw"]
 size = Vector2(636, 102)
@@ -16,6 +16,11 @@ size = Vector2(89, 978)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hj7em"]
 size = Vector2(1724, 0)
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_die52"]
+vertices = PackedVector2Array(107, 1080, 107, 102, 653, 132, 1831, 1080, 647, 2, 1253, 0, 1247, 128, 1831, 102)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(4, 5, 6, 2), PackedInt32Array(3, 2, 6), PackedInt32Array(3, 6, 7)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(107, 102, 653, 132, 647, 2, 1253, 0, 1247, 128, 1831, 102, 1831, 1080, 107, 1080)])
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_kqcge")
@@ -68,5 +73,17 @@ shape = SubResource("RectangleShape2D_hj7em")
 [node name="Player" parent="." instance=ExtResource("2_58wfl")]
 position = Vector2(765, 502)
 
-[node name="Enemy" parent="." instance=ExtResource("3_wk727")]
-position = Vector2(1256, 603)
+[node name="Dumb_Enemy" parent="." instance=ExtResource("3_wk727")]
+position = Vector2(1191, 599)
+
+[node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
+navigation_polygon = SubResource("NavigationPolygon_die52")
+
+[node name="Dumb_Enemy2" parent="." instance=ExtResource("3_wk727")]
+position = Vector2(371, 360)
+
+[node name="Dumb_Enemy3" parent="." instance=ExtResource("3_wk727")]
+position = Vector2(1303, 219)
+
+[node name="Dumb_Enemy4" parent="." instance=ExtResource("3_wk727")]
+position = Vector2(1381, 741)

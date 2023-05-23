@@ -1,7 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://3js00b75k4g"]
+[gd_scene load_steps=3 format=3 uid="uid://3sym374w12jj"]
 
-[ext_resource type="PackedScene" uid="uid://c6m3fhad1yx6y" path="res://Scenes/enemy.tscn" id="1_2jghc"]
-[ext_resource type="PackedScene" uid="uid://b3j7rftutygbs" path="res://Scenes/player.tscn" id="2_8hn7i"]
+[ext_resource type="PackedScene" uid="uid://b17h7a6noshxu" path="res://Scenes/dumb_enemy_melee.tscn" id="1_2jghc"]
+[ext_resource type="PackedScene" uid="uid://bj6mub4f7wd3a" path="res://Scenes/player.tscn" id="2_8hn7i"]
 
 [node name="Movement_Test" type="Node2D"]
 

@@ -11,7 +11,8 @@ public partial class player_script : CharacterBody2D
 	Sprite2D sprite;
 	TextureProgressBar health;
 	Vector2 ScreenSize;
-	bool attack_waiting = false;
+	bool quick_attack_waiting = false;
+	bool power_attack_waiting = false;
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
@@ -52,12 +53,18 @@ public partial class player_script : CharacterBody2D
 			break;
 		}
 		
-		if(Input.IsActionPressed("Attack")){
-			if(!attack_waiting && anim.CurrentAnimation == ""){
-				anim.Play("Player_melee");
-				attack_delay();
+		if(Input.IsActionPressed("Power_Attack")){
+			if(!power_attack_waiting && anim.CurrentAnimation == ""){
+				anim.Play("Player_power_melee");
+				power_attack_delay();
 			}
 			
+		}
+		if(Input.IsActionPressed("Quick_Attack")){
+			if(!quick_attack_waiting && anim.CurrentAnimation == ""){
+				anim.Play("Player_quick_melee");
+				quick_attack_delay();
+			}
 		}
 		if(Input.IsActionPressed("Block")){
 			if(anim.CurrentAnimation == ""){
@@ -79,14 +86,25 @@ public partial class player_script : CharacterBody2D
 		}
 		health.GetParent<Node2D>().GlobalRotationDegrees = 0;
 	}
-	async void attack_delay(){
-		attack_waiting = true;
-		await ToSignal(GetTree().CreateTimer(3), "timeout");
-		attack_waiting = false;	
-	}	
-	public void _on_attack_hitbox_container_area_entered(Area2D area){
+	async void power_attack_delay(){
+		power_attack_waiting = true;
+		await ToSignal(GetTree().CreateTimer(2), "timeout");
+		power_attack_waiting = false;	
+	}
+	async void quick_attack_delay(){
+		quick_attack_waiting = true;
+		await ToSignal(GetTree().CreateTimer(1),"timeout");
+		quick_attack_waiting = false;
+	}
+	public void _on_quick_attack_hitbox_container_area_entered(Area2D area){
 		if(area.Name == "Enemy_hitbox_container"){
 			GetTree().Root.GetNode<TextureProgressBar>($"Main/{area.GetParent().Name}/Health_Bar_Container/Health_Bar").Value -= 10;
 		}
 	}
+	public void _on_power_attack_hitbox_container_area_entered(Area2D area){
+		if(area.Name == "Enemy_hitbox_container"){
+			GetTree().Root.GetNode<TextureProgressBar>($"Main/{area.GetParent().Name}/Health_Bar_Container/Health_Bar").Value -= 30;
+		}
+	}
+
 }
