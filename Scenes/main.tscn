@@ -1,12 +1,14 @@
-[gd_scene load_steps=10 format=3 uid="uid://dymubtquxmn83"]
+[gd_scene load_steps=12 format=3 uid="uid://dymubtquxmn83"]
 
 [ext_resource type="Script" path="res://Scripts/main_script.cs" id="1_kqcge"]
 [ext_resource type="PackedScene" uid="uid://cbstqs0dx321q" path="res://Scenes/background.tscn" id="1_q2pee"]
 [ext_resource type="PackedScene" uid="uid://bj6mub4f7wd3a" path="res://Scenes/player.tscn" id="2_58wfl"]
 [ext_resource type="PackedScene" uid="uid://b17h7a6noshxu" path="res://Scenes/dumb_enemy_melee.tscn" id="3_wk727"]
+[ext_resource type="PackedScene" uid="uid://cbh6d51h3xyi8" path="res://Scenes/smart_enemy_melee.tscn" id="4_ja78y"]
+[ext_resource type="PackedScene" uid="uid://c4l54heam1sl0" path="res://Scenes/Mouse.tscn" id="6_4jbuk"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_okouw"]
-size = Vector2(636, 102)
+size = Vector2(641, 102)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fx1q5"]
 size = Vector2(107, 978)
@@ -39,7 +41,7 @@ shape = SubResource("RectangleShape2D_okouw")
 [node name="Doors" type="StaticBody2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Doors"]
-position = Vector2(962, 51)
+position = Vector2(959.5, 51)
 shape = SubResource("RectangleShape2D_okouw")
 
 [node name="Front_Wall_Right" type="StaticBody2D" parent="."]
@@ -73,17 +75,22 @@ shape = SubResource("RectangleShape2D_hj7em")
 [node name="Player" parent="." instance=ExtResource("2_58wfl")]
 position = Vector2(765, 502)
 
-[node name="Dumb_Enemy" parent="." instance=ExtResource("3_wk727")]
-position = Vector2(1191, 599)
-
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
 navigation_polygon = SubResource("NavigationPolygon_die52")
 
+[node name="Smart_enemy_melee" parent="." instance=ExtResource("4_ja78y")]
+position = Vector2(758, -112)
+
+[node name="Dumb_Enemy" parent="." instance=ExtResource("3_wk727")]
+position = Vector2(1040, -201)
+
 [node name="Dumb_Enemy2" parent="." instance=ExtResource("3_wk727")]
-position = Vector2(371, 360)
+position = Vector2(872, -267)
+
+[node name="Smart_enemy_melee2" parent="." instance=ExtResource("4_ja78y")]
+position = Vector2(770, -213)
 
 [node name="Dumb_Enemy3" parent="." instance=ExtResource("3_wk727")]
-position = Vector2(1303, 219)
+position = Vector2(1124, -90)
 
-[node name="Dumb_Enemy4" parent="." instance=ExtResource("3_wk727")]
-position = Vector2(1381, 741)
+[node name="Mouse" parent="." instance=ExtResource("6_4jbuk")]

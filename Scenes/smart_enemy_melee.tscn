@@ -1,9 +1,9 @@
-[gd_scene load_steps=10 format=3 uid="uid://b17h7a6noshxu"]
+[gd_scene load_steps=10 format=3 uid="uid://cbh6d51h3xyi8"]
 
-[ext_resource type="Texture2D" uid="uid://dkj4q0hblw3ee" path="res://Assets/Img/icon.svg" id="1_6yedr"]
-[ext_resource type="Script" path="res://Scripts/dumb_enemy_script.cs" id="1_irgx6"]
-[ext_resource type="PackedScene" uid="uid://dtawpwuctqr5o" path="res://Scenes/heath_bar.tscn" id="2_klv58"]
-[ext_resource type="Texture2D" uid="uid://bitk0lf6q5tr0" path="res://Assets/Img/Player_Idle.png" id="3_1nqvy"]
+[ext_resource type="Script" path="res://Scripts/smart_enemy_melee.cs" id="1_vnh7x"]
+[ext_resource type="PackedScene" uid="uid://dtawpwuctqr5o" path="res://Scenes/heath_bar.tscn" id="2_8j8ry"]
+[ext_resource type="Texture2D" uid="uid://dkj4q0hblw3ee" path="res://Assets/Img/icon.svg" id="3_2i0qn"]
+[ext_resource type="Texture2D" uid="uid://bitk0lf6q5tr0" path="res://Assets/Img/Player_Idle.png" id="4_eefsg"]
 
 [sub_resource type="Animation" id="Animation_f3j38"]
 resource_name = "Enemy_melee"
@@ -47,16 +47,16 @@ size = Vector2(27, 128)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_a1k07"]
 size = Vector2(20, 2.8125)
 
-[node name="Dumb_Enemy" type="CharacterBody2D"]
+[node name="Smart_enemy_melee" type="CharacterBody2D"]
 scale = Vector2(0.5, 0.5)
 collision_layer = 6
 collision_mask = 6
 safe_margin = 0.1
-script = ExtResource("1_irgx6")
+script = ExtResource("1_vnh7x")
 
 [node name="Health_Bar_Container" type="Node2D" parent="."]
 
-[node name="Health_Bar" parent="Health_Bar_Container" instance=ExtResource("2_klv58")]
+[node name="Health_Bar" parent="Health_Bar_Container" instance=ExtResource("2_8j8ry")]
 offset_left = -47.0
 offset_top = -85.0
 offset_right = 18.0
@@ -67,7 +67,7 @@ metadata/_edit_use_anchors_ = true
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 modulate = Color(1, 0.266667, 0.388235, 1)
-texture = ExtResource("1_6yedr")
+texture = ExtResource("3_2i0qn")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite2D"]
 libraries = {
@@ -87,7 +87,7 @@ modulate = Color(1, 0, 1, 1)
 show_behind_parent = true
 position = Vector2(81, -2.38419e-07)
 scale = Vector2(0.521635, 2.47596)
-texture = ExtResource("3_1nqvy")
+texture = ExtResource("4_eefsg")
 
 [node name="Melee_hitbox" type="CollisionShape2D" parent="Hitbox_container"]
 position = Vector2(80.5, 0)
@@ -106,4 +106,7 @@ avoidance_enabled = true
 
 [node name="NavigationObstacle2D" type="NavigationObstacle2D" parent="."]
 
-[connection signal="area_entered" from="Hitbox_container" to="." method="_on_hitbox_container_area_entered"]
+[node name="Attack_timer" type="Timer" parent="."]
+wait_time = 1.5
+
+[connection signal="area_entered" from="Hitbox_container" to="." method="_on_hitbox_container_area_entered" flags=18]

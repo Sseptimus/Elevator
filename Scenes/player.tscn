@@ -149,7 +149,6 @@ collision_mask = 5
 collision_priority = 0.01
 safe_margin = 0.1
 script = ExtResource("1_6ovbg")
-Speed = 1200.0
 
 [node name="Health_Bar_Container" type="Node2D" parent="."]
 
@@ -194,6 +193,8 @@ shape = SubResource("RectangleShape2D_0u7sv")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 22)
 shape = SubResource("RectangleShape2D_cgkw7")
+
+[node name="Iframe_timer" type="Timer" parent="."]
 
 [connection signal="area_entered" from="Sprite2D/Quick_attack_hitbox_container" to="." method="_on_quick_attack_hitbox_container_area_entered"]
 [connection signal="area_entered" from="Sprite2D/Power_attack_hitbox_container" to="." method="_on_power_attack_hitbox_container_area_entered"]

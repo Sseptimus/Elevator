@@ -1,7 +1,7 @@
 using Godot;
 using System;
 
-public partial class dumb_enemy_script : CharacterBody2D
+public partial class smart_enemy_melee : CharacterBody2D
 {
     CharacterBody2D player;
     AnimationPlayer enemy_anim;
@@ -10,6 +10,8 @@ public partial class dumb_enemy_script : CharacterBody2D
     private NavigationAgent2D _navigationAgent;
     private float _movementSpeed = 200.0f;
     CollisionShape2D collider;
+	Timer timer;
+	bool attack_delayed;
     public Vector2 MovementTarget
     {
         get { return _navigationAgent.TargetPosition; }
@@ -24,6 +26,7 @@ public partial class dumb_enemy_script : CharacterBody2D
         health = GetNode<TextureProgressBar>("Health_Bar_Container/Health_Bar");
         _navigationAgent = GetNode<NavigationAgent2D>("NavigationAgent2D");
         collider = GetNode<CollisionShape2D>("CollisionShape2D");
+		timer = GetNode<Timer>("Attack_timer");
 
         // These values need to be adjusted for the actor's speed
         // and the navigation layout.
@@ -38,26 +41,27 @@ public partial class dumb_enemy_script : CharacterBody2D
         Vector2 velocity = Velocity;
         Vector2 current = Vector2.Zero;
         LookAt(player.Position);
-        if (_navigationAgent.IsNavigationFinished())
-        {
-            return;
-        }
 
         Vector2 currentAgentPosition = GlobalTransform.Origin;
         Vector2 nextPathPosition = _navigationAgent.GetNextPathPosition();
-		health.GetParent<Node2D>().GlobalRotation = 0;
+
         Vector2 newVelocity = (nextPathPosition - currentAgentPosition).Normalized();
-        newVelocity *= _movementSpeed;
-        if (Position.DistanceTo(player.Position) <= 70)
+        
+		if(attack_delayed){
+			newVelocity = -newVelocity;
+		}
+        else if (Position.DistanceTo(player.Position) <= 50)
         {
             newVelocity = Vector2.Zero;
         }
+		newVelocity *= _movementSpeed;
         Velocity = newVelocity;
 
         MoveAndSlide();
-        if (Position.DistanceTo(player.Position) <= 150)
+        if (Position.DistanceTo(player.Position) <= 70)
         {
             enemy_anim.Play("Enemy_melee");
+			attack_delay();
         }
         if (health.Value <= 0)
         {
@@ -72,6 +76,12 @@ public partial class dumb_enemy_script : CharacterBody2D
             healthbar.Value -= 5;
         }
     }
+	private async void attack_delay(){
+		attack_delayed = true;
+		timer.Start();
+		await ToSignal(timer, "timeout");
+		attack_delayed = false;
+	}
     private async void ActorSetup()
     {
         // Wait for the first physics frame so the NavigationServer can sync.
