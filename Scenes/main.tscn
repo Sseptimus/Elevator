@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://bj6mub4f7wd3a" path="res://Scenes/player.tscn" id="2_58wfl"]
 [ext_resource type="PackedScene" uid="uid://b17h7a6noshxu" path="res://Scenes/dumb_enemy_melee.tscn" id="3_wk727"]
 [ext_resource type="PackedScene" uid="uid://cbh6d51h3xyi8" path="res://Scenes/smart_enemy_melee.tscn" id="4_ja78y"]
-[ext_resource type="PackedScene" uid="uid://c4l54heam1sl0" path="res://Scenes/Mouse.tscn" id="6_4jbuk"]
+[ext_resource type="PackedScene" uid="uid://c4l54heam1sl0" path="res://Scenes/mouse.tscn" id="6_a2wqi"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_okouw"]
 size = Vector2(641, 102)
@@ -93,4 +93,4 @@ position = Vector2(770, -213)
 [node name="Dumb_Enemy3" parent="." instance=ExtResource("3_wk727")]
 position = Vector2(1124, -90)
 
-[node name="Mouse" parent="." instance=ExtResource("6_4jbuk")]
+[node name="Mouse" parent="." instance=ExtResource("6_a2wqi")]

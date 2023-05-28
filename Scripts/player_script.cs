@@ -13,7 +13,10 @@ public partial class player_script : CharacterBody2D
     public bool quick_attack_waiting = false;
     public bool power_attack_waiting = false;
 	bool dash_waiting = false;
+	float look_direction;
+	Vector2 look_position;
 	Timer iframe_timer;
+	Sprite2D mouse;
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
     {
@@ -21,6 +24,7 @@ public partial class player_script : CharacterBody2D
         health = GetNode<TextureProgressBar>("Health_Bar_Container/Health_Bar");
         ScreenSize = GetViewportRect().Size;
 		iframe_timer = GetNode<Timer>("Iframe_timer");
+		mouse = GetTree().Root.GetNode<Sprite2D>("Main/Mouse");
     }
 
     public override void _PhysicsProcess(double delta)
@@ -75,14 +79,28 @@ public partial class player_script : CharacterBody2D
         }
         Velocity = velocity;
         MoveAndSlide();
-
-
-        if (health.Value <= 0)
+		if(Position.DistanceTo(mouse.Position)>=45){
+			look_position = mouse.Position - Position;
+			if(Mathf.Abs(look_position.Y)>Mathf.Abs(look_position.X)){
+				if(look_position.Y > 0){
+					look_direction = 90;
+				}else{
+					look_direction = -90;}
+			}else{
+				if(look_position.X > 0){
+					look_direction = 0;
+				}else{
+					look_direction = 180;
+				}
+			}
+		}        
+		if (health.Value <= 0)
         {
             QueueFree();
             GetTree().Quit();
         }
         health.GetParent<Node2D>().GlobalRotationDegrees = 0;
+		GlobalRotationDegrees = look_direction;
     }
     async void power_attack_delay()
     {
