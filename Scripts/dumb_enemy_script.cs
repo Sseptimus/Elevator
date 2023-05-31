@@ -20,7 +20,7 @@ public partial class dumb_enemy_script : CharacterBody2D
     {
         player = GetTree().Root.GetNode<CharacterBody2D>($"Main/Player");
         enemy_anim = GetNode<AnimationPlayer>("Sprite2D/AnimationPlayer");
-        healthbar = player.GetNode<TextureProgressBar>("Health_Bar_Container/Health_Bar");
+        healthbar = player.GetNode<TextureProgressBar>("Visuals_Container/Health_Bar_Container/Health_Bar");
         health = GetNode<TextureProgressBar>("Health_Bar_Container/Health_Bar");
         _navigationAgent = GetNode<NavigationAgent2D>("NavigationAgent2D");
         collider = GetNode<CollisionShape2D>("CollisionShape2D");

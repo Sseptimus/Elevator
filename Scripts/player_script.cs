@@ -17,14 +17,16 @@ public partial class player_script : CharacterBody2D
 	Vector2 look_position;
 	Timer iframe_timer;
 	Sprite2D mouse;
+    Node2D visuals;
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
     {
-        anim = GetNode<AnimationPlayer>("Sprite2D/AnimationPlayer");
-        health = GetNode<TextureProgressBar>("Health_Bar_Container/Health_Bar");
+        anim = GetNode<AnimationPlayer>("Visuals_Container/Sprite2D/AnimationPlayer");
+        health = GetNode<TextureProgressBar>("Visuals_Container/Health_Bar_Container/Health_Bar");
         ScreenSize = GetViewportRect().Size;
 		iframe_timer = GetNode<Timer>("Iframe_timer");
-		mouse = GetTree().Root.GetNode<Sprite2D>("Main/Mouse");
+		mouse = GetNode<Sprite2D>("Mouse");
+        visuals = GetNode<Node2D>("Visuals_Container");
     }
 
     public override void _PhysicsProcess(double delta)
@@ -79,8 +81,8 @@ public partial class player_script : CharacterBody2D
         }
         Velocity = velocity;
         MoveAndSlide();
-		if(Position.DistanceTo(mouse.Position)>=45){
-			look_position = mouse.Position - Position;
+		if(GlobalPosition.DistanceTo(mouse.GlobalPosition)>=45){
+			look_position = mouse.GlobalPosition - GlobalPosition;
 			if(Mathf.Abs(look_position.Y)>Mathf.Abs(look_position.X)){
 				if(look_position.Y > 0){
 					look_direction = 90;
@@ -100,7 +102,7 @@ public partial class player_script : CharacterBody2D
             GetTree().Quit();
         }
         health.GetParent<Node2D>().GlobalRotationDegrees = 0;
-		GlobalRotationDegrees = look_direction;
+		visuals.GlobalRotationDegrees = look_direction;
     }
     async void power_attack_delay()
     {
@@ -134,14 +136,33 @@ public partial class player_script : CharacterBody2D
         }
     }
 	async void iframe(){
-		GetNode<CollisionShape2D>("Player_hitbox_container/Player_hitbox").Disabled = true;
+		GetNode<CollisionShape2D>("Visuals_Container/Player_hitbox_container/Player_hitbox").Disabled = true;
 		iframe_timer.Start();
 		await ToSignal(iframe_timer, "timeout");
-		GetNode<CollisionShape2D>("Player_hitbox_container/Player_hitbox").Disabled = false;
+		GetNode<CollisionShape2D>("Visuals_Container/Player_hitbox_container/Player_hitbox").Disabled = false;
 	}
 	public void hit(int damage){
 		health.Value -=  damage;
 
 	}
+    public override void _Input(InputEvent @event)
+    {
+        if(@event is InputEventMouseMotion mouseMotion){
+			look_position = mouse.GlobalPosition - GlobalPosition;
+			if(Mathf.Abs(look_position.Y)>Mathf.Abs(look_position.X)){
+				if(look_position.Y > 0){
+					look_direction = 90;
+				}else{
+					look_direction = -90;}
+			}else{
+				if(look_position.X > 0){
+					look_direction = 0;
+				}else{
+					look_direction = 180;
+				}
+			}
+            visuals.GlobalRotationDegrees = look_direction;
+		}
+    }
 
 }
