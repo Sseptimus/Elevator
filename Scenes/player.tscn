@@ -1,13 +1,14 @@
-[gd_scene load_steps=18 format=3 uid="uid://bj6mub4f7wd3a"]
+[gd_scene load_steps=19 format=3 uid="uid://bj6mub4f7wd3a"]
 
 [ext_resource type="Script" path="res://Scripts/player_script.cs" id="1_6ovbg"]
 [ext_resource type="PackedScene" uid="uid://dtawpwuctqr5o" path="res://Scenes/heath_bar.tscn" id="2_0a5tg"]
 [ext_resource type="Texture2D" uid="uid://bitk0lf6q5tr0" path="res://Assets/Img/Player_Idle.png" id="2_3nab4"]
-[ext_resource type="Texture2D" uid="uid://bgos56fgujlga" path="res://Assets/Img/Player_Attack_Quick.png" id="3_gyu04"]
-[ext_resource type="Texture2D" uid="uid://ccpc2ojig4so6" path="res://Assets/Img/Player_Attack_Power.png" id="3_s5stt"]
 [ext_resource type="Texture2D" uid="uid://dqoy70hwk0pfm" path="res://Assets/Img/Player_Block.png" id="4_f4jm0"]
 [ext_resource type="Texture2D" uid="uid://bscyordj5ybnu" path="res://Assets/Img/Player_Dash.png" id="5_ikbkq"]
+[ext_resource type="Texture2D" uid="uid://imlkfb28ch3t" path="res://Assets/Img/Player_Attack_Power_Sword.png" id="7_pmfgy"]
 [ext_resource type="PackedScene" uid="uid://c4l54heam1sl0" path="res://Scenes/mouse.tscn" id="8_5l4mw"]
+[ext_resource type="Texture2D" uid="uid://y8ec7d3b5gc0" path="res://Assets/Img/Empty.png" id="8_hif3a"]
+[ext_resource type="Texture2D" uid="uid://dsq8ap5v75vsu" path="res://Assets/Img/Player_Attack_Quick_Sword.png" id="9_1h1qq"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cgkw7"]
 size = Vector2(52, 6)
@@ -70,36 +71,35 @@ tracks/1/keys = {
 
 [sub_resource type="Animation" id="Animation_pdaxm"]
 resource_name = "Player_melee_Down"
-length = 0.5
-step = 0.01
+length = 0.3
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath(".:texture")
+tracks/0/path = NodePath("Power_attack_hitbox_container/power_melee_hitbox:disabled")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0.001, 0.5),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [ExtResource("3_s5stt"), ExtResource("2_3nab4")]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Power_attack_hitbox_container/power_melee_hitbox:disabled")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0.001, 0.5),
+"times": PackedFloat32Array(0.001, 0.3),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [false, true]
 }
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Power_attack_hitbox_container/Sprite2D:texture")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [ExtResource("7_pmfgy"), ExtResource("8_hif3a")]
+}
 
 [sub_resource type="Animation" id="Animation_x0s55"]
 resource_name = "Player_quick_melee"
-length = 0.5
+length = 0.2
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -107,7 +107,7 @@ tracks/0/path = NodePath("Quick_attack_hitbox_container/quick_melee_hitbox:disab
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.3),
+"times": PackedFloat32Array(0, 0.2),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [false, true]
@@ -115,14 +115,14 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath(".:texture")
+tracks/1/path = NodePath("Quick_attack_hitbox_container/Sprite2D:texture")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.3),
+"times": PackedFloat32Array(0, 0.2),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
-"values": [ExtResource("3_gyu04"), ExtResource("2_3nab4")]
+"values": [ExtResource("9_1h1qq"), ExtResource("8_hif3a")]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_tsjid"]
@@ -134,10 +134,10 @@ _data = {
 }
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3p8r7"]
-size = Vector2(12.963, 17)
+size = Vector2(12.963, 12)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lnxrd"]
-size = Vector2(18, 79)
+size = Vector2(13.6296, 73.5)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0u7sv"]
 size = Vector2(52, 51)
@@ -145,7 +145,7 @@ size = Vector2(52, 51)
 [node name="Player" type="CharacterBody2D"]
 z_index = 1
 collision_layer = 5
-collision_mask = 5
+collision_mask = 3
 collision_priority = 0.01
 safe_margin = 0.1
 script = ExtResource("1_6ovbg")
@@ -179,27 +179,38 @@ libraries = {
 }
 
 [node name="Quick_attack_hitbox_container" type="Area2D" parent="Visuals_Container/Sprite2D"]
-position = Vector2(36, 0)
 scale = Vector2(1.08, 1)
 
 [node name="quick_melee_hitbox" type="CollisionShape2D" parent="Visuals_Container/Sprite2D/Quick_attack_hitbox_container"]
-position = Vector2(1.85185, -2.5)
+position = Vector2(42.5926, 0)
 shape = SubResource("RectangleShape2D_3p8r7")
 disabled = true
+
+[node name="Sprite2D" type="Sprite2D" parent="Visuals_Container/Sprite2D/Quick_attack_hitbox_container"]
+position = Vector2(42.5926, 0)
+texture = ExtResource("8_hif3a")
 
 [node name="Power_attack_hitbox_container" type="Area2D" parent="Visuals_Container/Sprite2D"]
 
 [node name="power_melee_hitbox" type="CollisionShape2D" parent="Visuals_Container/Sprite2D/Power_attack_hitbox_container"]
-position = Vector2(36, 0)
+position = Vector2(61.64, 0.25)
 scale = Vector2(1.08, 1)
 shape = SubResource("RectangleShape2D_lnxrd")
 disabled = true
+
+[node name="Sprite2D" type="Sprite2D" parent="Visuals_Container/Sprite2D/Power_attack_hitbox_container"]
+position = Vector2(62, 0)
+texture = ExtResource("8_hif3a")
 
 [node name="Player_hitbox_container" type="Area2D" parent="Visuals_Container"]
 
 [node name="Player_hitbox" type="CollisionShape2D" parent="Visuals_Container/Player_hitbox_container"]
 position = Vector2(0, -0.5)
 shape = SubResource("RectangleShape2D_0u7sv")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="Visuals_Container"]
+
+[node name="AudioListener2D" type="AudioListener2D" parent="."]
 
 [connection signal="area_entered" from="Visuals_Container/Sprite2D/Quick_attack_hitbox_container" to="." method="_on_quick_attack_hitbox_container_area_entered"]
 [connection signal="area_entered" from="Visuals_Container/Sprite2D/Power_attack_hitbox_container" to="." method="_on_power_attack_hitbox_container_area_entered"]

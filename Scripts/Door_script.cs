@@ -1,18 +1,17 @@
 using Godot;
 using System;
 
-public partial class Door_script : StaticBody2D
+public partial class Door_script : Node2D
 {
 	int objects_inside = 0;
-	Area2D left_door;
-	Area2D right_door;
-	TextEdit line;
+	StaticBody2D left_door;
+	StaticBody2D right_door;
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
-		left_door = GetNode<Area2D>("Left_Door_Container");
-		right_door = GetNode<Area2D>("Right_Door_Container");
-		line = GetTree().Root.GetNode<TextEdit>("Main/TextEdit");
+		left_door = GetNode<StaticBody2D>("Left_Door_Container");
+		right_door = GetNode<StaticBody2D>("Right_Door_Container");
+		
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -29,7 +28,6 @@ public partial class Door_script : StaticBody2D
 		}
 		left_door.Position = currentPositionLeft;
 		right_door.Position = currentPositionRight;
-		line.Text = objects_inside.ToString();
 
 	}
 	public void _on_area_2d_area_entered(Area2D area){

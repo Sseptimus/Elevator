@@ -10,6 +10,7 @@ public partial class dumb_enemy_script : CharacterBody2D
     private NavigationAgent2D _navigationAgent;
     private float _movementSpeed = 200.0f;
     CollisionShape2D collider;
+    bool knockback = false;
     public Vector2 MovementTarget
     {
         get { return _navigationAgent.TargetPosition; }
@@ -52,8 +53,11 @@ public partial class dumb_enemy_script : CharacterBody2D
         {
             newVelocity = Vector2.Zero;
         }
+        if(knockback){
+            Velocity = -newVelocity*1.5f;
+        }else{
         Velocity = newVelocity;
-
+        }
         MoveAndSlide();
         if (Position.DistanceTo(player.Position) <= 150)
         {
@@ -79,5 +83,13 @@ public partial class dumb_enemy_script : CharacterBody2D
 
         // Now that the navigation map is no longer empty, set the movement target.
         MovementTarget = player.Position;
+    }
+    public void _on_health_bar_value_changed(float value){
+        knockback_delay();
+    }
+    private async void knockback_delay(){
+        knockback = true;
+        await ToSignal(GetTree().CreateTimer(0.05),"timeout");
+        knockback = false;
     }
 }

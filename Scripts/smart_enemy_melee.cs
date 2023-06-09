@@ -47,7 +47,7 @@ public partial class smart_enemy_melee : CharacterBody2D
 
         Vector2 newVelocity = (nextPathPosition - currentAgentPosition).Normalized();
         
-		if(attack_delayed){
+		if(attack_delayed && Position.Y > 120){
 			newVelocity = -newVelocity;
 		}
         else if (Position.DistanceTo(player.Position) <= 50)

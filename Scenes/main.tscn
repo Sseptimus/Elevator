@@ -3,7 +3,6 @@
 [ext_resource type="Script" path="res://Scripts/main_script.cs" id="1_kqcge"]
 [ext_resource type="PackedScene" uid="uid://cbstqs0dx321q" path="res://Scenes/background.tscn" id="1_q2pee"]
 [ext_resource type="PackedScene" uid="uid://bj6mub4f7wd3a" path="res://Scenes/player.tscn" id="2_58wfl"]
-[ext_resource type="PackedScene" uid="uid://b17h7a6noshxu" path="res://Scenes/dumb_enemy_melee.tscn" id="2_mxg0h"]
 [ext_resource type="Script" path="res://Scripts/Door_script.cs" id="4_bprxm"]
 [ext_resource type="Texture2D" uid="uid://dkj4q0hblw3ee" path="res://Assets/Img/icon.svg" id="4_i2rht"]
 
@@ -20,15 +19,18 @@ size = Vector2(89, 978)
 size = Vector2(1724, 0)
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_die52"]
-vertices = PackedVector2Array(107, 1080, 107, 102, 653, 132, 1831, 1080, 647, 2, 1253, 0, 1247, 128, 1831, 102)
-polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(4, 5, 6, 2), PackedInt32Array(3, 2, 6), PackedInt32Array(3, 6, 7)])
-outlines = Array[PackedVector2Array]([PackedVector2Array(107, 102, 653, 132, 647, 2, 1253, 0, 1247, 128, 1831, 102, 1831, 1080, 107, 1080)])
+vertices = PackedVector2Array(639.459, -344, 1281.91, -343, 1051.47, -40, 817.031, -39, 106.743, 1080, 106.743, 102, 811.045, 137, 1831.59, 1080, 1057.45, 140, 1830.59, 102)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(4, 5, 6, 7), PackedInt32Array(8, 9, 7), PackedInt32Array(8, 7, 6), PackedInt32Array(2, 8, 6, 3)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(106.743, 1080, 1831.59, 1080, 1830.59, 102, 1057.45, 140, 1051.47, -40, 1281.91, -343, 639.459, -344, 817.031, -39, 811.045, 137, 106.743, 102)])
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_o37oj"]
-size = Vector2(643.452, 101)
+size = Vector2(643.452, 446.5)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_yltir"]
-size = Vector2(321.483, 101.5)
+size = Vector2(321.483, 7.75)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_m673b"]
+size = Vector2(643.476, 102)
 
 [node name="Main" type="Node2D"]
 scale = Vector2(1.00241, 1)
@@ -76,41 +78,49 @@ shape = SubResource("RectangleShape2D_hj7em")
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
 navigation_polygon = SubResource("NavigationPolygon_die52")
 
-[node name="Dumb_Enemy" parent="." instance=ExtResource("2_mxg0h")]
-position = Vector2(700, 47)
-
-[node name="Doors" type="StaticBody2D" parent="."]
+[node name="Doors" type="Node2D" parent="."]
+z_index = 3
 position = Vector2(639.462, 0)
 script = ExtResource("4_bprxm")
 
 [node name="Area2D" type="Area2D" parent="Doors"]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Doors/Area2D"]
-position = Vector2(321.726, 51)
+position = Vector2(321.726, -121.75)
 shape = SubResource("RectangleShape2D_o37oj")
 
-[node name="Left_Door_Container" type="Area2D" parent="Doors"]
+[node name="Left_Door_Container" type="StaticBody2D" parent="Doors"]
+collision_layer = 3
+
+[node name="Sprite2D" type="Sprite2D" parent="Doors/Left_Door_Container"]
+position = Vector2(161.113, 50.75)
+scale = Vector2(2.51738, 0.789062)
+texture = ExtResource("4_i2rht")
 
 [node name="Left_Door" type="CollisionShape2D" parent="Doors/Left_Door_Container"]
-position = Vector2(160.614, 50)
+z_index = 10
+position = Vector2(160.614, 96.875)
 shape = SubResource("RectangleShape2D_yltir")
+debug_color = Color(0.960784, 0, 0.505882, 0.419608)
 
-[node name="Sprite2D" type="Sprite2D" parent="Doors/Left_Door_Container/Left_Door"]
-position = Vector2(0.498821, 0.749996)
+[node name="NavigationObstacle2D" type="NavigationObstacle2D" parent="Doors/Left_Door_Container"]
+
+[node name="Right_Door_Container" type="StaticBody2D" parent="Doors"]
+position = Vector2(321.227, 0)
+collision_layer = 3
+
+[node name="Sprite2D" type="Sprite2D" parent="Doors/Right_Door_Container"]
+position = Vector2(161.113, 51.75)
 scale = Vector2(2.51738, 0.789062)
 texture = ExtResource("4_i2rht")
-
-[node name="Right_Door_Container" type="Area2D" parent="Doors"]
-position = Vector2(321.227, 0)
 
 [node name="Right_Door" type="CollisionShape2D" parent="Doors/Right_Door_Container"]
-position = Vector2(160.614, 51)
+z_index = 10
+position = Vector2(160.614, 96.875)
 shape = SubResource("RectangleShape2D_yltir")
+debug_color = Color(0.898039, 0.227451, 0.54902, 0.419608)
 
-[node name="Sprite2D" type="Sprite2D" parent="Doors/Right_Door_Container/Right_Door"]
-position = Vector2(0.498821, 0.749996)
-scale = Vector2(2.51738, 0.789062)
-texture = ExtResource("4_i2rht")
+[node name="NavigationObstacle2D" type="NavigationObstacle2D" parent="Doors/Right_Door_Container"]
 
 [node name="Level_timer" type="Timer" parent="."]
 wait_time = 30.0
@@ -118,10 +128,24 @@ wait_time = 30.0
 [node name="Player" parent="." instance=ExtResource("2_58wfl")]
 position = Vector2(765, 502)
 
-[node name="TextEdit" type="TextEdit" parent="."]
+[node name="Level_Display" type="TextEdit" parent="."]
 offset_left = 156.0
 offset_top = 12.0
 offset_right = 538.0
 offset_bottom = 96.0
 
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+position = Vector2(639.462, 0)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(321.714, 51)
+shape = SubResource("RectangleShape2D_m673b")
+
+[node name="StaticBody2D2" type="StaticBody2D" parent="."]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D2"]
+build_mode = 1
+polygon = PackedVector2Array(639.459, -1, 639.459, -345, 1282.91, -345, 1282.91, 0, 1325.8, 0, 1325.8, -372, 606.538, -373, 607.536, 0, 639.459, 0)
+
 [connection signal="area_entered" from="Doors/Area2D" to="Doors" method="_on_area_2d_area_entered"]
+[connection signal="area_exited" from="Doors/Area2D" to="Doors" method="_on_area_2d_area_exited"]
