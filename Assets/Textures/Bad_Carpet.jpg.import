@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dqoy70hwk0pfm"
-path="res://.godot/imported/Player_Block.png-774ebf863e5deecca6497eae618ec36f.ctex"
+uid="uid://di5npdmakh7up"
+path="res://.godot/imported/Bad_Carpet.jpg-046a5d49e1546f6532d6fece82196078.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Img/Player_Block.png"
-dest_files=["res://.godot/imported/Player_Block.png-774ebf863e5deecca6497eae618ec36f.ctex"]
+source_file="res://Assets/Textures/Bad_Carpet.jpg"
+dest_files=["res://.godot/imported/Bad_Carpet.jpg-046a5d49e1546f6532d6fece82196078.ctex"]
 
 [params]
 

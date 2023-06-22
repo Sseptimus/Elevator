@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bscyordj5ybnu"
-path="res://.godot/imported/Player_Dash.png-cb51d22602a486f3663a9cec9835d985.ctex"
+uid="uid://3topvnpqajxf"
+path="res://.godot/imported/Progressing_Carpet.png-cda5d1d1de711c4c1f4d5ac86499dee0.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Img/Player_Dash.png"
-dest_files=["res://.godot/imported/Player_Dash.png-cb51d22602a486f3663a9cec9835d985.ctex"]
+source_file="res://Assets/Textures/Progressing_Carpet.png"
+dest_files=["res://.godot/imported/Progressing_Carpet.png-cda5d1d1de711c4c1f4d5ac86499dee0.ctex"]
 
 [params]
 

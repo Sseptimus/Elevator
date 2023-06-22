@@ -5,6 +5,7 @@ public partial class player_script : CharacterBody2D
 {
     [Export]
     public float Speed = 300.0f;
+    AnimatedSprite2D sprite_anim;
     AnimationPlayer anim;
     String facing;
     Sprite2D sprite;
@@ -14,8 +15,8 @@ public partial class player_script : CharacterBody2D
     public bool power_attack_waiting = false;
 	bool dash_waiting = false;
     bool block_waiting = false;
-	float look_direction;
 	Vector2 look_position;
+    Vector2 aim_direction;
 	Timer iframe_timer;
 	Sprite2D mouse;
     Node2D visuals;
@@ -25,7 +26,8 @@ public partial class player_script : CharacterBody2D
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
     {
-        anim = GetNode<AnimationPlayer>("Visuals_Container/Sprite2D/AnimationPlayer");
+        sprite_anim = GetNode<AnimatedSprite2D>("Visuals_Container/AnimatedSprite2D");
+        anim = sprite_anim.GetNode<AnimationPlayer>("AnimationPlayer");
         health = GetNode<TextureProgressBar>("Visuals_Container/Health_Bar_Container/Health_Bar");
         ScreenSize = GetViewportRect().Size;
 		iframe_timer = GetNode<Timer>("Iframe_timer");
@@ -38,53 +40,79 @@ public partial class player_script : CharacterBody2D
 
     public override void _PhysicsProcess(double delta)
     {
-
         Vector2 velocity = Velocity;
         // Get the input direction and handle the movement/deceleration.
         // As good practice, you should replace UI actions with custom gameplay actions.
         Vector2 direction = Input.GetVector("ui_left", "ui_right", "ui_up", "ui_down");
         if (direction != Vector2.Zero)
         {
+            if(Mathf.Round(aim_direction.X) == -0 ){
+                aim_direction.X = 0;
+            }if(Mathf.Round(aim_direction.Y) == -0 ){
+                aim_direction.Y = 0;
+            }
             velocity = direction * Speed;
+            if(anim.CurrentAnimation == ""){
+            sprite_anim.Play($"{MathF.Round(aim_direction.X)} {MathF.Round(aim_direction.Y)}");
+            }
         }
         else
         {
             velocity.X = Mathf.MoveToward(Velocity.X, 0, Speed);
             velocity.Y = Mathf.MoveToward(velocity.Y, 0, Speed);
+            if(anim.CurrentAnimation == ""){
+            sprite_anim.Stop();
+            }
         }
         if(Mathf.Round(direction.Angle()/(Mathf.Pi/2))*(Mathf.Pi/2) != Mathf.Round(look_position.Angle()/(Mathf.Pi/2))*(Mathf.Pi/2)){
             velocity *= (float)0.75;
+            
+        }
+        
+        if(Mathf.Round(direction.Angle()/(Mathf.Pi/2))*(Mathf.Pi/2) == Mathf.Round(look_position.Angle()/(Mathf.Pi/2))*(Mathf.Pi/2) + Mathf.Pi || Mathf.Round(direction.Angle()/(Mathf.Pi/2))*(Mathf.Pi/2) == Mathf.Round(look_position.Angle()/(Mathf.Pi/2))*(Mathf.Pi/2) - Mathf.Pi){
+            sprite_anim.SpeedScale = -1;
+            
+        }
+        else{
+            sprite_anim.SpeedScale = 1;
+
         }
 
         if (Input.IsActionPressed("Power_Attack"))
         {
-            if (!power_attack_waiting && anim.CurrentAnimation == "")
+            if (!power_attack_waiting)
             {
-                anim.Play("Player_power_melee");
+                if(Mathf.Round(aim_direction.X) == -0 ){
+                aim_direction.X = 0;
+                }if(Mathf.Round(aim_direction.Y) == -0 ){
+                aim_direction.Y = 0;
+                }
+                anim.Play($"Melee_{MathF.Round(aim_direction.X)} {MathF.Round(aim_direction.Y)}");
                 power_attack_delay();
             }
 
         }
         if (Input.IsActionPressed("Quick_Attack"))
         {
-            if (!quick_attack_waiting && anim.CurrentAnimation == "")
+            if (!quick_attack_waiting)
             {
-                anim.Play("Player_quick_melee");
+                sprite_anim.Play("Player_quick_melee");
                 quick_attack_delay();
             }
         }
         if (Input.IsActionPressed("Block"))
         {
-            if (!block_waiting && anim.CurrentAnimation == "")
+            if (!block_waiting)
             {
-                anim.Play("Player_block");
+                sprite_anim.Play("Player_block");
+                block_delay();
             }
         }
         if (Input.IsActionPressed("Dash"))
         {
-            if (!dash_waiting && anim.CurrentAnimation == "")
+            if (!dash_waiting)
             {
-                anim.Play("Player_dash");
+                sprite_anim.Play("Player_dash");
 				dash_delay();
             }
         }
@@ -143,7 +171,6 @@ public partial class player_script : CharacterBody2D
 	public async void hit(int damage, Area2D area){
 		GetTree().Root.GetNode<TextureProgressBar>($"Main/{area.GetParent().Name}/Health_Bar_Container/Health_Bar").Value -= damage;
         var num = rnd.Next(1,4);
-        GD.Print(num);
         AudioStreamWav crowbar_hit = (AudioStreamWav)ResourceLoader.Load($"res://Assets/Audio/Crowbar_hit_{num.ToString()}.wav");
         sound_player.Stream = crowbar_hit;
         sound_player.Playing = true;
@@ -158,8 +185,9 @@ public partial class player_script : CharacterBody2D
     {
 			look_position = mouse.GlobalPosition - GlobalPosition;
             float angle = look_position.Angle();
-            look_direction = Mathf.Round(angle/(Mathf.Pi/4))*(Mathf.Pi/4);
-            visuals.GlobalRotation = look_direction;
+            float look_direction = Mathf.Round(angle/(Mathf.Pi/2))*(Mathf.Pi/2);
+            aim_direction.X = Mathf.Cos(look_direction);
+            aim_direction.Y = MathF.Sin(look_direction);
     }
-
+    
 }

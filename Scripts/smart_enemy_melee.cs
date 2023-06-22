@@ -12,6 +12,7 @@ public partial class smart_enemy_melee : CharacterBody2D
     CollisionShape2D collider;
 	Timer timer;
 	bool attack_delayed;
+    bool knockback = false;
     public Vector2 MovementTarget
     {
         get { return _navigationAgent.TargetPosition; }
@@ -69,12 +70,19 @@ public partial class smart_enemy_melee : CharacterBody2D
         }
         collider.GlobalRotation = 0;
     }
-    public void _on_hitbox_container_area_entered(Area2D area)
+   public void _on_hitbox_container_area_entered(Area2D area)
     {
         if (area.Name == "Player_hitbox_container")
         {
-            healthbar.Value -= 5;
+            hit();
         }
+    }
+    async void hit(){
+        healthbar.Value -= 5;
+        player.GetNode<AnimatedSprite2D>("Visuals_Container/AnimatedSprite2D").Modulate = new Color(1, 0, 0, 1);
+        await ToSignal(GetTree().CreateTimer(0.3),"timeout");
+        player.GetNode<AnimatedSprite2D>("Visuals_Container/AnimatedSprite2D").Modulate = new Color(1, 1, 1, 1);
+
     }
 	private async void attack_delay(){
 		attack_delayed = true;
@@ -89,5 +97,13 @@ public partial class smart_enemy_melee : CharacterBody2D
 
         // Now that the navigation map is no longer empty, set the movement target.
         MovementTarget = player.Position;
+    }
+    public void _on_health_bar_value_changed(float value){
+        knockback_delay();
+    }
+    private async void knockback_delay(){
+        knockback = true;
+        await ToSignal(GetTree().CreateTimer(0.05),"timeout");
+        knockback = false;
     }
 }

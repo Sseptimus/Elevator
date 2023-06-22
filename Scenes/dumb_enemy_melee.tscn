@@ -3,7 +3,6 @@
 [ext_resource type="Texture2D" uid="uid://dkj4q0hblw3ee" path="res://Assets/Img/icon.svg" id="1_6yedr"]
 [ext_resource type="Script" path="res://Scripts/dumb_enemy_script.cs" id="1_irgx6"]
 [ext_resource type="PackedScene" uid="uid://dtawpwuctqr5o" path="res://Scenes/heath_bar.tscn" id="2_klv58"]
-[ext_resource type="Texture2D" uid="uid://bitk0lf6q5tr0" path="res://Assets/Img/Player_Idle.png" id="3_1nqvy"]
 
 [sub_resource type="Animation" id="Animation_f3j38"]
 resource_name = "Enemy_melee"
@@ -40,6 +39,9 @@ _data = {
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_x2kyo"]
 size = Vector2(128, 128)
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_waaig"]
+load_path = "res://.godot/imported/Player_Idle.png-b9ea9c1e7c72aebc3e594b644f102d4e.ctex"
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_oa4bp"]
 size = Vector2(27, 128)
@@ -82,17 +84,15 @@ shape = SubResource("RectangleShape2D_x2kyo")
 [node name="Hitbox_container" type="Area2D" parent="."]
 
 [node name="Sword" type="Sprite2D" parent="Hitbox_container"]
-visible = false
 modulate = Color(1, 0, 1, 1)
 show_behind_parent = true
 position = Vector2(81, -2.38419e-07)
 scale = Vector2(0.521635, 2.47596)
-texture = ExtResource("3_1nqvy")
+texture = SubResource("CompressedTexture2D_waaig")
 
 [node name="Melee_hitbox" type="CollisionShape2D" parent="Hitbox_container"]
 position = Vector2(80.5, 0)
 shape = SubResource("RectangleShape2D_oa4bp")
-disabled = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 55)
@@ -103,8 +103,6 @@ shape = SubResource("RectangleShape2D_a1k07")
 target_desired_distance = 0.1
 navigation_layers = 7
 avoidance_enabled = true
-
-[node name="NavigationObstacle2D" type="NavigationObstacle2D" parent="."]
 
 [connection signal="value_changed" from="Health_Bar_Container/Health_Bar" to="." method="_on_health_bar_value_changed"]
 [connection signal="area_entered" from="Hitbox_container" to="." method="_on_hitbox_container_area_entered"]

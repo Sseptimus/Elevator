@@ -73,8 +73,15 @@ public partial class dumb_enemy_script : CharacterBody2D
     {
         if (area.Name == "Player_hitbox_container")
         {
-            healthbar.Value -= 5;
+            hit();
         }
+    }
+    async void hit(){
+        healthbar.Value -= 5;
+        player.GetNode<AnimatedSprite2D>("Visuals_Container/AnimatedSprite2D").Modulate = new Color(1, 0, 0, 1);
+        await ToSignal(GetTree().CreateTimer(0.3),"timeout");
+        player.GetNode<AnimatedSprite2D>("Visuals_Container/AnimatedSprite2D").Modulate = new Color(1, 1, 1, 1);
+
     }
     private async void ActorSetup()
     {

@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://Scripts/main_script.cs" id="1_kqcge"]
 [ext_resource type="PackedScene" uid="uid://cbstqs0dx321q" path="res://Scenes/background.tscn" id="1_q2pee"]
-[ext_resource type="PackedScene" uid="uid://bj6mub4f7wd3a" path="res://Scenes/player.tscn" id="2_58wfl"]
+[ext_resource type="PackedScene" uid="uid://vu4i5ua2ldcr" path="res://Scenes/player.tscn" id="2_58wfl"]
 [ext_resource type="Script" path="res://Scripts/Door_script.cs" id="4_bprxm"]
 [ext_resource type="Texture2D" uid="uid://dkj4q0hblw3ee" path="res://Assets/Img/icon.svg" id="4_i2rht"]
 
@@ -10,18 +10,18 @@
 size = Vector2(641, 102)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fx1q5"]
-size = Vector2(107, 978)
+size = Vector2(107.74, 978)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_t2mcr"]
-size = Vector2(89, 978)
+size = Vector2(93.4022, 978)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hj7em"]
-size = Vector2(1724, 0)
+size = Vector2(1726.25, 107)
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_die52"]
-vertices = PackedVector2Array(639.459, -344, 1281.91, -343, 1051.47, -40, 817.031, -39, 106.743, 1080, 106.743, 102, 811.045, 137, 1831.59, 1080, 1057.45, 140, 1830.59, 102)
+vertices = PackedVector2Array(639.459, -344, 1281.91, -343, 1051.47, -40, 817.031, -39, 107.74, 1072, 107.74, 102, 811.045, 137, 1826.6, 1072, 1057.45, 140, 1826.6, 102)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(4, 5, 6, 7), PackedInt32Array(8, 9, 7), PackedInt32Array(8, 7, 6), PackedInt32Array(2, 8, 6, 3)])
-outlines = Array[PackedVector2Array]([PackedVector2Array(106.743, 1080, 1831.59, 1080, 1830.59, 102, 1057.45, 140, 1051.47, -40, 1281.91, -343, 639.459, -344, 817.031, -39, 811.045, 137, 106.743, 102)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(107.74, 1072, 1826.6, 1072, 1826.6, 102, 1057.45, 140, 1051.47, -40, 1281.91, -343, 639.459, -344, 817.031, -39, 811.045, 137, 107.74, 102)])
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_o37oj"]
 size = Vector2(643.452, 446.5)
@@ -58,28 +58,28 @@ shape = SubResource("RectangleShape2D_okouw")
 collision_layer = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Left_Wall"]
-position = Vector2(53.5, 591)
+position = Vector2(53.8702, 591)
 shape = SubResource("RectangleShape2D_fx1q5")
 
 [node name="Right_Wall" type="StaticBody2D" parent="."]
 collision_layer = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Right_Wall"]
-position = Vector2(1875.5, 591)
+position = Vector2(1873.3, 591)
 shape = SubResource("RectangleShape2D_t2mcr")
 
 [node name="Bottom_Wall" type="StaticBody2D" parent="."]
 collision_layer = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Bottom_Wall"]
-position = Vector2(969, 1080)
+position = Vector2(967.874, 1125.5)
 shape = SubResource("RectangleShape2D_hj7em")
 
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
 navigation_polygon = SubResource("NavigationPolygon_die52")
 
 [node name="Doors" type="Node2D" parent="."]
-z_index = 3
+z_index = 1
 position = Vector2(639.462, 0)
 script = ExtResource("4_bprxm")
 
@@ -103,8 +103,6 @@ position = Vector2(160.614, 96.875)
 shape = SubResource("RectangleShape2D_yltir")
 debug_color = Color(0.960784, 0, 0.505882, 0.419608)
 
-[node name="NavigationObstacle2D" type="NavigationObstacle2D" parent="Doors/Left_Door_Container"]
-
 [node name="Right_Door_Container" type="StaticBody2D" parent="Doors"]
 position = Vector2(321.227, 0)
 collision_layer = 3
@@ -119,8 +117,6 @@ z_index = 10
 position = Vector2(160.614, 96.875)
 shape = SubResource("RectangleShape2D_yltir")
 debug_color = Color(0.898039, 0.227451, 0.54902, 0.419608)
-
-[node name="NavigationObstacle2D" type="NavigationObstacle2D" parent="Doors/Right_Door_Container"]
 
 [node name="Level_timer" type="Timer" parent="."]
 wait_time = 30.0

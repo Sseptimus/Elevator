@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dsq8ap5v75vsu"
-path="res://.godot/imported/Player_Attack_Quick_Sword.png-e8fa5d6c8360f68d646cfd6fe5ca1b3a.ctex"
+uid="uid://8lkx4myj045u"
+path="res://.godot/imported/Player_Attack_Right.png-4b8a2ffc641ae692500cd20abfedd5d0.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Img/Player_Attack_Quick_Sword.png"
-dest_files=["res://.godot/imported/Player_Attack_Quick_Sword.png-e8fa5d6c8360f68d646cfd6fe5ca1b3a.ctex"]
+source_file="res://Assets/Img/Player_Attack_Right.png"
+dest_files=["res://.godot/imported/Player_Attack_Right.png-4b8a2ffc641ae692500cd20abfedd5d0.ctex"]
 
 [params]
 
