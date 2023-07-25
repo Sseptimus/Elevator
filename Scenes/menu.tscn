@@ -1,0 +1,28 @@
+[gd_scene load_steps=3 format=3 uid="uid://btcwan8fki3ba"]
+
+[ext_resource type="PackedScene" uid="uid://vu4i5ua2ldcr" path="res://Scenes/player.tscn" id="1_03g3g"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_exj4e"]
+
+[node name="Menu" type="Node2D"]
+
+[node name="Window" type="StaticBody2D" parent="."]
+
+[node name="TextureRect" type="TextureRect" parent="Window"]
+offset_right = 1920.0
+offset_bottom = 340.0
+
+[node name="TextureRect" type="TextureRect" parent="."]
+offset_top = 340.0
+offset_right = 1930.0
+offset_bottom = 1310.0
+texture = SubResource("CompressedTexture2D_exj4e")
+stretch_mode = 1
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D"]
+polygon = PackedVector2Array(0, 340, 0, 1080, 1920, 1080, 1920, 340, 1928, 340, 1927, 1085, -5, 1085, -3, 340)
+
+[node name="Player" parent="." instance=ExtResource("1_03g3g")]
+position = Vector2(985, 677)

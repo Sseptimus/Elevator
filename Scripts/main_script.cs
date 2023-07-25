@@ -11,6 +11,7 @@ public partial class main_script : Node2D
 	Vector2 starting_pos;
 	CharacterBody2D newEnemy;
 	TextEdit level_display;
+	Vector2 pos2;
 	
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
@@ -18,10 +19,10 @@ public partial class main_script : Node2D
 		dumb_enemy = (PackedScene)ResourceLoader.Load("res://Scenes/dumb_enemy_melee.tscn");
 		smart_enemy = (PackedScene)ResourceLoader.Load("res://Scenes/smart_enemy_melee.tscn");
 		level_timer = GetNode<Timer>("Level_timer");
-		level_display = GetNode<TextEdit>("Level_Display");
-		level_display.Text = "G";
 		starting_pos.X = 960;
 		starting_pos.Y = -66;
+		pos2.X = 1151;
+		pos2.Y = 901;
 		level_switch();
 	}
 
@@ -36,7 +37,7 @@ public partial class main_script : Node2D
 		level_timer.Start(current_level*5);
 		await ToSignal(level_timer,"timeout");
 		current_level += 1;
-		level_display.Text = (current_level-1).ToString();
+	
 		spawn_enemies();
 		level_switch();
 	}
@@ -44,6 +45,9 @@ public partial class main_script : Node2D
 		
 		for(int i = 0; i < current_level-1; i++){
 			CharacterBody2D newEnemy = (CharacterBody2D)dumb_enemy.Instantiate();
+			Vector2 Spawn_pos = starting_pos;
+			starting_pos.X += i * 10;
+			starting_pos.Y += (float)((double)(i/10))*10;
 			newEnemy.Position = starting_pos;
 			enemies.Add(newEnemy);
 			AddChild(newEnemy);
@@ -52,8 +56,11 @@ public partial class main_script : Node2D
 		}
 		for(int i =0; i<current_level-2; i++){
 			CharacterBody2D newEnemy = (CharacterBody2D)smart_enemy.Instantiate();
+			Vector2 Spawn_pos = starting_pos;
+			starting_pos.X += i * 10;
+			starting_pos.Y += (float)((double)(i/10))*10;
 			newEnemy.Position = starting_pos;
-			enemies.Add(smart_enemy.Instantiate<CharacterBody2D>());
+			enemies.Add(newEnemy);
 			AddChild(newEnemy);
 		}
 	}

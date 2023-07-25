@@ -4,5 +4,6 @@
 [ext_resource type="Script" path="res://Scripts/Mouse_script.cs" id="2_f7j3u"]
 
 [node name="Mouse" type="Sprite2D"]
+rotation = 3.14159
 texture = ExtResource("1_uum2v")
 script = ExtResource("2_f7j3u")

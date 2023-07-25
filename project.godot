@@ -25,6 +25,12 @@ window/size/mode=3
 
 project/assembly_name="Elevator"
 
+[editor]
+
+movie_writer/movie_file="C:/Users/User/Documents/Godot/Elevator/Assets/Movies/Test.avi"
+movie_writer/disable_vsync=true
+movie_writer/fps=120
+
 [input]
 
 ui_cancel={

@@ -1,12 +1,13 @@
 using Godot;
 using System;
-
+using System.Collections;
 public partial class player_script : CharacterBody2D
 {
     [Export]
     public float Speed = 300.0f;
     AnimatedSprite2D sprite_anim;
-    AnimationPlayer anim;
+    AnimationPlayer player_anim;
+    AnimationPlayer action_anim;
     String facing;
     Sprite2D sprite;
     TextureProgressBar health;
@@ -27,13 +28,20 @@ public partial class player_script : CharacterBody2D
     public override void _Ready()
     {
         sprite_anim = GetNode<AnimatedSprite2D>("Visuals_Container/AnimatedSprite2D");
-        anim = sprite_anim.GetNode<AnimationPlayer>("AnimationPlayer");
+        player_anim = sprite_anim.GetNode<AnimationPlayer>("AnimationPlayer");
+        action_anim = sprite_anim.GetNode<AnimationPlayer>("AnimationActions");
         health = GetNode<TextureProgressBar>("Visuals_Container/Health_Bar_Container/Health_Bar");
         ScreenSize = GetViewportRect().Size;
 		iframe_timer = GetNode<Timer>("Iframe_timer");
 		mouse = GetNode<Sprite2D>("Mouse");
         visuals = GetNode<Node2D>("Visuals_Container");
-        line = GetTree().Root.GetNode<TextEdit>("Main/Level_Display");
+        /*switch(GetTree().Root.GetChild(0).Name){
+            case "Main":
+            //line = GetTree().Root.GetNode<TextEdit>("Main/Level_Display");
+            return;
+
+        }*/
+        
         sound_player = GetNode<AudioStreamPlayer2D>("Visuals_Container/AudioStreamPlayer2D");
         rnd = new Random();
     }
@@ -52,7 +60,7 @@ public partial class player_script : CharacterBody2D
                 aim_direction.Y = 0;
             }
             velocity = direction * Speed;
-            if(anim.CurrentAnimation == ""){
+            if(player_anim.CurrentAnimation == ""){
             sprite_anim.Play($"{MathF.Round(aim_direction.X)} {MathF.Round(aim_direction.Y)}");
             }
         }
@@ -60,7 +68,7 @@ public partial class player_script : CharacterBody2D
         {
             velocity.X = Mathf.MoveToward(Velocity.X, 0, Speed);
             velocity.Y = Mathf.MoveToward(velocity.Y, 0, Speed);
-            if(anim.CurrentAnimation == ""){
+            if(player_anim.CurrentAnimation == ""){
             sprite_anim.Stop();
             }
         }
@@ -87,7 +95,7 @@ public partial class player_script : CharacterBody2D
                 }if(Mathf.Round(aim_direction.Y) == -0 ){
                 aim_direction.Y = 0;
                 }
-                anim.Play($"Melee_{MathF.Round(aim_direction.X)} {MathF.Round(aim_direction.Y)}");
+                player_anim.Play($"Melee_{MathF.Round(aim_direction.X)} {MathF.Round(aim_direction.Y)}");
                 power_attack_delay();
             }
 
@@ -112,7 +120,7 @@ public partial class player_script : CharacterBody2D
         {
             if (!dash_waiting)
             {
-                sprite_anim.Play("Player_dash");
+                action_anim.Play("Player_Dash");
 				dash_delay();
             }
         }
@@ -139,7 +147,7 @@ public partial class player_script : CharacterBody2D
     }
 	async void dash_delay(){
 		dash_waiting = true;
-		await ToSignal(GetTree().CreateTimer(0.75),"timeout");
+		await ToSignal(GetTree().CreateTimer(1),"timeout");
 		dash_waiting = false;
 	}
     async void block_delay(){
@@ -170,15 +178,15 @@ public partial class player_script : CharacterBody2D
 	}
 	public async void hit(int damage, Area2D area){
 		GetTree().Root.GetNode<TextureProgressBar>($"Main/{area.GetParent().Name}/Health_Bar_Container/Health_Bar").Value -= damage;
-        var num = rnd.Next(1,4);
+        int num = rnd.Next(1,4);
         AudioStreamWav crowbar_hit = (AudioStreamWav)ResourceLoader.Load($"res://Assets/Audio/Crowbar_hit_{num.ToString()}.wav");
         sound_player.Stream = crowbar_hit;
         sound_player.Playing = true;
         Color red = new Color(1, 0, 0, 1);
-        GetTree().Root.GetNode<Sprite2D>($"Main/{area.GetParent().Name}/Sprite2D").Modulate = red;
-        Color yellow = new Color(1, 1, 0, 1);
+        Color saved_modulate = GetTree().Root.GetNode<AnimatedSprite2D>($"Main/{area.GetParent().Name}/AnimatedSprite2D").Modulate;
+        GetTree().Root.GetNode<AnimatedSprite2D>($"Main/{area.GetParent().Name}/AnimatedSprite2D").Modulate = red;
         await ToSignal(GetTree().CreateTimer(0.2),"timeout");
-        GetTree().Root.GetNode<Sprite2D>($"Main/{area.GetParent().Name}/Sprite2D").Modulate = yellow;
+        GetTree().Root.GetNode<AnimatedSprite2D>($"Main/{area.GetParent().Name}/AnimatedSprite2D").Modulate = saved_modulate;
 
 	}
     public override void _Input(InputEvent @event)

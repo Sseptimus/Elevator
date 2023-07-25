@@ -1,19 +1,129 @@
-[gd_scene load_steps=2 format=3 uid="uid://cbstqs0dx321q"]
+[gd_scene load_steps=13 format=3 uid="uid://pgvqqh70iklm"]
 
-[ext_resource type="Texture2D" uid="uid://3topvnpqajxf" path="res://Assets/Textures/Progressing_Carpet.png" id="1_jtoqo"]
+[ext_resource type="Texture2D" uid="uid://ddespbhyabpe0" path="res://Assets/Textures/Modern Carpet2.png" id="1_f8ih4"]
+[ext_resource type="Script" path="res://Scripts/background_script.cs" id="1_rg2uo"]
+[ext_resource type="Script" path="res://Scripts/Door_script.cs" id="2_egvqq"]
+[ext_resource type="Texture2D" uid="uid://dpf7g1fqg8jnh" path="res://Assets/Textures/Left Door.png" id="4_lo6yc"]
+[ext_resource type="Texture2D" uid="uid://c60sqbcgnbl60" path="res://Assets/Textures/Top_Wall_Empty.png" id="4_qts80"]
+[ext_resource type="Texture2D" uid="uid://b2pr8llthp8pi" path="res://Assets/Textures/Side_Wall.png" id="5_4xeoy"]
+[ext_resource type="Texture2D" uid="uid://bbsnr74vn65ct" path="res://Assets/Textures/Untitled-2.png" id="7_4ewnp"]
+[ext_resource type="Texture2D" uid="uid://c05c64nm1ajwh" path="res://Assets/Textures/Untitled-1.png" id="7_w2i7n"]
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_432s0"]
+vertices = PackedVector2Array(639.459, -344, 1281.91, -343, 1002.58, 2, 903.822, 3, 1057.45, 140, 1826.6, 110, 1826.6, 1080, 107.74, 1079, 107.74, 110, 811.045, 137)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(4, 5, 6, 7), PackedInt32Array(7, 8, 9), PackedInt32Array(4, 7, 9), PackedInt32Array(4, 9, 3, 2)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(107.74, 1079, 1826.6, 1080, 1826.6, 110, 1057.45, 140, 1002.58, 2, 1281.91, -343, 639.459, -344, 903.822, 3, 811.045, 137, 107.74, 110)])
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rwuuj"]
+size = Vector2(643.452, 446.5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_834gd"]
+size = Vector2(321.483, 7.75)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_0eotv"]
 
 [node name="Background" type="Control"]
 layout_mode = 3
-anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_rg2uo")
 
 [node name="TextureRect" type="TextureRect" parent="."]
 layout_mode = 0
-offset_left = 107.0
-offset_top = 102.0
-offset_right = 1827.0
-offset_bottom = 1072.0
-texture = ExtResource("1_jtoqo")
+offset_left = 100.0
+offset_top = 100.0
+offset_right = 1820.0
+offset_bottom = 1070.0
+texture = ExtResource("1_f8ih4")
+stretch_mode = 1
+
+[node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
+visible = false
+navigation_polygon = SubResource("NavigationPolygon_432s0")
+
+[node name="Doors" type="Node2D" parent="."]
+z_index = 3
+position = Vector2(650, 0)
+script = ExtResource("2_egvqq")
+
+[node name="Area2D" type="Area2D" parent="Doors"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Doors/Area2D"]
+position = Vector2(321.726, -121.75)
+shape = SubResource("RectangleShape2D_rwuuj")
+
+[node name="Left_Door_Container" type="StaticBody2D" parent="Doors"]
+z_index = -1
+collision_layer = 3
+
+[node name="Sprite2D" type="Sprite2D" parent="Doors/Left_Door_Container"]
+z_index = -1
+position = Vector2(310, 50)
+texture = ExtResource("4_lo6yc")
+
+[node name="Left_Door" type="CollisionShape2D" parent="Doors/Left_Door_Container"]
+z_index = 10
+position = Vector2(160.614, 96.875)
+shape = SubResource("RectangleShape2D_834gd")
+debug_color = Color(0.960784, 0, 0.505882, 0.419608)
+
+[node name="Right_Door_Container" type="StaticBody2D" parent="Doors"]
+z_index = -1
+position = Vector2(321.227, 0)
+collision_layer = 3
+
+[node name="Sprite2D" type="Sprite2D" parent="Doors/Right_Door_Container"]
+z_index = -1
+material = SubResource("ShaderMaterial_0eotv")
+position = Vector2(-10.2269, 50)
+scale = Vector2(-1, 1)
+texture = ExtResource("4_lo6yc")
+
+[node name="Right_Door" type="CollisionShape2D" parent="Doors/Right_Door_Container"]
+z_index = 10
+position = Vector2(160.614, 96.875)
+shape = SubResource("RectangleShape2D_834gd")
+debug_color = Color(0.898039, 0.227451, 0.54902, 0.419608)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="StaticBody2D"]
+z_index = 1
+position = Vector2(960, 50)
+texture = ExtResource("4_qts80")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D"]
+visible = false
+polygon = PackedVector2Array(650, 110, 650, 0, 0, 0, 0, 1165, 1920, 1165, 1920, 0, 1293, 0, 1293, 110, 1827, 110, 1827, 1080, 107, 1080, 107, 110)
+
+[node name="Sprite2D3" type="Sprite2D" parent="StaticBody2D"]
+position = Vector2(1871, 960)
+rotation = 1.5708
+texture = ExtResource("5_4xeoy")
+
+[node name="Sprite2D2" type="Sprite2D" parent="StaticBody2D"]
+position = Vector2(50, 960)
+rotation = -1.5708
+texture = ExtResource("5_4xeoy")
+
+[node name="PointLight2D2" type="PointLight2D" parent="."]
+position = Vector2(969, 596)
+scale = Vector2(1.59767, 1.61031)
+energy = 1.21
+texture = ExtResource("7_4ewnp")
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+visible = false
+position = Vector2(399, -3.99997)
+rotation = -0.0216805
+scale = Vector2(1.83573, 1.57276)
+energy = 3.24
+shadow_enabled = true
+shadow_filter = 1
+shadow_filter_smooth = 1.0
+texture = ExtResource("7_w2i7n")
+
+[connection signal="area_entered" from="Doors/Area2D" to="Doors" method="_on_area_2d_area_entered"]
+[connection signal="area_exited" from="Doors/Area2D" to="Doors" method="_on_area_2d_area_exited"]

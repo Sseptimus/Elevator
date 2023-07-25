@@ -14,14 +14,14 @@ public partial class Mouse_script : Sprite2D
 	{
 		
 		Input.MouseMode = MouseModeEnum.Captured;
-		player = GetTree().Root.GetNode<CharacterBody2D>("Main/Player");
-		text = GetTree().Root.GetNode<TextEdit>("Main/Level_Display");
+		player = GetParent<CharacterBody2D>();
 		
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{
+		GlobalRotation = player.GetAngleTo(GlobalPosition)+(Mathf.Pi/2);
 		if(IsActionPressed("Active_Controller")){
 			active_keyboard = false;
 		}
@@ -31,12 +31,8 @@ public partial class Mouse_script : Sprite2D
 		else{
 			Visible = true;
 		}
-		if(!waiting){
-			currentPosition.X = Mathf.MoveToward(Position.X,0,25);
-			currentPosition.Y = Mathf.MoveToward(Position.Y,0,25);
-		}
-		if(currentPosition.DistanceTo(Vector2.Zero) > 100){
-			currentPosition = currentPosition.Normalized()*98;
+		if(currentPosition.DistanceTo(Vector2.Zero) > 60){
+			currentPosition = currentPosition.Normalized()*58;
 		}
 		
 		Position = currentPosition;
@@ -46,36 +42,17 @@ public partial class Mouse_script : Sprite2D
     {
         if(@event is InputEventMouseMotion mouseMotion){
 			active_keyboard = true;
-			try{
-				if(GetTree().Root.GetNode<Timer>("Main/timer") != null){
-					GetTree().Root.GetNode<Timer>("Main/timer").QueueFree();
-					waiting = false;
-				}
-			}catch (Exception){}
-			currentPosition += mouseMotion.Relative;
-			if(!waiting){
-			mouse_delay();
+			if(GetTree().Root.HasNode("Main/Timer")){
+				GetTree().Root.GetNode<Timer>("Main/timer").QueueFree();
 			}
+			currentPosition += mouseMotion.Relative;
 		}
 		if(@event.IsAction("Active_Controller")){
-			try{
-				if(GetTree().Root.GetNode<Timer>("Main/timer") != null){
-					GetTree().Root.GetNode<Timer>("Main/timer").QueueFree();
-					waiting = false;
-				}
-			}catch (Exception){}
+			if(GetTree().Root.GetNode<Timer>("Main/timer") != null){
+				GetTree().Root.GetNode<Timer>("Main/timer").QueueFree();
+			}
 			var direction = Input.GetVector("view_left", "view_right", "view_up", "view_down");
 			currentPosition += direction*50;
-			if(!waiting){
-			mouse_delay();
-			}
-			
 		}
     }
-	async void mouse_delay(){
-		waiting = true;
-		await ToSignal(GetTree().CreateTimer(1),"timeout");
-		waiting = false;
-		
-	}
 }

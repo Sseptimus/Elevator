@@ -11,8 +11,9 @@ public partial class smart_enemy_melee : CharacterBody2D
     private float _movementSpeed = 200.0f;
     CollisionShape2D collider;
 	Timer timer;
-	bool attack_delayed;
+	bool attack_delayed = false;
     bool knockback = false;
+    AnimationPlayer animator;
     public Vector2 MovementTarget
     {
         get { return _navigationAgent.TargetPosition; }
@@ -22,12 +23,14 @@ public partial class smart_enemy_melee : CharacterBody2D
     public override void _Ready()
     {
         player = GetTree().Root.GetNode<CharacterBody2D>($"Main/Player");
-        enemy_anim = GetNode<AnimationPlayer>("Sprite2D/AnimationPlayer");
-        healthbar = player.GetNode<TextureProgressBar>("Health_Bar_Container/Health_Bar");
+        enemy_anim = GetNode<AnimationPlayer>("WeaponAnimation");
+        healthbar = player.GetNode<TextureProgressBar>("Visuals_Container/Health_Bar_Container/Health_Bar");
         health = GetNode<TextureProgressBar>("Health_Bar_Container/Health_Bar");
         _navigationAgent = GetNode<NavigationAgent2D>("NavigationAgent2D");
         collider = GetNode<CollisionShape2D>("CollisionShape2D");
 		timer = GetNode<Timer>("Attack_timer");
+        animator = GetNode<AnimationPlayer>("AnimatedSprite2D/AnimationPlayer");
+        animator.Play("-1 0");
 
         // These values need to be adjusted for the actor's speed
         // and the navigation layout.
@@ -41,7 +44,6 @@ public partial class smart_enemy_melee : CharacterBody2D
         ActorSetup();
         Vector2 velocity = Velocity;
         Vector2 current = Vector2.Zero;
-        LookAt(player.Position);
 
         Vector2 currentAgentPosition = GlobalTransform.Origin;
         Vector2 nextPathPosition = _navigationAgent.GetNextPathPosition();

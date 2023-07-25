@@ -11,6 +11,8 @@ public partial class dumb_enemy_script : CharacterBody2D
     private float _movementSpeed = 200.0f;
     CollisionShape2D collider;
     bool knockback = false;
+    AnimatedSprite2D sprite;
+    AnimationPlayer animator;
     public Vector2 MovementTarget
     {
         get { return _navigationAgent.TargetPosition; }
@@ -20,11 +22,14 @@ public partial class dumb_enemy_script : CharacterBody2D
     public override void _Ready()
     {
         player = GetTree().Root.GetNode<CharacterBody2D>($"Main/Player");
-        enemy_anim = GetNode<AnimationPlayer>("Sprite2D/AnimationPlayer");
+        enemy_anim = GetNode<AnimationPlayer>("WeaponAnimation");
         healthbar = player.GetNode<TextureProgressBar>("Visuals_Container/Health_Bar_Container/Health_Bar");
         health = GetNode<TextureProgressBar>("Health_Bar_Container/Health_Bar");
         _navigationAgent = GetNode<NavigationAgent2D>("NavigationAgent2D");
         collider = GetNode<CollisionShape2D>("CollisionShape2D");
+        sprite = GetNode<AnimatedSprite2D>("AnimatedSprite2D");
+        animator = GetNode<AnimationPlayer>("AnimatedSprite2D/AnimationPlayer");
+        animator.Play("-1 0");
 
         // These values need to be adjusted for the actor's speed
         // and the navigation layout.
@@ -38,7 +43,6 @@ public partial class dumb_enemy_script : CharacterBody2D
         ActorSetup();
         Vector2 velocity = Velocity;
         Vector2 current = Vector2.Zero;
-        LookAt(player.Position);
         if (_navigationAgent.IsNavigationFinished())
         {
             return;
@@ -59,6 +63,8 @@ public partial class dumb_enemy_script : CharacterBody2D
         Velocity = newVelocity;
         }
         MoveAndSlide();
+        Area2D a = GetNode<Area2D>("Hitbox_container");
+        a.LookAt(player.Position);
         if (Position.DistanceTo(player.Position) <= 150)
         {
             enemy_anim.Play("Enemy_melee");

@@ -1,13 +1,13 @@
-[gd_scene load_steps=58 format=3 uid="uid://vu4i5ua2ldcr"]
+[gd_scene load_steps=66 format=3 uid="uid://vu4i5ua2ldcr"]
 
 [ext_resource type="Script" path="res://Scripts/player_script.cs" id="1_6ovbg"]
 [ext_resource type="PackedScene" uid="uid://dtawpwuctqr5o" path="res://Scenes/heath_bar.tscn" id="2_0a5tg"]
 [ext_resource type="Texture2D" uid="uid://w7vsd467ed7q" path="res://Assets/Img/char_a_p1_0bas_humn_v01.png" id="4_3qx1v"]
 [ext_resource type="Texture2D" uid="uid://cqwtrg17hsbci" path="res://Assets/Img/Player_Attack_Left.png" id="5_cj4px"]
 [ext_resource type="Texture2D" uid="uid://8lkx4myj045u" path="res://Assets/Img/Player_Attack_Right.png" id="5_tx3bo"]
+[ext_resource type="Texture2D" uid="uid://tm8ok7t70dqm" path="res://Assets/Img/Player_Attack_Down.png" id="6_i2eo7"]
 [ext_resource type="Texture2D" uid="uid://m6vp55uvru6h" path="res://Assets/Img/Player_Attack_Up.png" id="7_dfyem"]
 [ext_resource type="PackedScene" uid="uid://c4l54heam1sl0" path="res://Scenes/mouse.tscn" id="8_5l4mw"]
-[ext_resource type="Texture2D" uid="uid://y8ec7d3b5gc0" path="res://Assets/Img/Empty.png" id="8_hif3a"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cgkw7"]
 size = Vector2(49, 3.30189)
@@ -127,6 +127,26 @@ region = Rect2(256, 0, 64, 64)
 [sub_resource type="AtlasTexture" id="AtlasTexture_yqa5j"]
 atlas = ExtResource("5_cj4px")
 region = Rect2(192, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ci5ls"]
+atlas = ExtResource("6_i2eo7")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_drdp1"]
+atlas = ExtResource("6_i2eo7")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xfvll"]
+atlas = ExtResource("6_i2eo7")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_s736d"]
+atlas = ExtResource("6_i2eo7")
+region = Rect2(192, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_p5nuo"]
+atlas = ExtResource("6_i2eo7")
+region = Rect2(256, 0, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_6lv8o"]
 atlas = ExtResource("7_dfyem")
@@ -284,6 +304,26 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_ci5ls")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_drdp1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xfvll")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_s736d")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_p5nuo")
+}],
+"loop": true,
+"name": &"Melee_0 -1",
+"speed": 9.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_6lv8o")
 }, {
 "duration": 1.0,
@@ -323,14 +363,11 @@ animations = [{
 "speed": 9.0
 }]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_3p8r7"]
-size = Vector2(12.963, 12)
-
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lnxrd"]
 size = Vector2(16.6667, 27.7481)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_37uca"]
-size = Vector2(17.4395, 28.6667)
+size = Vector2(18.4988, 28.6667)
 
 [sub_resource type="Animation" id="Animation_nvgq4"]
 resource_name = "Melee_-1 0"
@@ -378,10 +415,10 @@ tracks/3/path = NodePath("Power_attack_hitbox_container/power_melee_hitbox_horiz
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
-"times": PackedFloat32Array(0, 0.3),
-"transitions": PackedFloat32Array(1, 1),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [Vector2(-17.667, 1.423), Vector2(17.6667, 1.42298)]
+"values": [Vector2(-17.667, 1.423)]
 }
 
 [sub_resource type="Animation" id="Animation_g6ir2"]
@@ -422,6 +459,71 @@ tracks/2/keys = {
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [false, true]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Power_attack_hitbox_container/power_melee_hitbox_vertical:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-1.33333, -10.4905)]
+}
+
+[sub_resource type="Animation" id="Animation_g5u2w"]
+resource_name = "Melee_0 1"
+length = 0.333
+step = 0.01
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"Melee_0 -1"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.0667, 0.1333, 0.2, 0.2667),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Power_attack_hitbox_container/power_melee_hitbox_vertical:disabled")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.1333, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Power_attack_hitbox_container/power_melee_hitbox_vertical:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-0.266094, 7.82639)]
 }
 
 [sub_resource type="Animation" id="Animation_t3vfq"]
@@ -464,16 +566,65 @@ tracks/2/keys = {
 "update": 1,
 "values": [&"Melee_1 0"]
 }
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Power_attack_hitbox_container/power_melee_hitbox_horizontal:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(17.667, 1.423)]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_1c3sc"]
 _data = {
 "Melee_-1 0": SubResource("Animation_nvgq4"),
 "Melee_0 -1": SubResource("Animation_g6ir2"),
+"Melee_0 1": SubResource("Animation_g5u2w"),
 "Melee_1 0": SubResource("Animation_t3vfq")
+}
+
+[sub_resource type="Animation" id="Animation_va2nf"]
+resource_name = "Player_Dash"
+length = 0.1985
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../..:Speed")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1985),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [1500.0, 300.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimationPlayer:speed_scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1985),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [5.0, 1.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ge8eq"]
+_data = {
+"Player_Dash": SubResource("Animation_va2nf")
 }
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0u7sv"]
 size = Vector2(52, 86)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_sd630"]
+polygon = PackedVector2Array(14, 14, 21, 12, 21, -2, 12, -13, 21, -23, 15, -45, -11, -45, -17, -27, -12, -16, -18, -7, -18, 10, -12, 15, -12, 28, -17, 32, -12, 35, 1, 35, 19, 35, 18, 31, 14, 28)
 
 [node name="Player" type="CharacterBody2D"]
 z_index = 2
@@ -492,6 +643,7 @@ shape = SubResource("RectangleShape2D_cgkw7")
 
 [node name="Mouse" parent="." instance=ExtResource("8_5l4mw")]
 visible = false
+z_index = 1
 
 [node name="Visuals_Container" type="Node2D" parent="."]
 
@@ -505,41 +657,35 @@ offset_bottom = -4.0
 metadata/_edit_use_anchors_ = true
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Visuals_Container"]
+z_index = 2
 position = Vector2(0, 1.90735e-06)
 scale = Vector2(3, 2.811)
 sprite_frames = SubResource("SpriteFrames_t73cm")
-animation = &"1 0"
-
-[node name="Quick_attack_hitbox_container" type="Area2D" parent="Visuals_Container/AnimatedSprite2D"]
-scale = Vector2(1.08, 1)
-
-[node name="quick_melee_hitbox" type="CollisionShape2D" parent="Visuals_Container/AnimatedSprite2D/Quick_attack_hitbox_container"]
-position = Vector2(42.5926, 0)
-shape = SubResource("RectangleShape2D_3p8r7")
-disabled = true
-
-[node name="Sprite2D" type="Sprite2D" parent="Visuals_Container/AnimatedSprite2D/Quick_attack_hitbox_container"]
-position = Vector2(42.5926, 0)
-texture = ExtResource("8_hif3a")
+animation = &"0 -1"
+speed_scale = 5.0
 
 [node name="Power_attack_hitbox_container" type="Area2D" parent="Visuals_Container/AnimatedSprite2D"]
 
 [node name="power_melee_hitbox_horizontal" type="CollisionShape2D" parent="Visuals_Container/AnimatedSprite2D/Power_attack_hitbox_container"]
-position = Vector2(17.6667, 1.42298)
+position = Vector2(-17.667, 1.423)
 scale = Vector2(1.08, 1)
 shape = SubResource("RectangleShape2D_lnxrd")
 disabled = true
 
 [node name="power_melee_hitbox_vertical" type="CollisionShape2D" parent="Visuals_Container/AnimatedSprite2D/Power_attack_hitbox_container"]
-position = Vector2(-1.33333, -10.4905)
+position = Vector2(-0.266094, 7.82639)
 rotation = 1.5708
-scale = Vector2(1, 1)
 shape = SubResource("RectangleShape2D_37uca")
 disabled = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Visuals_Container/AnimatedSprite2D"]
 libraries = {
 "": SubResource("AnimationLibrary_1c3sc")
+}
+
+[node name="AnimationActions" type="AnimationPlayer" parent="Visuals_Container/AnimatedSprite2D"]
+libraries = {
+"": SubResource("AnimationLibrary_ge8eq")
 }
 
 [node name="Player_hitbox_container" type="Area2D" parent="Visuals_Container"]
@@ -552,5 +698,9 @@ shape = SubResource("RectangleShape2D_0u7sv")
 
 [node name="AudioListener2D" type="AudioListener2D" parent="."]
 
-[connection signal="area_entered" from="Visuals_Container/AnimatedSprite2D/Quick_attack_hitbox_container" to="." method="_on_quick_attack_hitbox_container_area_entered"]
+[node name="LightOccluder2D" type="LightOccluder2D" parent="."]
+occluder = SubResource("OccluderPolygon2D_sd630")
+
+[node name="Hurt_Timer" type="Timer" parent="."]
+
 [connection signal="area_entered" from="Visuals_Container/AnimatedSprite2D/Power_attack_hitbox_container" to="." method="_on_power_attack_hitbox_container_area_entered"]
