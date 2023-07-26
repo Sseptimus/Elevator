@@ -24,6 +24,7 @@ size = Vector2(321.483, 7.75)
 
 [node name="Background" type="Control"]
 layout_mode = 3
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
@@ -111,7 +112,7 @@ texture = ExtResource("5_4xeoy")
 [node name="PointLight2D2" type="PointLight2D" parent="."]
 position = Vector2(969, 596)
 scale = Vector2(1.59767, 1.61031)
-energy = 1.21
+energy = 0.75
 texture = ExtResource("7_4ewnp")
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
