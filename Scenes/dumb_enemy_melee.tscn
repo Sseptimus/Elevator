@@ -1,8 +1,9 @@
-[gd_scene load_steps=32 format=3 uid="uid://b17h7a6noshxu"]
+[gd_scene load_steps=35 format=3 uid="uid://b17h7a6noshxu"]
 
 [ext_resource type="Script" path="res://Scripts/dumb_enemy_script.cs" id="1_irgx6"]
 [ext_resource type="PackedScene" uid="uid://dtawpwuctqr5o" path="res://Scenes/heath_bar.tscn" id="2_klv58"]
 [ext_resource type="Texture2D" uid="uid://4iqvbfev87yy" path="res://Assets/Img/Ghost TileSheet.png" id="3_npbe7"]
+[ext_resource type="Texture2D" uid="uid://choq6lo4d88wi" path="res://Assets/Img/Level_1_enemy_tilesheet.png" id="4_o8jsu"]
 
 [sub_resource type="Animation" id="Animation_f3j38"]
 resource_name = "Enemy_melee"
@@ -53,21 +54,29 @@ region = Rect2(94, 47, 47, 47)
 atlas = ExtResource("3_npbe7")
 region = Rect2(47, 47, 47, 47)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_mj1he"]
-atlas = ExtResource("3_npbe7")
-region = Rect2(0, 0, 47, 47)
+[sub_resource type="AtlasTexture" id="AtlasTexture_lm14f"]
+atlas = ExtResource("4_o8jsu")
+region = Rect2(0, 0, 64, 64)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_d643q"]
-atlas = ExtResource("3_npbe7")
-region = Rect2(47, 0, 47, 47)
+[sub_resource type="AtlasTexture" id="AtlasTexture_sl45q"]
+atlas = ExtResource("4_o8jsu")
+region = Rect2(64, 0, 64, 64)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_lq712"]
-atlas = ExtResource("3_npbe7")
-region = Rect2(94, 0, 47, 47)
+[sub_resource type="AtlasTexture" id="AtlasTexture_qd4c4"]
+atlas = ExtResource("4_o8jsu")
+region = Rect2(128, 0, 64, 64)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_gx26i"]
-atlas = ExtResource("3_npbe7")
-region = Rect2(47, 0, 47, 47)
+[sub_resource type="AtlasTexture" id="AtlasTexture_7iqd6"]
+atlas = ExtResource("4_o8jsu")
+region = Rect2(192, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tm3oj"]
+atlas = ExtResource("4_o8jsu")
+region = Rect2(256, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m64iv"]
+atlas = ExtResource("4_o8jsu")
+region = Rect2(320, 0, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_rytjp"]
 atlas = ExtResource("3_npbe7")
@@ -122,16 +131,22 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_mj1he")
+"texture": SubResource("AtlasTexture_lm14f")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_d643q")
+"texture": SubResource("AtlasTexture_sl45q")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_lq712")
+"texture": SubResource("AtlasTexture_qd4c4")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_gx26i")
+"texture": SubResource("AtlasTexture_7iqd6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tm3oj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_m64iv")
 }],
 "loop": true,
 "name": &"0 -1",
@@ -334,6 +349,7 @@ libraries = {
 scale = Vector2(2.75, 2.75)
 sprite_frames = SubResource("SpriteFrames_j8ykd")
 animation = &"0 -1"
+frame_progress = 0.206284
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="AnimatedSprite2D"]
 libraries = {
