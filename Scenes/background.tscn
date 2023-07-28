@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://pgvqqh70iklm"]
+[gd_scene load_steps=14 format=3 uid="uid://pgvqqh70iklm"]
 
 [ext_resource type="Texture2D" uid="uid://ddespbhyabpe0" path="res://Assets/Textures/Modern Carpet2.png" id="1_f8ih4"]
 [ext_resource type="Script" path="res://Scripts/background_script.cs" id="1_rg2uo"]
@@ -21,6 +21,9 @@ size = Vector2(643.452, 446.5)
 size = Vector2(321.483, 7.75)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_0eotv"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kg0bg"]
+size = Vector2(641, 92)
 
 [node name="Background" type="Control"]
 layout_mode = 3
@@ -89,6 +92,7 @@ shape = SubResource("RectangleShape2D_834gd")
 debug_color = Color(0.898039, 0.227451, 0.54902, 0.419608)
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
+collision_layer = 3
 
 [node name="Sprite2D" type="Sprite2D" parent="StaticBody2D"]
 z_index = 1
@@ -96,7 +100,6 @@ position = Vector2(960, 50)
 texture = ExtResource("4_qts80")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D"]
-visible = false
 polygon = PackedVector2Array(650, 110, 650, 0, 0, 0, 0, 1165, 1920, 1165, 1920, 0, 1293, 0, 1293, 110, 1827, 110, 1827, 1080, 107, 1080, 107, 110)
 
 [node name="Sprite2D3" type="Sprite2D" parent="StaticBody2D"]
@@ -125,6 +128,12 @@ shadow_enabled = true
 shadow_filter = 1
 shadow_filter_smooth = 1.0
 texture = ExtResource("7_w2i7n")
+
+[node name="StaticBody2D2" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D2"]
+position = Vector2(971.5, 65)
+shape = SubResource("RectangleShape2D_kg0bg")
 
 [connection signal="area_entered" from="Doors/Area2D" to="Doors" method="_on_area_2d_area_entered"]
 [connection signal="area_exited" from="Doors/Area2D" to="Doors" method="_on_area_2d_area_exited"]

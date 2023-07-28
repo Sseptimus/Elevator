@@ -346,10 +346,10 @@ libraries = {
 }
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-scale = Vector2(2.75, 2.75)
+scale = Vector2(5, 5)
 sprite_frames = SubResource("SpriteFrames_j8ykd")
 animation = &"0 -1"
-frame_progress = 0.206284
+frame_progress = 0.990884
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="AnimatedSprite2D"]
 libraries = {
