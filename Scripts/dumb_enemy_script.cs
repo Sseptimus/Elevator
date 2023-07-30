@@ -3,6 +3,7 @@ using System;
 
 public partial class dumb_enemy_script : CharacterBody2D
 {
+    // defining variables
 	CharacterBody2D player;
 	AnimationPlayer enemy_anim;
 	TextureProgressBar healthbar;
@@ -13,6 +14,7 @@ public partial class dumb_enemy_script : CharacterBody2D
 	bool knockback = false;
 	AnimatedSprite2D sprite;
 	AnimationPlayer animator;
+	Timer hurt_timer;
 	public Vector2 MovementTarget
 	{
 		get { return _navigationAgent.TargetPosition; }
@@ -29,7 +31,8 @@ public partial class dumb_enemy_script : CharacterBody2D
 		collider = GetNode<CollisionShape2D>("CollisionShape2D");
 		sprite = GetNode<AnimatedSprite2D>("AnimatedSprite2D");
 		animator = GetNode<AnimationPlayer>("AnimatedSprite2D/AnimationPlayer");
-		animator.Play("-1 0");
+		hurt_timer = GetTree().Root.GetNode<Timer>("Main/Player/Hurt_Timer");
+		
 
 		// These values need to be adjusted for the actor's speed
 		// and the navigation layout.
@@ -62,6 +65,18 @@ public partial class dumb_enemy_script : CharacterBody2D
 		}else{
 		Velocity = newVelocity;
 		}
+		Vector2 look_position = player.GlobalPosition - GlobalPosition;
+		float angle = look_position.Angle();
+		float look_direction = Mathf.Round(angle/(Mathf.Pi/2))*(Mathf.Pi/2);
+		Vector2 aim_direction;
+		aim_direction.X = MathF.Round(Mathf.Cos(look_direction));
+		aim_direction.Y = MathF.Round(MathF.Sin(look_direction));
+		if (aim_direction.X == -0){
+			aim_direction.X = 0;
+		}if (aim_direction.Y == -0){
+			aim_direction.Y = 0;
+		}
+		animator.Play($"{aim_direction.X} {aim_direction.Y}");
 		MoveAndSlide();
 		Area2D a = GetNode<Area2D>("Hitbox_container");
 		a.LookAt(player.Position);
@@ -82,11 +97,9 @@ public partial class dumb_enemy_script : CharacterBody2D
 			hit();
 		}
 	}
-	async void hit(){
+	void hit(){ 
 		healthbar.Value -= 5;
-		player.GetNode<AnimatedSprite2D>("Visuals_Container/AnimatedSprite2D").Modulate = new Color(1, 0, 0, 1);
-		await ToSignal(GetTree().CreateTimer(0.3),"timeout");
-		player.GetNode<AnimatedSprite2D>("Visuals_Container/AnimatedSprite2D").Modulate = new Color(1, 1, 1, 1);
+		hurt_timer.Start();
 
 	}
 	private async void ActorSetup()

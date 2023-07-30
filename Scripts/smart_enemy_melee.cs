@@ -14,6 +14,7 @@ public partial class smart_enemy_melee : CharacterBody2D
 	bool attack_delayed = false;
     bool knockback = false;
     AnimationPlayer animator;
+    Timer hurt_timer;
     public Vector2 MovementTarget
     {
         get { return _navigationAgent.TargetPosition; }
@@ -29,9 +30,8 @@ public partial class smart_enemy_melee : CharacterBody2D
         _navigationAgent = GetNode<NavigationAgent2D>("NavigationAgent2D");
         collider = GetNode<CollisionShape2D>("CollisionShape2D");
 		timer = GetNode<Timer>("Attack_timer");
+        hurt_timer = GetTree().Root.GetNode<Timer>("Main/Player/Hurt_Timer");
         animator = GetNode<AnimationPlayer>("AnimatedSprite2D/AnimationPlayer");
-        animator.Play("-1 0");
-
         // These values need to be adjusted for the actor's speed
         // and the navigation layout.
         _navigationAgent.PathDesiredDistance = 4.0f;
@@ -41,6 +41,7 @@ public partial class smart_enemy_melee : CharacterBody2D
     // Called every frame. 'delta' is the elapsed time since the previous frame.
     public override void _PhysicsProcess(double delta)
     {
+        
         ActorSetup();
         Vector2 velocity = Velocity;
         Vector2 current = Vector2.Zero;
@@ -59,7 +60,18 @@ public partial class smart_enemy_melee : CharacterBody2D
         }
 		newVelocity *= _movementSpeed;
         Velocity = newVelocity;
-
+        Vector2 look_position = player.GlobalPosition - GlobalPosition;
+		float angle = look_position.Angle();
+		float look_direction = Mathf.Round(angle/(Mathf.Pi/2))*(Mathf.Pi/2);
+		Vector2 aim_direction;
+		aim_direction.X = MathF.Round(Mathf.Cos(look_direction));
+		aim_direction.Y = MathF.Round(MathF.Sin(look_direction));
+		if (aim_direction.X == -0){
+			aim_direction.X = 0;
+		}if (aim_direction.Y == -0){
+			aim_direction.Y = 0;
+		}
+		animator.Play($"{aim_direction.X} {aim_direction.Y}");
         MoveAndSlide();
         if (Position.DistanceTo(player.Position) <= 70)
         {
@@ -76,16 +88,11 @@ public partial class smart_enemy_melee : CharacterBody2D
     {
         if (area.Name == "Player_hitbox_container")
         {
-            hit();
+            healthbar.Value -= 5;
+            hurt_timer.Start();
         }
     }
-    async void hit(){
-        healthbar.Value -= 5;
-        player.GetNode<AnimatedSprite2D>("Visuals_Container/AnimatedSprite2D").Modulate = new Color(1, 0, 0, 1);
-        await ToSignal(GetTree().CreateTimer(0.3),"timeout");
-        player.GetNode<AnimatedSprite2D>("Visuals_Container/AnimatedSprite2D").Modulate = new Color(1, 1, 1, 1);
-
-    }
+    
 	private async void attack_delay(){
 		attack_delayed = true;
 		timer.Start();

@@ -24,6 +24,7 @@ public partial class player_script : CharacterBody2D
     TextEdit line;
     AudioStreamPlayer2D sound_player;
     Random rnd;
+    Timer hurt_timer;
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
     {
@@ -35,19 +36,17 @@ public partial class player_script : CharacterBody2D
 		iframe_timer = GetNode<Timer>("Iframe_timer");
 		mouse = GetNode<Sprite2D>("Mouse");
         visuals = GetNode<Node2D>("Visuals_Container");
-        /*switch(GetTree().Root.GetChild(0).Name){
-            case "Main":
-            //line = GetTree().Root.GetNode<TextEdit>("Main/Level_Display");
-            return;
-
-        }*/
-        
+        hurt_timer = GetNode<Timer>("Hurt_Timer");
         sound_player = GetNode<AudioStreamPlayer2D>("Visuals_Container/AudioStreamPlayer2D");
         rnd = new Random();
+        Modulate = new Color(1, 1, 1, 1);
     }
 
     public override void _PhysicsProcess(double delta)
     {
+        if (hurt_timer.TimeLeft != 0){
+            Modulate = new Color(1, 0, 0, 1);
+        }
         Vector2 velocity = Velocity;
         // Get the input direction and handle the movement/deceleration.
         // As good practice, you should replace UI actions with custom gameplay actions.
@@ -189,6 +188,9 @@ public partial class player_script : CharacterBody2D
         GetTree().Root.GetNode<AnimatedSprite2D>($"Main/{area.GetParent().Name}/AnimatedSprite2D").Modulate = saved_modulate;
 
 	}
+    public void _on_hurt_timer_timeout(){
+        Modulate = new Color(1,1,1,1);
+    }
     public override void _Input(InputEvent @event)
     {
 			look_position = mouse.GlobalPosition - GlobalPosition;
@@ -199,3 +201,5 @@ public partial class player_script : CharacterBody2D
     }
     
 }
+
+

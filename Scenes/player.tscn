@@ -702,5 +702,8 @@ shape = SubResource("RectangleShape2D_0u7sv")
 occluder = SubResource("OccluderPolygon2D_sd630")
 
 [node name="Hurt_Timer" type="Timer" parent="."]
+wait_time = 0.3
+one_shot = true
 
 [connection signal="area_entered" from="Visuals_Container/AnimatedSprite2D/Power_attack_hitbox_container" to="." method="_on_power_attack_hitbox_container_area_entered"]
+[connection signal="timeout" from="Hurt_Timer" to="." method="_on_hurt_timer_timeout"]

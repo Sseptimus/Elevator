@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ddespbhyabpe0"
-path="res://.godot/imported/Modern Carpet2.png-11c90ae910471715178fd7dea4147c34.ctex"
+uid="uid://bxv0dqk23py76"
+path="res://.godot/imported/Pixel_Side_Wall.png-66b454bdb84a9cd012f34c7880249d43.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Textures/Modern Carpet2.png"
-dest_files=["res://.godot/imported/Modern Carpet2.png-11c90ae910471715178fd7dea4147c34.ctex"]
+source_file="res://Assets/Textures/Pixel_Side_Wall.png"
+dest_files=["res://.godot/imported/Pixel_Side_Wall.png-66b454bdb84a9cd012f34c7880249d43.ctex"]
 
 [params]
 

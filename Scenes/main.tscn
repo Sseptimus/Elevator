@@ -1,37 +1,81 @@
-[gd_scene load_steps=5 format=3 uid="uid://dymubtquxmn83"]
+[gd_scene load_steps=6 format=3 uid="uid://dymubtquxmn83"]
 
 [ext_resource type="Script" path="res://Scripts/main_script.cs" id="1_kqcge"]
-[ext_resource type="PackedScene" uid="uid://pgvqqh70iklm" path="res://Scenes/background.tscn" id="1_q2pee"]
+[ext_resource type="PackedScene" uid="uid://rlcgesiykerw" path="res://Scenes/background.tscn" id="1_q2pee"]
 [ext_resource type="PackedScene" uid="uid://vu4i5ua2ldcr" path="res://Scenes/player.tscn" id="2_58wfl"]
+[ext_resource type="PackedScene" uid="uid://dcd6xt287t8n7" path="res://Scenes/paused.tscn" id="2_grmou"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_uo1bm"]
 
 [node name="Main" type="Node2D"]
+process_mode = 3
 scale = Vector2(1.00241, 1)
 script = ExtResource("1_kqcge")
 
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+visible = false
+
+[node name="Pause" parent="CanvasLayer" instance=ExtResource("2_grmou")]
+process_mode = 2
+top_level = true
+z_index = 4
+z_as_relative = false
+offset_left = -557.0
+offset_top = -407.0
+offset_right = -500.0
+offset_bottom = -381.0
+mouse_filter = 1
+
+[node name="Button" type="Button" parent="CanvasLayer/Pause"]
+process_mode = 3
+top_level = true
+z_index = 4
+z_as_relative = false
+layout_mode = 0
+offset_left = 839.0
+offset_top = 583.0
+offset_right = 888.0
+offset_bottom = 614.0
+scale = Vector2(5, 5)
+action_mode = 0
+text = "Quit?"
+icon_alignment = 1
+
 [node name="Background" parent="." instance=ExtResource("1_q2pee")]
+process_mode = 1
+offset_left = 3.04442e-05
+offset_top = 1.52588e-05
 offset_right = 1920.0
 offset_bottom = 1080.0
+mouse_filter = 1
 
 [node name="Player" parent="." instance=ExtResource("2_58wfl")]
+process_mode = 1
 position = Vector2(765, 502)
 
 [node name="Level_timer" type="Timer" parent="."]
+process_mode = 1
 wait_time = 30.0
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
+process_mode = 1
 color = Color(0.509804, 0.529412, 0.372549, 1)
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
+process_mode = 1
 collision_layer = 3
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D"]
 polygon = PackedVector2Array(721.262, -3, 712.283, -300, 1219.06, -308, 1208.09, -7, 1299.87, -12, 1285.9, -347, 650.432, -346, 655.42, -3)
 
 [node name="Level Display" type="AnimatedSprite2D" parent="."]
+process_mode = 1
 sprite_frames = SubResource("SpriteFrames_uo1bm")
 
 [node name="Level Counter" type="TextEdit" parent="."]
+process_mode = 1
 offset_right = 8.0
 offset_bottom = 8.0
+mouse_filter = 2
+
+[connection signal="pressed" from="CanvasLayer/Pause/Button" to="." method="_on_button_pressed"]

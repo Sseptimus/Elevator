@@ -15,7 +15,6 @@ public partial class Mouse_script : Sprite2D
 		
 		Input.MouseMode = MouseModeEnum.Captured;
 		player = GetParent<CharacterBody2D>();
-		
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -54,5 +53,5 @@ public partial class Mouse_script : Sprite2D
 			var direction = Input.GetVector("view_left", "view_right", "view_up", "view_down");
 			currentPosition += direction*50;
 		}
-    }
+	}
 }
