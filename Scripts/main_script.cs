@@ -11,7 +11,7 @@ public partial class main_script : Node2D
 	PackedScene smart_enemy;
 	Vector2 starting_pos;
 	CharacterBody2D newEnemy;
-	TextEdit level_display;
+	Label level_display;
 	CanvasLayer pause;
 	Vector2 pos2;
 	
@@ -22,6 +22,8 @@ public partial class main_script : Node2D
 		smart_enemy = (PackedScene)ResourceLoader.Load("res://Scenes/smart_enemy_melee.tscn");
 		level_timer = GetNode<Timer>("Level_timer");
 		pause = GetNode<CanvasLayer>("CanvasLayer");
+		level_display = GetNode<Label>("Background/Label");
+		level_display.Text = "G";
 		starting_pos.X = 960;
 		starting_pos.Y = -66;
 		pos2.X = 1151;
@@ -38,7 +40,7 @@ public partial class main_script : Node2D
 		level_timer.Start(current_level*5);
 		await ToSignal(level_timer,"timeout");
 		current_level += 1;
-	
+		level_display.Text = current_level.ToString();
 		spawn_enemies();
 		level_switch();
 	}

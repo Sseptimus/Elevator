@@ -431,5 +431,9 @@ avoidance_enabled = true
 [node name="Attack_timer" type="Timer" parent="."]
 wait_time = 1.5
 
+[node name="NavigationObstacle2D" type="NavigationObstacle2D" parent="."]
+estimate_radius = false
+radius = 50.0
+
 [connection signal="value_changed" from="Health_Bar_Container/Health_Bar" to="." method="_on_health_bar_value_changed"]
 [connection signal="area_entered" from="Hitbox_container" to="." method="_on_hitbox_container_area_entered" flags=18]

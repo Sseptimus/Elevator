@@ -372,6 +372,7 @@ size = Vector2(18.4988, 28.6667)
 [sub_resource type="Animation" id="Animation_nvgq4"]
 resource_name = "Melee_-1 0"
 length = 0.3333
+step = 0.01
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -633,6 +634,7 @@ collision_mask = 3
 collision_priority = 0.01
 safe_margin = 0.1
 script = ExtResource("1_6ovbg")
+Speed = 1500.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-1.5, 25.5)
@@ -661,24 +663,27 @@ z_index = 2
 position = Vector2(0, 1.90735e-06)
 scale = Vector2(3, 2.811)
 sprite_frames = SubResource("SpriteFrames_t73cm")
-animation = &"0 -1"
+animation = &"Melee_0 -1"
+frame = 2
 speed_scale = 5.0
 
 [node name="Power_attack_hitbox_container" type="Area2D" parent="Visuals_Container/AnimatedSprite2D"]
 
 [node name="power_melee_hitbox_horizontal" type="CollisionShape2D" parent="Visuals_Container/AnimatedSprite2D/Power_attack_hitbox_container"]
-position = Vector2(-17.667, 1.423)
-scale = Vector2(1.08, 1)
+position = Vector2(-18.6667, 1.42298)
+scale = Vector2(1.2, 1)
 shape = SubResource("RectangleShape2D_lnxrd")
 disabled = true
 
 [node name="power_melee_hitbox_vertical" type="CollisionShape2D" parent="Visuals_Container/AnimatedSprite2D/Power_attack_hitbox_container"]
-position = Vector2(-0.266094, 7.82639)
+position = Vector2(0.0178905, 10.1597)
 rotation = 1.5708
+scale = Vector2(1.1, 1)
 shape = SubResource("RectangleShape2D_37uca")
 disabled = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Visuals_Container/AnimatedSprite2D"]
+speed_scale = 5.0
 libraries = {
 "": SubResource("AnimationLibrary_1c3sc")
 }

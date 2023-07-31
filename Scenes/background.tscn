@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://rlcgesiykerw"]
+[gd_scene load_steps=13 format=3 uid="uid://pgvqqh70iklm"]
 
 [ext_resource type="Script" path="res://Scripts/background_script.cs" id="1_rg2uo"]
 [ext_resource type="Texture2D" uid="uid://ipfo57720d06" path="res://Assets/Textures/Pixel_Tiles.png" id="2_5jk5h"]
@@ -125,6 +125,27 @@ shadow_enabled = true
 shadow_filter = 1
 shadow_filter_smooth = 1.0
 texture = ExtResource("7_w2i7n")
+
+[node name="Label" type="Label" parent="."]
+z_index = 1
+layout_mode = 0
+offset_left = 721.0
+offset_top = 16.0
+offset_right = 758.0
+offset_bottom = 42.0
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Grades_Container" type="CenterContainer" parent="."]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -99.0
+offset_top = 85.0
+offset_right = 1.0
+offset_bottom = 1080.0
+grow_horizontal = 0
 
 [connection signal="area_entered" from="Doors/Area2D" to="Doors" method="_on_area_2d_area_entered"]
 [connection signal="area_exited" from="Doors/Area2D" to="Doors" method="_on_area_2d_area_exited"]

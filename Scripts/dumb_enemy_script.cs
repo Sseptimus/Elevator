@@ -15,6 +15,8 @@ public partial class dumb_enemy_script : CharacterBody2D
 	AnimatedSprite2D sprite;
 	AnimationPlayer animator;
 	Timer hurt_timer;
+	Boolean grouped;
+	Area2D groupee;
 	public Vector2 MovementTarget
 	{
 		get { return _navigationAgent.TargetPosition; }
@@ -44,7 +46,6 @@ public partial class dumb_enemy_script : CharacterBody2D
 	public override void _PhysicsProcess(double delta)
 	{
 		ActorSetup();
-		Vector2 velocity = Velocity;
 		Vector2 current = Vector2.Zero;
 		if (_navigationAgent.IsNavigationFinished())
 		{
@@ -61,10 +62,9 @@ public partial class dumb_enemy_script : CharacterBody2D
 			newVelocity = Vector2.Zero;
 		}
 		if(knockback){
-			Velocity = -newVelocity*1.5f;
-		}else{
-		Velocity = newVelocity;
+			newVelocity = -newVelocity*1.5f;
 		}
+		Velocity = newVelocity;
 		Vector2 look_position = player.GlobalPosition - GlobalPosition;
 		float angle = look_position.Angle();
 		float look_direction = Mathf.Round(angle/(Mathf.Pi/2))*(Mathf.Pi/2);

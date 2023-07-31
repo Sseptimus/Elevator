@@ -352,7 +352,7 @@ _data = {
 }
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_x2kyo"]
-size = Vector2(128, 128)
+size = Vector2(128, 148)
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_waaig"]
 
@@ -374,9 +374,9 @@ script = ExtResource("1_irgx6")
 
 [node name="Health_Bar" parent="Health_Bar_Container" instance=ExtResource("2_klv58")]
 offset_left = -47.0
-offset_top = -85.0
+offset_top = -105.0
 offset_right = 18.0
-offset_bottom = -20.0
+offset_bottom = -40.0
 max_value = 80.0
 value = 80.0
 metadata/_edit_use_anchors_ = true
@@ -398,15 +398,14 @@ libraries = {
 }
 
 [node name="Enemy_hitbox_container" type="Area2D" parent="."]
-visible = false
 
 [node name="Enemy_hitbox" type="CollisionShape2D" parent="Enemy_hitbox_container"]
+position = Vector2(0, -10)
 shape = SubResource("RectangleShape2D_x2kyo")
 
 [node name="Hitbox_container" type="Area2D" parent="."]
 
 [node name="Sword" type="Sprite2D" parent="Hitbox_container"]
-visible = false
 modulate = Color(1, 0, 1, 1)
 show_behind_parent = true
 position = Vector2(81, -2.38419e-07)
@@ -419,7 +418,6 @@ shape = SubResource("RectangleShape2D_oa4bp")
 disabled = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
 position = Vector2(0, 55)
 scale = Vector2(6.32, 6.4)
 shape = SubResource("RectangleShape2D_a1k07")
@@ -428,6 +426,10 @@ shape = SubResource("RectangleShape2D_a1k07")
 target_desired_distance = 0.1
 navigation_layers = 7
 avoidance_enabled = true
+
+[node name="NavigationObstacle2D" type="NavigationObstacle2D" parent="."]
+estimate_radius = false
+radius = 50.0
 
 [connection signal="value_changed" from="Health_Bar_Container/Health_Bar" to="." method="_on_health_bar_value_changed"]
 [connection signal="area_entered" from="Hitbox_container" to="." method="_on_hitbox_container_area_entered"]

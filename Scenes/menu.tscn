@@ -10,7 +10,7 @@
 
 [node name="TextureRect" type="TextureRect" parent="Window"]
 offset_right = 1920.0
-offset_bottom = 340.0
+offset_bottom = 249.0
 
 [node name="TextureRect" type="TextureRect" parent="."]
 offset_top = 340.0
