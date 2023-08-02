@@ -40,6 +40,7 @@ public partial class player_script : CharacterBody2D
         sound_player = GetNode<AudioStreamPlayer2D>("Visuals_Container/AudioStreamPlayer2D");
         rnd = new Random();
         Modulate = new Color(1, 1, 1, 1);
+        GameManager.CurrentLevel = 1;
     }
 
     public override void _PhysicsProcess(double delta)

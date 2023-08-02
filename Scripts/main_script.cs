@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using static Godot.Input;
 public partial class main_script : Node2D
 {
-	int current_level = 1;
+	public int current_level {get; set;} = 1;
 	public List<CharacterBody2D> enemies = new List<CharacterBody2D>();
 	Timer level_timer;
 	PackedScene dumb_enemy;
@@ -21,7 +21,7 @@ public partial class main_script : Node2D
 		dumb_enemy = (PackedScene)ResourceLoader.Load("res://Scenes/dumb_enemy_melee.tscn");
 		smart_enemy = (PackedScene)ResourceLoader.Load("res://Scenes/smart_enemy_melee.tscn");
 		level_timer = GetNode<Timer>("Level_timer");
-		pause = GetNode<CanvasLayer>("CanvasLayer");
+		pause = GetNode<CanvasLayer>("PauseLayer");
 		level_display = GetNode<Label>("Background/Label");
 		level_display.Text = "G";
 		starting_pos.X = 960;
@@ -32,8 +32,16 @@ public partial class main_script : Node2D
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
-	public override void _Process(double delta)
+	public override async void _Process(double delta)
 	{
+		if(enemies.Count > 30){
+			GetTree().Paused = true;
+			Label pause_label = GetNode<Label>("Pause");
+			pause_label.Text = "The elevator is too heavy";
+			pause_label.Visible = true;
+			await ToSignal(GetTree().CreateTimer(5),"timeout");
+			GetTree().Quit();
+		}
 		
 	}
 	public async void level_switch(){
@@ -85,6 +93,9 @@ public partial class main_script : Node2D
 			}
 		}
 	}
+}
+public static class GameManager{
+	public static int CurrentLevel {get; set;} = 1;
 }
 
 

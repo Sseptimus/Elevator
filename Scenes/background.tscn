@@ -1,11 +1,11 @@
 [gd_scene load_steps=13 format=3 uid="uid://pgvqqh70iklm"]
 
 [ext_resource type="Script" path="res://Scripts/background_script.cs" id="1_rg2uo"]
-[ext_resource type="Texture2D" uid="uid://ipfo57720d06" path="res://Assets/Textures/Pixel_Tiles.png" id="2_5jk5h"]
+[ext_resource type="Texture2D" uid="uid://qb0asv3n47jw" path="res://Assets/Textures/Pixel_Dirty_Tiles.png" id="2_15pg3"]
 [ext_resource type="Script" path="res://Scripts/Door_script.cs" id="2_egvqq"]
 [ext_resource type="Texture2D" uid="uid://dpf7g1fqg8jnh" path="res://Assets/Textures/Left Door.png" id="4_lo6yc"]
 [ext_resource type="Texture2D" uid="uid://clkxhqd0qa32q" path="res://Assets/Textures/Pixel_Top_Wall_Empty.png" id="5_g4tfg"]
-[ext_resource type="Texture2D" uid="uid://bxv0dqk23py76" path="res://Assets/Textures/Pixel_Side_Wall.png" id="6_cxplj"]
+[ext_resource type="Texture2D" uid="uid://bmgddpt4udtw5" path="res://Assets/Textures/Pixel_Dirty_Side_Wall.png" id="6_qi1m4"]
 [ext_resource type="Texture2D" uid="uid://bbsnr74vn65ct" path="res://Assets/Textures/Untitled-2.png" id="7_4ewnp"]
 [ext_resource type="Texture2D" uid="uid://c05c64nm1ajwh" path="res://Assets/Textures/Untitled-1.png" id="7_w2i7n"]
 
@@ -37,7 +37,7 @@ offset_left = 100.0
 offset_top = 100.0
 offset_right = 1820.0
 offset_bottom = 1070.0
-texture = ExtResource("2_5jk5h")
+texture = ExtResource("2_15pg3")
 stretch_mode = 1
 
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
@@ -102,12 +102,12 @@ polygon = PackedVector2Array(650, 110, 650, 0, 0, 0, 0, 1165, 1920, 1165, 1920, 
 [node name="Sprite2D3" type="Sprite2D" parent="StaticBody2D"]
 position = Vector2(1871, 960)
 rotation = 1.5708
-texture = ExtResource("6_cxplj")
+texture = ExtResource("6_qi1m4")
 
 [node name="Sprite2D2" type="Sprite2D" parent="StaticBody2D"]
 position = Vector2(50, 960)
 rotation = -1.5708
-texture = ExtResource("6_cxplj")
+texture = ExtResource("6_qi1m4")
 
 [node name="PointLight2D2" type="PointLight2D" parent="."]
 position = Vector2(969, 596)

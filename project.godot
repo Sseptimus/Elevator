@@ -15,6 +15,10 @@ run/main_scene="res://Scenes/main.tscn"
 config/features=PackedStringArray("4.0", "C#", "Forward Plus")
 config/icon="res://Assets/Img/icon.svg"
 
+[autoload]
+
+MainScript="*res://Scripts/main_script.cs"
+
 [display]
 
 window/size/viewport_width=1920
