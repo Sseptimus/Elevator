@@ -1,9 +1,9 @@
 [gd_scene load_steps=7 format=3 uid="uid://dymubtquxmn83"]
 
 [ext_resource type="Script" path="res://Scripts/main_script.cs" id="1_kqcge"]
-[ext_resource type="PackedScene" uid="uid://pgvqqh70iklm" path="res://Scenes/background.tscn" id="1_q2pee"]
+[ext_resource type="PackedScene" uid="uid://rlcgesiykerw" path="res://Scenes/background.tscn" id="1_q2pee"]
 [ext_resource type="PackedScene" uid="uid://vu4i5ua2ldcr" path="res://Scenes/player.tscn" id="2_58wfl"]
-[ext_resource type="PackedScene" path="res://Scenes/paused.tscn" id="2_grmou"]
+[ext_resource type="PackedScene" uid="uid://dcd6xt287t8n7" path="res://Scenes/paused.tscn" id="2_grmou"]
 [ext_resource type="Script" path="res://Scenes/Perk.cs" id="5_y8u0a"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_uo1bm"]
@@ -62,7 +62,7 @@ mouse_filter = 1
 
 [node name="Player" parent="." instance=ExtResource("2_58wfl")]
 process_mode = 1
-position = Vector2(765, 502)
+position = Vector2(428.966, 407)
 
 [node name="Level_timer" type="Timer" parent="."]
 process_mode = 1

@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://pgvqqh70iklm"]
+[gd_scene load_steps=13 format=3 uid="uid://rlcgesiykerw"]
 
 [ext_resource type="Script" path="res://Scripts/background_script.cs" id="1_rg2uo"]
 [ext_resource type="Texture2D" uid="uid://qb0asv3n47jw" path="res://Assets/Textures/Pixel_Dirty_Tiles.png" id="2_15pg3"]
@@ -123,7 +123,7 @@ scale = Vector2(1.83573, 1.57276)
 energy = 3.24
 shadow_enabled = true
 shadow_filter = 1
-shadow_filter_smooth = 1.0
+shadow_filter_smooth = 10.0
 texture = ExtResource("7_w2i7n")
 
 [node name="Label" type="Label" parent="."]
