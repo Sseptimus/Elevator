@@ -1,6 +1,6 @@
 using Godot;
 using System;
-
+using System.Collections;
 public partial class dumb_enemy_script : CharacterBody2D
 {
     // defining variables
@@ -17,6 +17,7 @@ public partial class dumb_enemy_script : CharacterBody2D
 	Timer hurt_timer;
 	Boolean grouped;
 	Area2D groupee;
+	Random rnd;
 	public Vector2 MovementTarget
 	{
 		get { return _navigationAgent.TargetPosition; }
@@ -25,6 +26,7 @@ public partial class dumb_enemy_script : CharacterBody2D
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
+		rnd = new Random();
 		player = GetTree().Root.GetNode<CharacterBody2D>($"Main/Player");
 		enemy_anim = GetNode<AnimationPlayer>("WeaponAnimation");
 		healthbar = player.GetNode<TextureProgressBar>("Visuals_Container/Health_Bar_Container/Health_Bar");
@@ -34,7 +36,8 @@ public partial class dumb_enemy_script : CharacterBody2D
 		sprite = GetNode<AnimatedSprite2D>("AnimatedBaseSprite");
 		animator = GetNode<AnimationPlayer>("AnimationPlayer");
 		hurt_timer = GetTree().Root.GetNode<Timer>("Main/Player/Hurt_Timer");
-		
+		GetNode<AnimatedSprite2D>("AnimatedShirtSprite").Modulate = new Color((float)rnd.Next(0,100)/100,(float)rnd.Next(0,100)/100,(float)rnd.Next(0,100)/100);
+		GetNode<AnimatedSprite2D>("AnimatedPantsSprite").Modulate = new Color((float)rnd.Next(0,100)/100,(float)rnd.Next(0,100)/100,(float)rnd.Next(0,100)/100);
 
 		// These values need to be adjusted for the actor's speed
 		// and the navigation layout.

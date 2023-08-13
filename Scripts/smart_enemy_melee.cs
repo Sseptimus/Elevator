@@ -15,6 +15,7 @@ public partial class smart_enemy_melee : CharacterBody2D
     bool knockback = false;
     AnimationPlayer animator;
     Timer hurt_timer;
+    Random rnd;
     public Vector2 MovementTarget
     {
         get { return _navigationAgent.TargetPosition; }
@@ -23,6 +24,7 @@ public partial class smart_enemy_melee : CharacterBody2D
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
     {
+        rnd = new Random();
         player = GetTree().Root.GetNode<CharacterBody2D>($"Main/Player");
         enemy_anim = GetNode<AnimationPlayer>("WeaponAnimation");
         healthbar = player.GetNode<TextureProgressBar>("Visuals_Container/Health_Bar_Container/Health_Bar");
@@ -31,7 +33,9 @@ public partial class smart_enemy_melee : CharacterBody2D
         collider = GetNode<CollisionShape2D>("CollisionShape2D");
 		timer = GetNode<Timer>("Attack_timer");
         hurt_timer = GetTree().Root.GetNode<Timer>("Main/Player/Hurt_Timer");
-        animator = GetNode<AnimationPlayer>("AnimatedSprite2D/AnimationPlayer");
+        animator = GetNode<AnimationPlayer>("AnimationPlayer");
+        GetNode<AnimatedSprite2D>("AnimatedShirtSprite").Modulate = new Color((float)rnd.Next(0,100)/100,(float)rnd.Next(0,100)/100,(float)rnd.Next(0,100)/100);
+		GetNode<AnimatedSprite2D>("AnimatedPantsSprite").Modulate = new Color((float)rnd.Next(0,100)/100,(float)rnd.Next(0,100)/100,(float)rnd.Next(0,100)/100);
         // These values need to be adjusted for the actor's speed
         // and the navigation layout.
         _navigationAgent.PathDesiredDistance = 4.0f;
