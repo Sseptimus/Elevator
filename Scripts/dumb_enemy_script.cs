@@ -31,8 +31,8 @@ public partial class dumb_enemy_script : CharacterBody2D
 		health = GetNode<TextureProgressBar>("Health_Bar_Container/Health_Bar");
 		_navigationAgent = GetNode<NavigationAgent2D>("NavigationAgent2D");
 		collider = GetNode<CollisionShape2D>("CollisionShape2D");
-		sprite = GetNode<AnimatedSprite2D>("AnimatedSprite2D");
-		animator = GetNode<AnimationPlayer>("AnimatedSprite2D/AnimationPlayer");
+		sprite = GetNode<AnimatedSprite2D>("AnimatedBaseSprite");
+		animator = GetNode<AnimationPlayer>("AnimationPlayer");
 		hurt_timer = GetTree().Root.GetNode<Timer>("Main/Player/Hurt_Timer");
 		
 
@@ -46,7 +46,6 @@ public partial class dumb_enemy_script : CharacterBody2D
 	public override void _PhysicsProcess(double delta)
 	{
 		ActorSetup();
-		Vector2 current = Vector2.Zero;
 		if (_navigationAgent.IsNavigationFinished())
 		{
 			return;
