@@ -16,8 +16,9 @@ public partial class main_script : Node2D
 	Vector2 pos2;
 	
 	// Called when the node enters the scene tree for the first time.
-	public override void _Ready()
+	public override async void _Ready()
 	{
+		//await PerkSelection();
 		dumb_enemy = (PackedScene)ResourceLoader.Load("res://Scenes/dumb_enemy_melee.tscn");
 		smart_enemy = (PackedScene)ResourceLoader.Load("res://Scenes/smart_enemy_melee.tscn");
 		level_timer = GetNode<Timer>("Level_timer");
@@ -93,6 +94,9 @@ public partial class main_script : Node2D
 			}
 		}
 	}
+	//async void PerkSelection(){
+		//show selector
+	//}
 }
 public static class GameManager{
 	public static int CurrentLevel {get; set;} = 1;

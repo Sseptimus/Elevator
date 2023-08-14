@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://Scripts/main_script.cs" id="1_kqcge"]
 [ext_resource type="PackedScene" uid="uid://rlcgesiykerw" path="res://Scenes/background.tscn" id="1_q2pee"]
 [ext_resource type="PackedScene" uid="uid://vu4i5ua2ldcr" path="res://Scenes/player.tscn" id="2_58wfl"]
-[ext_resource type="PackedScene" uid="uid://dcd6xt287t8n7" path="res://Scenes/paused.tscn" id="2_grmou"]
+[ext_resource type="PackedScene" path="res://Scenes/paused.tscn" id="2_grmou"]
 [ext_resource type="Script" path="res://Scenes/Perk.cs" id="5_y8u0a"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_uo1bm"]
@@ -88,5 +88,38 @@ process_mode = 1
 offset_right = 8.0
 offset_bottom = 8.0
 mouse_filter = 2
+
+[node name="PerkSelector" type="Label" parent="."]
+visible = false
+offset_left = -185.553
+offset_top = -17.0
+offset_right = 45.4472
+offset_bottom = 37.0
+scale = Vector2(10, 10)
+text = "Select Your First Perk
+"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Option1" type="TextureButton" parent="PerkSelector"]
+layout_mode = 0
+offset_left = 41.5
+offset_top = 49.7
+offset_right = 81.5
+offset_bottom = 89.7
+
+[node name="Option2" type="TextureButton" parent="PerkSelector"]
+layout_mode = 0
+offset_left = 91.0805
+offset_top = 52.6
+offset_right = 131.081
+offset_bottom = 92.6
+
+[node name="Option3" type="TextureButton" parent="PerkSelector"]
+layout_mode = 0
+offset_left = 156.623
+offset_top = 50.7
+offset_right = 196.623
+offset_bottom = 90.7
 
 [connection signal="pressed" from="PauseLayer/Pause/Button" to="." method="_on_button_pressed"]
