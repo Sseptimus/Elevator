@@ -1,4 +1,4 @@
-[gd_scene load_steps=66 format=3 uid="uid://vu4i5ua2ldcr"]
+[gd_scene load_steps=66 format=3 uid="uid://dcl4rh15o2mmr"]
 
 [ext_resource type="Script" path="res://Scripts/player_script.cs" id="1_6ovbg"]
 [ext_resource type="PackedScene" uid="uid://dtawpwuctqr5o" path="res://Scenes/heath_bar.tscn" id="2_0a5tg"]
@@ -300,7 +300,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"Melee_-1 0",
-"speed": 9.0
+"speed": 3.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -663,20 +663,19 @@ z_index = 2
 position = Vector2(0, 1.90735e-06)
 scale = Vector2(3, 2.811)
 sprite_frames = SubResource("SpriteFrames_t73cm")
-animation = &"Melee_0 -1"
-frame = 2
+animation = &"-1 0"
 speed_scale = 5.0
 
 [node name="Power_attack_hitbox_container" type="Area2D" parent="Visuals_Container/AnimatedSprite2D"]
 
 [node name="power_melee_hitbox_horizontal" type="CollisionShape2D" parent="Visuals_Container/AnimatedSprite2D/Power_attack_hitbox_container"]
-position = Vector2(-18.6667, 1.42298)
+position = Vector2(-17.667, 1.423)
 scale = Vector2(1.2, 1)
 shape = SubResource("RectangleShape2D_lnxrd")
 disabled = true
 
 [node name="power_melee_hitbox_vertical" type="CollisionShape2D" parent="Visuals_Container/AnimatedSprite2D/Power_attack_hitbox_container"]
-position = Vector2(0.0178905, 10.1597)
+position = Vector2(-0.266094, 7.82639)
 rotation = 1.5708
 scale = Vector2(1.1, 1)
 shape = SubResource("RectangleShape2D_37uca")

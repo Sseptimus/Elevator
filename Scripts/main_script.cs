@@ -13,23 +13,28 @@ public partial class main_script : Node2D
 	CharacterBody2D newEnemy;
 	Label level_display;
 	CanvasLayer pause;
+	Label perkSelector;
 	Vector2 pos2;
+	Label menu;
 	
 	// Called when the node enters the scene tree for the first time.
-	public override async void _Ready()
+	public override void _Ready()
 	{
-		//await PerkSelection();
 		dumb_enemy = (PackedScene)ResourceLoader.Load("res://Scenes/dumb_enemy_melee.tscn");
 		smart_enemy = (PackedScene)ResourceLoader.Load("res://Scenes/smart_enemy_melee.tscn");
 		level_timer = GetNode<Timer>("Level_timer");
 		pause = GetNode<CanvasLayer>("PauseLayer");
 		level_display = GetNode<Label>("Background/Label");
+		perkSelector = GetNode<Label>("PerkSelector");
+		menu = GetNode<Label>("Menu");
+		Input.MouseMode = MouseModeEnum.Visible;
 		level_display.Text = "G";
 		starting_pos.X = 960;
 		starting_pos.Y = -66;
 		pos2.X = 1151;
 		pos2.Y = 901;
-		level_switch();
+		GetTree().Paused = true;
+		perk._on_visibility_changed();
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -76,10 +81,14 @@ public partial class main_script : Node2D
 			AddChild(newEnemy);
 		}
 	}
+	private void _on_quit_button_pressed()
+	{
+		GetTree().Quit();
+	}
 	private void _on_button_pressed()
 	{
-		GD.Print("A");
-		GetTree().Quit();
+		menu.Visible = false;
+		perkSelector.Visible = true;
 	}
 	public override void _Input(InputEvent @event){
 		if(@event.IsActionPressed("ui_cancel")){
@@ -94,12 +103,16 @@ public partial class main_script : Node2D
 			}
 		}
 	}
-	//async void PerkSelection(){
-		//show selector
-	//}
+}
+public class Upgrades{
+	public int PlayerDamageMultiplier {get; set;} = 1;
+	public int PlayerHealthMultiplier {get; set;} = 1;
+	public int EnemyDamageMultiplier {get; set;} = 1;
+	public int EnemyHealthMultiplier {get; set;} = 1;
 }
 public static class GameManager{
 	public static int CurrentLevel {get; set;} = 1;
+
 }
 
 

@@ -79,7 +79,7 @@ public partial class smart_enemy_melee : CharacterBody2D
         MoveAndSlide();
         if (Position.DistanceTo(player.Position) <= 70)
         {
-            enemy_anim.Play("Enemy_melee");
+            enemy_anim.Play($"Enemy Attack {aim_direction.X} {aim_direction.Y}");
 			attack_delay();
         }
         if (health.Value <= 0)

@@ -3,7 +3,7 @@ using System;
 using System.Collections;
 public partial class dumb_enemy_script : CharacterBody2D
 {
-    // defining variables
+	// defining variables
 	CharacterBody2D player;
 	AnimationPlayer enemy_anim;
 	TextureProgressBar healthbar;
@@ -36,8 +36,8 @@ public partial class dumb_enemy_script : CharacterBody2D
 		sprite = GetNode<AnimatedSprite2D>("AnimatedBaseSprite");
 		animator = GetNode<AnimationPlayer>("AnimationPlayer");
 		hurt_timer = GetTree().Root.GetNode<Timer>("Main/Player/Hurt_Timer");
-		GetNode<AnimatedSprite2D>("AnimatedShirtSprite").Modulate = new Color((float)rnd.Next(0,100)/100,(float)rnd.Next(0,100)/100,(float)rnd.Next(0,100)/100);
-		GetNode<AnimatedSprite2D>("AnimatedPantsSprite").Modulate = new Color((float)rnd.Next(0,100)/100,(float)rnd.Next(0,100)/100,(float)rnd.Next(0,100)/100);
+		GetNode<AnimatedSprite2D>("AnimatedShirtSprite").Modulate = new Color((float)rnd.Next(0, 100) / 100, (float)rnd.Next(0, 100) / 100, (float)rnd.Next(0, 100) / 100);
+		GetNode<AnimatedSprite2D>("AnimatedPantsSprite").Modulate = new Color((float)rnd.Next(0, 100) / 100, (float)rnd.Next(0, 100) / 100, (float)rnd.Next(0, 100) / 100);
 
 		// These values need to be adjusted for the actor's speed
 		// and the navigation layout.
@@ -63,19 +63,23 @@ public partial class dumb_enemy_script : CharacterBody2D
 		{
 			newVelocity = Vector2.Zero;
 		}
-		if(knockback){
-			newVelocity = -newVelocity*1.5f;
+		if (knockback)
+		{
+			newVelocity = -newVelocity * 1.5f;
 		}
 		Velocity = newVelocity;
 		Vector2 look_position = player.GlobalPosition - GlobalPosition;
 		float angle = look_position.Angle();
-		float look_direction = Mathf.Round(angle/(Mathf.Pi/2))*(Mathf.Pi/2);
+		float look_direction = Mathf.Round(angle / (Mathf.Pi / 2)) * (Mathf.Pi / 2);
 		Vector2 aim_direction;
 		aim_direction.X = MathF.Round(Mathf.Cos(look_direction));
 		aim_direction.Y = MathF.Round(MathF.Sin(look_direction));
-		if (aim_direction.X == -0){
+		if (aim_direction.X == -0)
+		{
 			aim_direction.X = 0;
-		}if (aim_direction.Y == -0){
+		}
+		if (aim_direction.Y == -0)
+		{
 			aim_direction.Y = 0;
 		}
 		animator.Play($"{aim_direction.X} {aim_direction.Y}");
@@ -84,7 +88,7 @@ public partial class dumb_enemy_script : CharacterBody2D
 		a.LookAt(player.Position);
 		if (Position.DistanceTo(player.Position) <= 150)
 		{
-			enemy_anim.Play("Enemy_melee");
+			enemy_anim.Play($"Enemy Attack {aim_direction.X} {aim_direction.Y}");
 		}
 		if (health.Value <= 0)
 		{
@@ -99,7 +103,8 @@ public partial class dumb_enemy_script : CharacterBody2D
 			hit();
 		}
 	}
-	void hit(){ 
+	void hit()
+	{
 		healthbar.Value -= 5;
 		hurt_timer.Start();
 
@@ -112,12 +117,14 @@ public partial class dumb_enemy_script : CharacterBody2D
 		// Now that the navigation map is no longer empty, set the movement target.
 		MovementTarget = player.Position;
 	}
-	public void _on_health_bar_value_changed(float value){
+	public void _on_health_bar_value_changed(float value)
+	{
 		knockback_delay();
 	}
-	private async void knockback_delay(){
+	private async void knockback_delay()
+	{
 		knockback = true;
-		await ToSignal(GetTree().CreateTimer(0.05),"timeout");
+		await ToSignal(GetTree().CreateTimer(0.05), "timeout");
 		knockback = false;
 	}
 }

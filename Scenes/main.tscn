@@ -2,9 +2,9 @@
 
 [ext_resource type="Script" path="res://Scripts/main_script.cs" id="1_kqcge"]
 [ext_resource type="PackedScene" uid="uid://rlcgesiykerw" path="res://Scenes/background.tscn" id="1_q2pee"]
-[ext_resource type="PackedScene" uid="uid://vu4i5ua2ldcr" path="res://Scenes/player.tscn" id="2_58wfl"]
+[ext_resource type="PackedScene" uid="uid://dcl4rh15o2mmr" path="res://Scenes/player.tscn" id="2_58wfl"]
 [ext_resource type="PackedScene" path="res://Scenes/paused.tscn" id="2_grmou"]
-[ext_resource type="Script" path="res://Scenes/Perk.cs" id="5_y8u0a"]
+[ext_resource type="PackedScene" uid="uid://53omrigpia0e" path="res://Scenes/perk_selector.tscn" id="5_c3403"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_uo1bm"]
 
@@ -41,16 +41,6 @@ scale = Vector2(5, 5)
 action_mode = 0
 text = "Quit?"
 icon_alignment = 1
-
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
-visible = false
-script = ExtResource("5_y8u0a")
-
-[node name="Option1" type="Sprite2D" parent="CanvasLayer"]
-
-[node name="Option2" type="Sprite2D" parent="CanvasLayer"]
-
-[node name="Option3" type="Sprite2D" parent="CanvasLayer"]
 
 [node name="Background" parent="." instance=ExtResource("1_q2pee")]
 process_mode = 1
@@ -89,37 +79,43 @@ offset_right = 8.0
 offset_bottom = 8.0
 mouse_filter = 2
 
-[node name="PerkSelector" type="Label" parent="."]
+[node name="PerkSelector" parent="." instance=ExtResource("5_c3403")]
+
+[node name="Menu" type="Label" parent="."]
+process_mode = 3
 visible = false
-offset_left = -185.553
-offset_top = -17.0
-offset_right = 45.4472
-offset_bottom = 37.0
-scale = Vector2(10, 10)
-text = "Select Your First Perk
-"
-horizontal_alignment = 1
-vertical_alignment = 1
+z_index = 7
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 352.151
+offset_top = 176.0
+offset_right = 568.151
+offset_bottom = 202.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(5.28844, 5.07452)
+text = "I need a name for this game"
 
-[node name="Option1" type="TextureButton" parent="PerkSelector"]
+[node name="ColorRect" type="ColorRect" parent="Menu"]
+z_index = -1
 layout_mode = 0
-offset_left = 41.5
-offset_top = 49.7
-offset_right = 81.5
-offset_bottom = 89.7
+offset_left = -103.562
+offset_top = -49.6599
+offset_right = -63.5618
+offset_bottom = -9.65988
+scale = Vector2(14.7598, 6.96063)
+color = Color(0, 0, 0, 1)
 
-[node name="Option2" type="TextureButton" parent="PerkSelector"]
+[node name="Button" type="Button" parent="Menu"]
 layout_mode = 0
-offset_left = 91.0805
-offset_top = 52.6
-offset_right = 131.081
-offset_bottom = 92.6
+offset_left = 83.189
+offset_top = 65.4249
+offset_right = 129.189
+offset_bottom = 96.4249
+text = "Start"
 
-[node name="Option3" type="TextureButton" parent="PerkSelector"]
-layout_mode = 0
-offset_left = 156.623
-offset_top = 50.7
-offset_right = 196.623
-offset_bottom = 90.7
-
-[connection signal="pressed" from="PauseLayer/Pause/Button" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="PauseLayer/Pause/Button" to="." method="_on_quit_button_pressed"]
+[connection signal="pressed" from="Menu/Button" to="." method="_on_button_pressed"]

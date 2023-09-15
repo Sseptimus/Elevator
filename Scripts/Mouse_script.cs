@@ -13,7 +13,6 @@ public partial class Mouse_script : Sprite2D
 	public override void _Ready()
 	{
 		
-		Input.MouseMode = MouseModeEnum.Captured;
 		player = GetParent<CharacterBody2D>();
 	}
 

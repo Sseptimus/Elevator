@@ -1,9 +1,10 @@
-[gd_scene load_steps=13 format=3 uid="uid://rlcgesiykerw"]
+[gd_scene load_steps=14 format=3 uid="uid://rlcgesiykerw"]
 
 [ext_resource type="Script" path="res://Scripts/background_script.cs" id="1_rg2uo"]
 [ext_resource type="Texture2D" uid="uid://qb0asv3n47jw" path="res://Assets/Textures/Pixel_Dirty_Tiles.png" id="2_15pg3"]
 [ext_resource type="Script" path="res://Scripts/Door_script.cs" id="2_egvqq"]
-[ext_resource type="Texture2D" uid="uid://dpf7g1fqg8jnh" path="res://Assets/Textures/Left Door.png" id="4_lo6yc"]
+[ext_resource type="Texture2D" uid="uid://bd80uua7388b5" path="res://Assets/Textures/Pixel_Left_Door.png" id="4_pmyak"]
+[ext_resource type="Texture2D" uid="uid://4nlp18ivm58y" path="res://Assets/Textures/Pixel_Right_Door.png" id="5_635yg"]
 [ext_resource type="Texture2D" uid="uid://clkxhqd0qa32q" path="res://Assets/Textures/Pixel_Top_Wall_Empty.png" id="5_g4tfg"]
 [ext_resource type="Texture2D" uid="uid://bmgddpt4udtw5" path="res://Assets/Textures/Pixel_Dirty_Side_Wall.png" id="6_qi1m4"]
 [ext_resource type="Texture2D" uid="uid://bbsnr74vn65ct" path="res://Assets/Textures/Untitled-2.png" id="7_4ewnp"]
@@ -62,7 +63,7 @@ collision_layer = 3
 [node name="Sprite2D" type="Sprite2D" parent="Doors/Left_Door_Container"]
 z_index = -1
 position = Vector2(310, 50)
-texture = ExtResource("4_lo6yc")
+texture = ExtResource("4_pmyak")
 
 [node name="Left_Door" type="CollisionShape2D" parent="Doors/Left_Door_Container"]
 z_index = 10
@@ -79,8 +80,7 @@ collision_layer = 3
 z_index = -1
 material = SubResource("ShaderMaterial_0eotv")
 position = Vector2(-10.2269, 50)
-scale = Vector2(-1, 1)
-texture = ExtResource("4_lo6yc")
+texture = ExtResource("5_635yg")
 
 [node name="Right_Door" type="CollisionShape2D" parent="Doors/Right_Door_Container"]
 z_index = 10

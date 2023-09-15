@@ -1,0 +1,43 @@
+[gd_scene load_steps=5 format=3 uid="uid://53omrigpia0e"]
+
+[ext_resource type="Script" path="res://Scripts/perk.cs" id="1_6g8ur"]
+[ext_resource type="Texture2D" uid="uid://5likfj8ca0qc" path="res://Assets/Img/Option 1.png" id="2_ba5ro"]
+[ext_resource type="Texture2D" uid="uid://b4ntcmt5yul3t" path="res://Assets/Img/Option 2.png" id="3_lpfea"]
+[ext_resource type="Texture2D" uid="uid://cjuk0e6iob7lp" path="res://Assets/Img/Option 3.png" id="4_qgelj"]
+
+[node name="PerkSelector" type="Label"]
+process_mode = 3
+offset_left = 325.0
+offset_top = 124.0
+offset_right = 518.0
+offset_bottom = 150.0
+scale = Vector2(7, 7)
+text = "Select your next upgrade"
+script = ExtResource("1_6g8ur")
+
+[node name="TextureButton" type="TextureButton" parent="."]
+layout_mode = 0
+offset_left = -12.0
+offset_top = 44.2857
+offset_right = 38.0
+offset_bottom = 104.286
+texture_normal = ExtResource("2_ba5ro")
+
+[node name="TextureButton2" type="TextureButton" parent="."]
+layout_mode = 0
+offset_left = 70.2857
+offset_top = 42.5714
+offset_right = 120.286
+offset_bottom = 102.571
+texture_normal = ExtResource("3_lpfea")
+
+[node name="TextureButton3" type="TextureButton" parent="."]
+layout_mode = 0
+offset_left = 148.571
+offset_top = 46.0
+offset_right = 198.571
+offset_bottom = 106.0
+texture_normal = ExtResource("4_qgelj")
+
+[connection signal="focus_entered" from="." to="." method="_on_visibility_changed"]
+[connection signal="pressed" from="TextureButton" to="." method="_on_texture_button1_pressed"]
