@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ccpc2ojig4so6"
-path="res://.godot/imported/Player_Attack_Power.png-603e83ca382d514d4e725a8f75469a80.ctex"
+uid="uid://b5xatbaeo8h8s"
+path="res://.godot/imported/Level_1_enemy_shirt_tilesheet.png-45dc2b84e6c1edcf7017e3904d46d054.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Img/Player_Attack_Power.png"
-dest_files=["res://.godot/imported/Player_Attack_Power.png-603e83ca382d514d4e725a8f75469a80.ctex"]
+source_file="res://Assets/Img/Level_1_enemy/Walking/Level_1_enemy_shirt_tilesheet.png"
+dest_files=["res://.godot/imported/Level_1_enemy_shirt_tilesheet.png-45dc2b84e6c1edcf7017e3904d46d054.ctex"]
 
 [params]
 
