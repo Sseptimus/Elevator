@@ -3,17 +3,22 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Runtime.InteropServices;
+using static Godot.Input;
 
-
-public partial class perk : Label
+public partial class perk : CanvasLayer
 {
 	UpgradeOption GlassCannon;
+	UpgradeOption Nothing;
+	UpgradeOption option1;
+	UpgradeOption option2;
+	UpgradeOption option3;
 	List<UpgradeOption> upgrades = new List<UpgradeOption>();
 	Random rnd;
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
-		upgrades.Add(GlassCannon = new UpgradeOption(0.00001,10000,0.00001,1, optionImage: "res://Assets/Img/Option 1.png"));
+		upgrades.Add(GlassCannon = new UpgradeOption(0.00001,10000,0.00001,1, optionImage: "res://Assets/Img/Option_Thumbnails/Glass_Cannon_Thumbnail.png"));
+		upgrades.Add(Nothing = new UpgradeOption(1,1,1,1,optionImage: "res://Assets/Img/Option 1.png"));
 		rnd = new Random();
 	}
 
@@ -23,16 +28,49 @@ public partial class perk : Label
 		
 	}
 	public void _on_visibility_changed(){
-		GD.Print("a");
 		if(Visible){
-			UpgradeOption option1 = upgrades[rnd.Next(upgrades.Count)];
-			GetNode<TextureButton>("TextureButton1").TextureNormal = (CompressedTexture2D)ResourceLoader.Load("res://.godot/imported/Option 1.png-8ad48309397fc021c613f79bb65072f9.ctex");
-			GetNode<TextureButton>("TextureButton2").TextureNormal = (CompressedTexture2D)ResourceLoader.Load("res://.godot/imported/Option 1.png-8ad48309397fc021c613f79bb65072f9.ctex");
-			GetNode<TextureButton>("TextureButton3").TextureNormal = (CompressedTexture2D)ResourceLoader.Load("res://.godot/imported/Option 1.png-8ad48309397fc021c613f79bb65072f9.ctex");
+			option1 = upgrades[rnd.Next(upgrades.Count)];
+			option2 = upgrades[rnd.Next(upgrades.Count)];
+			option3 = upgrades[rnd.Next(upgrades.Count)];
+			GetNode<TextureButton>("TextureButton1").TextureNormal = (CompressedTexture2D)ResourceLoader.Load($"{option1.OptionImage}");
+			GetNode<TextureButton>("TextureButton2").TextureNormal = (CompressedTexture2D)ResourceLoader.Load($"{option2.OptionImage}");
+			GetNode<TextureButton>("TextureButton3").TextureNormal = (CompressedTexture2D)ResourceLoader.Load($"{option3.OptionImage}");
 		}
 	}
-	private void _on_texture_button1_pressed(){
-		
+	public void _on_texture_button_1_pressed(){
+		GameManager.PlayerUpgrades.Add(option1);
+		UpgradeMultipliers();
+		Visible = false;
+		GetTree().Paused = false;
+		Input.MouseMode = MouseModeEnum.Captured;
+	}
+	public void _on_texture_button_2_pressed(){
+		GameManager.PlayerUpgrades.Add(option2);
+		UpgradeMultipliers();
+		Visible = false;
+		GetTree().Paused = false;
+		Input.MouseMode = MouseModeEnum.Captured;
+	}
+	public void _on_texture_button_3_pressed(){
+		GameManager.PlayerUpgrades.Add(option3);
+		UpgradeMultipliers();
+		Visible = false;
+		GetTree().Paused = false;
+		Input.MouseMode = MouseModeEnum.Captured;
+	}
+}
+void UpgradeMultipliers(){
+	if(GameManager.PlayerUpgrades[-1].PlayerDamageMultiplier != 0){
+		Upgrades.PlayerDamageMultiplier = GameManager.PlayerUpgrades[-1].PlayerDamageMultiplier;
+	}
+	if(GameManager.PlayerUpgrades[-1].PlayerHealthMultiplier != 0){
+		Upgrades.PlayerHealthMultiplier = GameManager.PlayerUpgrades[-1].PlayerHealthMultiplier;
+	}
+	if(GameManager.PlayerUpgrades[-1].EnemyDamageMultiplierMultiplier != 0){
+		Upgrades.EnemyDamageMultiplier = GameManager.PlayerUpgrades[-1].EnemyDamageMultiplier;
+	}
+	if(GameManager.PlayerUpgrades[-1].EnemyHealthMultiplier != 0){
+		Upgrades.EnemyHealthMultiplier = GameManager.PlayerUpgrades[-1].EnemyHealthMultiplier;
 	}
 }
 public class UpgradeOption{

@@ -116,14 +116,6 @@ public partial class player_script : CharacterBody2D
             }
 
         }
-        if (Input.IsActionPressed("Quick_Attack"))
-        {
-            if (!quick_attack_waiting)
-            {
-                sprite_anim.Play("Player_quick_melee");
-                quick_attack_delay();
-            }
-        }
         if (Input.IsActionPressed("Block"))
         {
             if (!block_waiting)
@@ -183,7 +175,7 @@ public partial class player_script : CharacterBody2D
     {
         if (area.Name == "Enemy_hitbox_container")
         {
-            hit(30, area);
+            hit(30*Upgrades.PlayerDamageMultiplier, area);
 
         }
     }

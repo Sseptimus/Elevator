@@ -2,8 +2,8 @@
 
 [ext_resource type="Script" path="res://Scripts/main_script.cs" id="1_kqcge"]
 [ext_resource type="PackedScene" uid="uid://rlcgesiykerw" path="res://Scenes/background.tscn" id="1_q2pee"]
-[ext_resource type="PackedScene" uid="uid://dcl4rh15o2mmr" path="res://Scenes/player.tscn" id="2_58wfl"]
-[ext_resource type="PackedScene" path="res://Scenes/paused.tscn" id="2_grmou"]
+[ext_resource type="PackedScene" uid="uid://dcl4rh15o2mmr" path="res://Scenes/player.tscn" id="2_f6o6o"]
+[ext_resource type="PackedScene" uid="uid://dcd6xt287t8n7" path="res://Scenes/paused.tscn" id="2_grmou"]
 [ext_resource type="PackedScene" uid="uid://53omrigpia0e" path="res://Scenes/perk_selector.tscn" id="5_c3403"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_uo1bm"]
@@ -12,6 +12,10 @@
 process_mode = 3
 scale = Vector2(1.00241, 1)
 script = ExtResource("1_kqcge")
+
+[node name="Player" parent="." instance=ExtResource("2_f6o6o")]
+process_mode = 1
+position = Vector2(953.702, 718)
 
 [node name="PauseLayer" type="CanvasLayer" parent="."]
 visible = false
@@ -50,10 +54,6 @@ offset_right = 1920.0
 offset_bottom = 1080.0
 mouse_filter = 1
 
-[node name="Player" parent="." instance=ExtResource("2_58wfl")]
-process_mode = 1
-position = Vector2(428.966, 407)
-
 [node name="Level_timer" type="Timer" parent="."]
 process_mode = 1
 wait_time = 30.0
@@ -80,10 +80,10 @@ offset_bottom = 8.0
 mouse_filter = 2
 
 [node name="PerkSelector" parent="." instance=ExtResource("5_c3403")]
+visible = false
 
 [node name="Menu" type="Label" parent="."]
 process_mode = 3
-visible = false
 z_index = 7
 anchors_preset = 8
 anchor_left = 0.5
@@ -102,10 +102,10 @@ text = "I need a name for this game"
 [node name="ColorRect" type="ColorRect" parent="Menu"]
 z_index = -1
 layout_mode = 0
-offset_left = -103.562
-offset_top = -49.6599
-offset_right = -63.5618
-offset_bottom = -9.65988
+offset_left = -67.0
+offset_top = -35.0
+offset_right = -42.0
+offset_bottom = -4.0
 scale = Vector2(14.7598, 6.96063)
 color = Color(0, 0, 0, 1)
 

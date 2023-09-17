@@ -5,7 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://w7vsd467ed7q" path="res://Assets/Img/char_a_p1_0bas_humn_v01.png" id="4_3qx1v"]
 [ext_resource type="Texture2D" uid="uid://cqwtrg17hsbci" path="res://Assets/Img/Player_Attack_Left.png" id="5_cj4px"]
 [ext_resource type="Texture2D" uid="uid://8lkx4myj045u" path="res://Assets/Img/Player_Attack_Right.png" id="5_tx3bo"]
-[ext_resource type="Texture2D" uid="uid://tm8ok7t70dqm" path="res://Assets/Img/Player_Attack_Down.png" id="6_i2eo7"]
+[ext_resource type="Texture2D" uid="uid://bp8ftye1iwuuk" path="res://Assets/Img/Player_Attack_Down.png" id="6_i2eo7"]
 [ext_resource type="Texture2D" uid="uid://m6vp55uvru6h" path="res://Assets/Img/Player_Attack_Up.png" id="7_dfyem"]
 [ext_resource type="PackedScene" uid="uid://c4l54heam1sl0" path="res://Scenes/mouse.tscn" id="8_5l4mw"]
 
@@ -663,7 +663,7 @@ z_index = 2
 position = Vector2(0, 1.90735e-06)
 scale = Vector2(3, 2.811)
 sprite_frames = SubResource("SpriteFrames_t73cm")
-animation = &"-1 0"
+animation = &"Melee_-1 0"
 speed_scale = 5.0
 
 [node name="Power_attack_hitbox_container" type="Area2D" parent="Visuals_Container/AnimatedSprite2D"]

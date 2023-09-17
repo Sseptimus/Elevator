@@ -13,7 +13,7 @@ public partial class main_script : Node2D
 	CharacterBody2D newEnemy;
 	Label level_display;
 	CanvasLayer pause;
-	Label perkSelector;
+	CanvasLayer perkSelector;
 	Vector2 pos2;
 	Label menu;
 	
@@ -24,17 +24,16 @@ public partial class main_script : Node2D
 		smart_enemy = (PackedScene)ResourceLoader.Load("res://Scenes/smart_enemy_melee.tscn");
 		level_timer = GetNode<Timer>("Level_timer");
 		pause = GetNode<CanvasLayer>("PauseLayer");
-		level_display = GetNode<Label>("Background/Label");
-		perkSelector = GetNode<Label>("PerkSelector");
+		//level_display = GetNode<Label>("Background/Label");
+		perkSelector = GetNode<CanvasLayer>("PerkSelector");
 		menu = GetNode<Label>("Menu");
 		Input.MouseMode = MouseModeEnum.Visible;
-		level_display.Text = "G";
+		//level_display.Text = "G";
 		starting_pos.X = 960;
 		starting_pos.Y = -66;
 		pos2.X = 1151;
 		pos2.Y = 901;
 		GetTree().Paused = true;
-		perk._on_visibility_changed();
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -110,9 +109,9 @@ public class Upgrades{
 	public int EnemyDamageMultiplier {get; set;} = 1;
 	public int EnemyHealthMultiplier {get; set;} = 1;
 }
-public static class GameManager{
+public class GameManager{
 	public static int CurrentLevel {get; set;} = 1;
-
+	public static List<UpgradeOption> PlayerUpgrades {get; set;} = new List<UpgradeOption>();
 }
 
 
