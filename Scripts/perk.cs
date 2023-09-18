@@ -17,9 +17,11 @@ public partial class perk : CanvasLayer
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
-		upgrades.Add(GlassCannon = new UpgradeOption(0.00001,10000,0.00001,1, optionImage: "res://Assets/Img/Option_Thumbnails/Glass_Cannon_Thumbnail.png"));
+		upgrades = new List<UpgradeOption>();
+		upgrades.Add(GlassCannon = new UpgradeOption(1,100,1,10000, optionImage: "res://Assets/Img/Option_Thumbnails/Glass_Cannon_Thumbnail.png"));
 		upgrades.Add(Nothing = new UpgradeOption(1,1,1,1,optionImage: "res://Assets/Img/Option 1.png"));
 		rnd = new Random();
+
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -59,19 +61,17 @@ public partial class perk : CanvasLayer
 		Input.MouseMode = MouseModeEnum.Captured;
 	}
 	void UpgradeMultipliers(){
-	if(GameManager.PlayerUpgrades[GameManager.PlayerUpgrades.Count].PlayerDamageMultiplier != 1){
-		Upgrades.PlayerDamageMultiplier = GameManager.PlayerUpgrades[GameManager.PlayerUpgrades.Count].PlayerDamageMultiplier;
+	if((int)GameManager.PlayerUpgrades[GameManager.PlayerUpgrades.Count-1].PlayerDamageMultiplier != 1){
+		Upgrades.PlayerDamageMultiplier = GameManager.PlayerUpgrades[GameManager.PlayerUpgrades.Count-1].PlayerDamageMultiplier;
 	}
-	if(GameManager.PlayerUpgrades[GameManager.PlayerUpgrades.Count].PlayerHealthMultiplier != 1){
-		Upgrades.PlayerHealthMultiplier = GameManager.PlayerUpgrades[GameManager.PlayerUpgrades.Count].PlayerHealthMultiplier;
-		GetTree().Root.GetNode<TextureProgressBar>("Main/Player/Visuals_Container/Health_Bar_Container/Health_Bar").MaxValue *= Upgrades.PlayerHealthMultiplier;
-
+	if(GameManager.PlayerUpgrades[GameManager.PlayerUpgrades.Count-1].PlayerHealthMultiplier != 1){
+		Upgrades.PlayerHealthMultiplier = GameManager.PlayerUpgrades[GameManager.PlayerUpgrades.Count-1].PlayerHealthMultiplier;
 	}
-	if(GameManager.PlayerUpgrades[GameManager.PlayerUpgrades.Count].EnemyDamageMultiplier != 1){
-		Upgrades.EnemyDamageMultiplier = GameManager.PlayerUpgrades[GameManager.PlayerUpgrades.Count].EnemyDamageMultiplier;
+	if(GameManager.PlayerUpgrades[GameManager.PlayerUpgrades.Count-1].EnemyDamageMultiplier != 1){
+		Upgrades.EnemyDamageMultiplier = GameManager.PlayerUpgrades[GameManager.PlayerUpgrades.Count-1].EnemyDamageMultiplier;
 	}
-	if(GameManager.PlayerUpgrades[GameManager.PlayerUpgrades.Count].EnemyHealthMultiplier != 0){
-		Upgrades.EnemyHealthMultiplier = GameManager.PlayerUpgrades[GameManager.PlayerUpgrades.Count].EnemyHealthMultiplier;
+	if(GameManager.PlayerUpgrades[GameManager.PlayerUpgrades.Count-1].EnemyHealthMultiplier != 0){
+		Upgrades.EnemyHealthMultiplier = GameManager.PlayerUpgrades[GameManager.PlayerUpgrades.Count-1].EnemyHealthMultiplier;
 	}
 }
 }

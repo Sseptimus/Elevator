@@ -40,7 +40,6 @@ public partial class player_script : CharacterBody2D
         sound_player = GetNode<AudioStreamPlayer2D>("Visuals_Container/AudioStreamPlayer2D");
         rnd = new Random();
         Modulate = new Color(1, 1, 1, 1);
-        GameManager.CurrentLevel = 1;
     }
 
     public override void _PhysicsProcess(double delta)
@@ -194,10 +193,10 @@ public partial class player_script : CharacterBody2D
         sound_player.Stream = crowbar_hit;
         sound_player.Playing = true;
         Color red = new Color(1, 0, 0, 1);
-        Color saved_modulate = GetTree().Root.GetNode<AnimatedSprite2D>($"Main/{area.GetParent().Name}").Modulate;
-        GetTree().Root.GetNode<AnimatedSprite2D>($"Main/{area.GetParent().Name}").Modulate = red;
+        Color saved_modulate = GetTree().Root.GetNode<CharacterBody2D>($"Main/{area.GetParent().Name}").Modulate;
+        GetTree().Root.GetNode<CharacterBody2D>($"Main/{area.GetParent().Name}").Modulate = red;
         await ToSignal(GetTree().CreateTimer(0.2), "timeout");
-        GetTree().Root.GetNode<AnimatedSprite2D>($"Main/{area.GetParent().Name}").Modulate = saved_modulate;
+        GetTree().Root.GetNode<CharacterBody2D>($"Main/{area.GetParent().Name}").Modulate = saved_modulate;
 
     }
     public void _on_hurt_timer_timeout()

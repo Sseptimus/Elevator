@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using static Godot.Input;
 public partial class main_script : Node2D
 {
-	public int current_level {get; set;} = 1;
 	public List<CharacterBody2D> enemies = new List<CharacterBody2D>();
 	Timer level_timer;
 	PackedScene dumb_enemy;
@@ -20,24 +19,29 @@ public partial class main_script : Node2D
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
+		GameManager.CurrentLevel = 0;
 		dumb_enemy = (PackedScene)ResourceLoader.Load("res://Scenes/dumb_enemy_melee.tscn");
 		smart_enemy = (PackedScene)ResourceLoader.Load("res://Scenes/smart_enemy_melee.tscn");
 		level_timer = GetNode<Timer>("Level_timer");
 		pause = GetNode<CanvasLayer>("PauseLayer");
-		//level_display = GetNode<Label>("Background/Label");
+		level_display = GetNode<Label>("Background/Label");
 		perkSelector = GetNode<CanvasLayer>("PerkSelector");
 		menu = GetNode<Label>("Menu");
 		Input.MouseMode = MouseModeEnum.Visible;
-		//level_display.Text = "G";
+		level_display.Text = "G";
 		starting_pos.X = 960;
 		starting_pos.Y = -66;
 		pos2.X = 1151;
 		pos2.Y = 901;
 		GetTree().Paused = true;
+		Upgrades.PlayerHealthMultiplier = 1;
+		Upgrades.PlayerDamageMultiplier = 1;
+		Upgrades.EnemyDamageMultiplier = 1;
+		Upgrades.EnemyHealthMultiplier = 1;
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
-	public override async void _Process(double delta)
+	/*public override async void _Process(double delta)
 	{
 		if(enemies.Count > 30){
 			GetTree().Paused = true;
@@ -48,36 +52,43 @@ public partial class main_script : Node2D
 			GetTree().Quit();
 		}
 		
-	}
+	}*/
 	public async void level_switch(){
-		level_timer.Start(current_level*5);
-		await ToSignal(level_timer,"timeout");
-		current_level += 1;
-		level_display.Text = current_level.ToString();
 		spawn_enemies();
+		level_timer.Start(GameManager.CurrentLevel+1*5);
+		await ToSignal(level_timer,"timeout");
+		GameManager.CurrentLevel += 1;
+		level_display.Text = GameManager.CurrentLevel.ToString();
 		level_switch();
 	}
 	public void spawn_enemies(){
-		
-		for(int i = 0; i < current_level-1; i++){
+		if(GameManager.CurrentLevel != 0){
+		for(int i = 0; i <= GameManager.CurrentLevel; i++){
 			CharacterBody2D newEnemy = (CharacterBody2D)dumb_enemy.Instantiate();
 			Vector2 Spawn_pos = starting_pos;
-			starting_pos.X += i * 10;
+			starting_pos.X += i * 20;
+			starting_pos.Y += (float)((double)(i/10))*10;
+			newEnemy.Position = starting_pos;
+			enemies.Add(newEnemy);
+			AddChild(newEnemy);
+			newEnemy = (CharacterBody2D)dumb_enemy.Instantiate();
+			Spawn_pos = starting_pos;
+			starting_pos.X += i * 20;
 			starting_pos.Y += (float)((double)(i/10))*10;
 			newEnemy.Position = starting_pos;
 			enemies.Add(newEnemy);
 			AddChild(newEnemy);
 			
-			
 		}
-		for(int i =0; i<current_level-2; i++){
+		for(int i =0; i<=GameManager.CurrentLevel-2; i++){
 			CharacterBody2D newEnemy = (CharacterBody2D)smart_enemy.Instantiate();
 			Vector2 Spawn_pos = starting_pos;
 			starting_pos.X += i * 10;
-			starting_pos.Y += (float)((double)(i/10))*10;
+			starting_pos.Y += (float)((double)(i/10))*10-100;
 			newEnemy.Position = starting_pos;
 			enemies.Add(newEnemy);
 			AddChild(newEnemy);
+		}
 		}
 	}
 	private void _on_quit_button_pressed()
@@ -88,6 +99,11 @@ public partial class main_script : Node2D
 	{
 		menu.Visible = false;
 		perkSelector.Visible = true;
+	}
+	private void _on_perk_selector_visibility_changed(){
+		if(!perkSelector.Visible){
+			level_switch();
+		}
 	}
 	public override void _Input(InputEvent @event){
 		if(@event.IsActionPressed("ui_cancel")){
@@ -110,7 +126,7 @@ public class Upgrades{
 	public static double EnemyHealthMultiplier {get; set;} = 1;
 }
 public class GameManager{
-	public static int CurrentLevel {get; set;} = 1;
+	public static int CurrentLevel {get; set;} = 0;
 	public static List<UpgradeOption> PlayerUpgrades {get; set;} = new List<UpgradeOption>();
 }
 
