@@ -29,6 +29,7 @@ public partial class smart_enemy_melee : CharacterBody2D
         enemy_anim = GetNode<AnimationPlayer>("WeaponAnimation");
         healthbar = player.GetNode<TextureProgressBar>("Visuals_Container/Health_Bar_Container/Health_Bar");
         health = GetNode<TextureProgressBar>("Health_Bar_Container/Health_Bar");
+        health.MaxValue *= Upgrades.EnemyHealthMultiplier;
         _navigationAgent = GetNode<NavigationAgent2D>("NavigationAgent2D");
         collider = GetNode<CollisionShape2D>("CollisionShape2D");
 		timer = GetNode<Timer>("Attack_timer");
@@ -92,7 +93,7 @@ public partial class smart_enemy_melee : CharacterBody2D
     {
         if (area.Name == "Player_hitbox_container")
         {
-            healthbar.Value -= 5;
+            healthbar.Value -= 5*Upgrades.EnemyDamageMultiplier;
             hurt_timer.Start();
         }
     }

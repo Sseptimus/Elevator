@@ -104,10 +104,10 @@ public partial class main_script : Node2D
 	}
 }
 public class Upgrades{
-	public int PlayerDamageMultiplier {get; set;} = 1;
-	public int PlayerHealthMultiplier {get; set;} = 1;
-	public int EnemyDamageMultiplier {get; set;} = 1;
-	public int EnemyHealthMultiplier {get; set;} = 1;
+	public static double PlayerDamageMultiplier {get; set;} = 1;
+	public static double PlayerHealthMultiplier {get; set;} = 1;
+	public static double EnemyDamageMultiplier {get; set;} = 1;
+	public static double EnemyHealthMultiplier {get; set;} = 1;
 }
 public class GameManager{
 	public static int CurrentLevel {get; set;} = 1;

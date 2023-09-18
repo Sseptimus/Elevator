@@ -58,21 +58,24 @@ public partial class perk : CanvasLayer
 		GetTree().Paused = false;
 		Input.MouseMode = MouseModeEnum.Captured;
 	}
+	void UpgradeMultipliers(){
+	if(GameManager.PlayerUpgrades[GameManager.PlayerUpgrades.Count].PlayerDamageMultiplier != 1){
+		Upgrades.PlayerDamageMultiplier = GameManager.PlayerUpgrades[GameManager.PlayerUpgrades.Count].PlayerDamageMultiplier;
+	}
+	if(GameManager.PlayerUpgrades[GameManager.PlayerUpgrades.Count].PlayerHealthMultiplier != 1){
+		Upgrades.PlayerHealthMultiplier = GameManager.PlayerUpgrades[GameManager.PlayerUpgrades.Count].PlayerHealthMultiplier;
+		GetTree().Root.GetNode<TextureProgressBar>("Main/Player/Visuals_Container/Health_Bar_Container/Health_Bar").MaxValue *= Upgrades.PlayerHealthMultiplier;
+
+	}
+	if(GameManager.PlayerUpgrades[GameManager.PlayerUpgrades.Count].EnemyDamageMultiplier != 1){
+		Upgrades.EnemyDamageMultiplier = GameManager.PlayerUpgrades[GameManager.PlayerUpgrades.Count].EnemyDamageMultiplier;
+	}
+	if(GameManager.PlayerUpgrades[GameManager.PlayerUpgrades.Count].EnemyHealthMultiplier != 0){
+		Upgrades.EnemyHealthMultiplier = GameManager.PlayerUpgrades[GameManager.PlayerUpgrades.Count].EnemyHealthMultiplier;
+	}
 }
-void UpgradeMultipliers(){
-	if(GameManager.PlayerUpgrades[-1].PlayerDamageMultiplier != 0){
-		Upgrades.PlayerDamageMultiplier = GameManager.PlayerUpgrades[-1].PlayerDamageMultiplier;
-	}
-	if(GameManager.PlayerUpgrades[-1].PlayerHealthMultiplier != 0){
-		Upgrades.PlayerHealthMultiplier = GameManager.PlayerUpgrades[-1].PlayerHealthMultiplier;
-	}
-	if(GameManager.PlayerUpgrades[-1].EnemyDamageMultiplierMultiplier != 0){
-		Upgrades.EnemyDamageMultiplier = GameManager.PlayerUpgrades[-1].EnemyDamageMultiplier;
-	}
-	if(GameManager.PlayerUpgrades[-1].EnemyHealthMultiplier != 0){
-		Upgrades.EnemyHealthMultiplier = GameManager.PlayerUpgrades[-1].EnemyHealthMultiplier;
-	}
 }
+
 public class UpgradeOption{
 	public double PlayerHealthMultiplier;
 	public double PlayerDamageMultiplier;

@@ -31,6 +31,7 @@ public partial class dumb_enemy_script : CharacterBody2D
 		enemy_anim = GetNode<AnimationPlayer>("WeaponAnimation");
 		healthbar = player.GetNode<TextureProgressBar>("Visuals_Container/Health_Bar_Container/Health_Bar");
 		health = GetNode<TextureProgressBar>("Health_Bar_Container/Health_Bar");
+		health.MaxValue *= Upgrades.EnemyHealthMultiplier;
 		_navigationAgent = GetNode<NavigationAgent2D>("NavigationAgent2D");
 		collider = GetNode<CollisionShape2D>("CollisionShape2D");
 		sprite = GetNode<AnimatedSprite2D>("AnimatedBaseSprite");
@@ -105,7 +106,7 @@ public partial class dumb_enemy_script : CharacterBody2D
 	}
 	void hit()
 	{
-		healthbar.Value -= 5;
+		healthbar.Value -= 5*Upgrades.EnemyDamageMultiplier;
 		hurt_timer.Start();
 
 	}
