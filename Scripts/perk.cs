@@ -9,6 +9,7 @@ public partial class perk : CanvasLayer
 {
 	UpgradeOption GlassCannon;
 	UpgradeOption Nothing;
+	UpgradeOption Speed;
 	UpgradeOption option1;
 	UpgradeOption option2;
 	UpgradeOption option3;
@@ -20,6 +21,7 @@ public partial class perk : CanvasLayer
 		upgrades = new List<UpgradeOption>();
 		upgrades.Add(GlassCannon = new UpgradeOption(1,100,1,10000, optionImage: "res://Assets/Img/Option_Thumbnails/Glass_Cannon_Thumbnail.png"));
 		upgrades.Add(Nothing = new UpgradeOption(1,1,1,1,optionImage: "res://Assets/Img/Option 1.png"));
+		upgrades.Add(Speed = new UpgradeOption(1,1,1,1,playerSpeed: 5, optionImage: "res://Assets/Img/Option_Thumbnails/Speed_Thumbnail.png"));
 		rnd = new Random();
 
 	}
@@ -27,7 +29,7 @@ public partial class perk : CanvasLayer
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{
-		
+
 	}
 	public void _on_visibility_changed(){
 		if(Visible){
@@ -72,6 +74,9 @@ public partial class perk : CanvasLayer
 	}
 	if(GameManager.PlayerUpgrades[GameManager.PlayerUpgrades.Count-1].EnemyHealthMultiplier != 0){
 		Upgrades.EnemyHealthMultiplier = GameManager.PlayerUpgrades[GameManager.PlayerUpgrades.Count-1].EnemyHealthMultiplier;
+	}
+	if(GameManager.PlayerUpgrades[GameManager.PlayerUpgrades.Count-1].PlayerSpeedMultiplier != 0){
+		Upgrades.PlayerSpeedMultiplier = GameManager.PlayerUpgrades[GameManager.PlayerUpgrades.Count-1].PlayerSpeedMultiplier;
 	}
 }
 }

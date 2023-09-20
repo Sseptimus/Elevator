@@ -63,7 +63,7 @@ public partial class player_script : CharacterBody2D
                 aim_direction.Y = 0;
             }
             // Calculates velocity
-            velocity = direction * Speed;
+            velocity = direction * Speed*(int)Upgrades.PlayerSpeedMultiplier;
             // Runs corresponding animation to direction faced (fetched during input checks)
             if (player_anim.CurrentAnimation == "")
             {

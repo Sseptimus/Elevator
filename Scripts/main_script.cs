@@ -38,6 +38,7 @@ public partial class main_script : Node2D
 		Upgrades.PlayerDamageMultiplier = 1;
 		Upgrades.EnemyDamageMultiplier = 1;
 		Upgrades.EnemyHealthMultiplier = 1;
+		Upgrades.PlayerSpeedMultiplier = 1;
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -122,8 +123,10 @@ public partial class main_script : Node2D
 public class Upgrades{
 	public static double PlayerDamageMultiplier {get; set;} = 1;
 	public static double PlayerHealthMultiplier {get; set;} = 1;
+	public static double PlayerSpeedMultiplier{get; set;} = 1;
 	public static double EnemyDamageMultiplier {get; set;} = 1;
 	public static double EnemyHealthMultiplier {get; set;} = 1;
+	
 }
 public class GameManager{
 	public static int CurrentLevel {get; set;} = 0;
