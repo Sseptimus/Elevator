@@ -81,13 +81,15 @@ public class UpgradeOption{
 	public double PlayerDamageMultiplier;
 	public double EnemyHealthMultiplier;
 	public double EnemyDamageMultiplier;
+	public double PlayerSpeedMultiplier;
 	public string OptionImage;
 	public string OptionThumbnail;
-	public UpgradeOption([Optional]double playerHealth,[Optional]double playerDamage,[Optional] double enemyHealth,[Optional]double enemyDamage,[Optional] string optionImage,[Optional] string thumbImage){
+	public UpgradeOption([Optional]double playerHealth,[Optional]double playerDamage,[Optional] double enemyHealth,[Optional]double enemyDamage,[Optional]double playerSpeed, [Optional] string optionImage,[Optional] string thumbImage){
 		PlayerHealthMultiplier = playerHealth;
 		PlayerDamageMultiplier = playerDamage;
 		EnemyHealthMultiplier = enemyHealth;
 		EnemyDamageMultiplier = enemyDamage;
+		PlayerSpeedMultiplier = playerSpeed;
 		OptionImage = optionImage;
 		OptionThumbnail = thumbImage;
 	}

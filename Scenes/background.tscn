@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://Scripts/background_script.cs" id="1_rg2uo"]
 [ext_resource type="Texture2D" uid="uid://qb0asv3n47jw" path="res://Assets/Textures/Pixel_Dirty_Tiles.png" id="2_15pg3"]
 [ext_resource type="Script" path="res://Scripts/Door_script.cs" id="2_egvqq"]
-[ext_resource type="Texture2D" uid="uid://dvxr8un3d3xo8" path="res://Assets/Textures/Pixel_Left_Door.png" id="4_pmyak"]
+[ext_resource type="Texture2D" uid="uid://bpwxmv5tbx1sk" path="res://Assets/Textures/Pixel_Left_Door.png" id="4_pmyak"]
 [ext_resource type="Texture2D" uid="uid://4nlp18ivm58y" path="res://Assets/Textures/Pixel_Right_Door.png" id="5_635yg"]
 [ext_resource type="Texture2D" uid="uid://clkxhqd0qa32q" path="res://Assets/Textures/Pixel_Top_Wall_Empty.png" id="5_g4tfg"]
 [ext_resource type="Texture2D" uid="uid://bmgddpt4udtw5" path="res://Assets/Textures/Pixel_Dirty_Side_Wall.png" id="6_qi1m4"]
@@ -97,21 +97,20 @@ position = Vector2(960, 50)
 texture = ExtResource("5_g4tfg")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D"]
-visible = false
-polygon = PackedVector2Array(650, 110, 650, 0, 0, 0, 0, 1165, 1920, 1165, 1920, 0, 1293, 0, 1293, 110, 1827, 110, 1827, 1080, 107, 1080, 107, 110)
+polygon = PackedVector2Array(650, 102, 650, 0, 0, 0, 0, 1165, 1920, 1165, 1920, 0, 1293, 0, 1293, 100, 1819, 101, 1819, 1080, 101, 1080, 100, 100)
 
 [node name="Sprite2D3" type="Sprite2D" parent="StaticBody2D"]
-position = Vector2(1871, 960)
+position = Vector2(1869, 958)
 rotation = 1.5708
 texture = ExtResource("6_qi1m4")
 
 [node name="Sprite2D2" type="Sprite2D" parent="StaticBody2D"]
-position = Vector2(50, 960)
+position = Vector2(50, 958)
 rotation = -1.5708
 texture = ExtResource("6_qi1m4")
 
 [node name="PointLight2D2" type="PointLight2D" parent="."]
-position = Vector2(969, 596)
+position = Vector2(969, 595)
 scale = Vector2(1.59767, 1.61031)
 energy = 0.75
 texture = ExtResource("7_4ewnp")

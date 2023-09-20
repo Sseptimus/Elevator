@@ -634,7 +634,6 @@ collision_mask = 3
 collision_priority = 0.01
 safe_margin = 0.1
 script = ExtResource("1_6ovbg")
-Speed = 1500.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-1.5, 25.5)
@@ -682,7 +681,6 @@ shape = SubResource("RectangleShape2D_37uca")
 disabled = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Visuals_Container/AnimatedSprite2D"]
-speed_scale = 5.0
 libraries = {
 "": SubResource("AnimationLibrary_1c3sc")
 }

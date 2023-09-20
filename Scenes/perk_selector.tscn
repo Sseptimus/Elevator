@@ -7,36 +7,38 @@
 
 [node name="PerkSelector" type="CanvasLayer"]
 process_mode = 3
-scale = Vector2(7, 7)
-transform = Transform2D(7, 0, 0, 7, 0, 0)
 script = ExtResource("1_6g8ur")
 
 [node name="TextureButton1" type="TextureButton" parent="."]
-offset_left = 40.0
-offset_top = 70.0
-offset_right = 90.0
-offset_bottom = 130.0
+offset_left = 200.0
+offset_top = 450.0
+offset_right = 250.0
+offset_bottom = 510.0
+scale = Vector2(7, 7)
 texture_normal = ExtResource("2_ba5ro")
 
 [node name="TextureButton2" type="TextureButton" parent="."]
-offset_left = 120.0
-offset_top = 70.0
-offset_right = 170.0
-offset_bottom = 130.0
+offset_left = 750.0
+offset_top = 450.0
+offset_right = 800.0
+offset_bottom = 510.0
+scale = Vector2(7, 7)
 texture_normal = ExtResource("3_lpfea")
 
 [node name="TextureButton3" type="TextureButton" parent="."]
-offset_left = 200.0
-offset_top = 70.0
-offset_right = 250.0
-offset_bottom = 130.0
+offset_left = 1300.0
+offset_top = 445.0
+offset_right = 1350.0
+offset_bottom = 505.0
+scale = Vector2(7, 7)
 texture_normal = ExtResource("4_qgelj")
 
 [node name="Label" type="Label" parent="."]
-offset_left = 45.8571
-offset_top = 24.4286
-offset_right = 238.857
-offset_bottom = 50.4286
+offset_left = 273.0
+offset_top = 150.0
+offset_right = 466.0
+offset_bottom = 176.0
+scale = Vector2(7, 7)
 text = "Select your next upgrade"
 
 [connection signal="visibility_changed" from="." to="." method="_on_visibility_changed"]
