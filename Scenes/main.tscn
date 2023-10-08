@@ -82,41 +82,5 @@ mouse_filter = 2
 [node name="PerkSelector" parent="." instance=ExtResource("5_c3403")]
 visible = false
 
-[node name="Menu" type="Label" parent="."]
-process_mode = 3
-z_index = 7
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = 352.151
-offset_top = 176.0
-offset_right = 568.151
-offset_bottom = 202.0
-grow_horizontal = 2
-grow_vertical = 2
-scale = Vector2(5.28844, 5.07452)
-text = "I need a name for this game"
-
-[node name="ColorRect" type="ColorRect" parent="Menu"]
-z_index = -1
-layout_mode = 0
-offset_left = -67.0
-offset_top = -35.0
-offset_right = -42.0
-offset_bottom = -4.0
-scale = Vector2(14.7598, 6.96063)
-color = Color(0, 0, 0, 1)
-
-[node name="Button" type="Button" parent="Menu"]
-layout_mode = 0
-offset_left = 83.189
-offset_top = 65.4249
-offset_right = 129.189
-offset_bottom = 96.4249
-text = "Start"
-
 [connection signal="pressed" from="PauseLayer/Pause/Button" to="." method="_on_quit_button_pressed"]
 [connection signal="visibility_changed" from="PerkSelector" to="." method="_on_perk_selector_visibility_changed"]
-[connection signal="pressed" from="Menu/Button" to="." method="_on_button_pressed"]

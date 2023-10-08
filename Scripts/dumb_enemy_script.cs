@@ -85,13 +85,17 @@ public partial class dumb_enemy_script : CharacterBody2D
 			aim_direction.Y = 0;
 		}
 		animator.Play($"{aim_direction.X} {aim_direction.Y}");
+		if (Position.DistanceTo(player.Position) <= 150)
+		{
+			if(enemy_anim.CurrentAnimation == ""){
+				enemy_anim.Play($"Enemy Attack {aim_direction.X} {aim_direction.Y}");
+			}
+			newVelocity = Vector2.Zero;	
+		}
 		MoveAndSlide();
 		Area2D a = GetNode<Area2D>("Hitbox_container");
 		a.LookAt(player.Position);
-		if (Position.DistanceTo(player.Position) <= 150)
-		{
-			enemy_anim.Play($"Enemy Attack {aim_direction.X} {aim_direction.Y}");
-		}
+		
 		if (health.Value <= 0)
 		{
 			QueueFree();
@@ -107,7 +111,7 @@ public partial class dumb_enemy_script : CharacterBody2D
 	}
 	void hit()
 	{
-		healthbar.Value -= 5*Upgrades.EnemyDamageMultiplier;
+		healthbar.Value -= 3*Upgrades.EnemyDamageMultiplier;
 		hurt_timer.Start();
 
 	}

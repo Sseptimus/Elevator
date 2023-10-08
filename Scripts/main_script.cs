@@ -39,6 +39,7 @@ public partial class main_script : Node2D
 		Upgrades.EnemyDamageMultiplier = 1;
 		Upgrades.EnemyHealthMultiplier = 1;
 		Upgrades.PlayerSpeedMultiplier = 1;
+		perkSelector.Visible = true;
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -95,11 +96,6 @@ public partial class main_script : Node2D
 	private void _on_quit_button_pressed()
 	{
 		GetTree().Quit();
-	}
-	private void _on_button_pressed()
-	{
-		menu.Visible = false;
-		perkSelector.Visible = true;
 	}
 	private void _on_perk_selector_visibility_changed(){
 		if(!perkSelector.Visible){

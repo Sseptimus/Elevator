@@ -57,16 +57,14 @@ public partial class smart_enemy_melee : CharacterBody2D
 
         Vector2 newVelocity = (nextPathPosition - currentAgentPosition).Normalized();
         
-		if(attack_delayed && Position.Y > 120){
-			newVelocity = -newVelocity;
-		}
-        else if (Position.DistanceTo(player.Position) <= 50)
+		
+        if (Position.DistanceTo(player.Position) <= 50)
         {
             newVelocity = Vector2.Zero;
         }
 		newVelocity *= _movementSpeed;
-        Velocity = newVelocity;
-		float angle = Velocity.Angle();
+        
+		float angle = newVelocity.Angle();
 		float look_direction = Mathf.Round(angle/(Mathf.Pi/2))*(Mathf.Pi/2);
 		Vector2 aim_direction;
 		aim_direction.X = MathF.Round(Mathf.Cos(look_direction));
@@ -76,6 +74,12 @@ public partial class smart_enemy_melee : CharacterBody2D
 		}if (aim_direction.Y == -0){
 			aim_direction.Y = 0;
 		}
+        Velocity = newVelocity;
+        if(attack_delayed && Position.Y > 120){
+			newVelocity = -newVelocity;
+		}else if (knockback){
+            newVelocity = -newVelocity * 1.5f;
+        }
 		animator.Play($"{aim_direction.X} {aim_direction.Y}");
         MoveAndSlide();
         if (Position.DistanceTo(player.Position) <= 70)
@@ -93,7 +97,7 @@ public partial class smart_enemy_melee : CharacterBody2D
     {
         if (area.Name == "Player_hitbox_container")
         {
-            healthbar.Value -= 5*Upgrades.EnemyDamageMultiplier;
+            healthbar.Value -= 3*Upgrades.EnemyDamageMultiplier;
             hurt_timer.Start();
         }
     }

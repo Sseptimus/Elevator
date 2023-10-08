@@ -2256,7 +2256,7 @@ size = Vector2(20, 2.8125)
 process_mode = 1
 scale = Vector2(0.5, 0.5)
 collision_layer = 2
-collision_mask = 6
+collision_mask = 4
 safe_margin = 0.1
 script = ExtResource("1_vnh7x")
 
@@ -2337,9 +2337,6 @@ avoidance_enabled = true
 
 [node name="Attack_timer" type="Timer" parent="."]
 wait_time = 1.5
-
-[node name="NavigationObstacle2D" type="NavigationObstacle2D" parent="."]
-radius = 50.0
 
 [connection signal="value_changed" from="Health_Bar_Container/Health_Bar" to="." method="_on_health_bar_value_changed"]
 [connection signal="area_entered" from="Hitbox_container" to="." method="_on_hitbox_container_area_entered" flags=18]
