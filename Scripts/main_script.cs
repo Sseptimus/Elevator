@@ -11,7 +11,7 @@ public partial class main_script : Node2D
 	Vector2 starting_pos;
 	CharacterBody2D newEnemy;
 	Label level_display;
-	CanvasLayer pause;
+	Label pause;
 	CanvasLayer perkSelector;
 	Vector2 pos2;
 	Label menu;
@@ -23,13 +23,14 @@ public partial class main_script : Node2D
 		dumb_enemy = (PackedScene)ResourceLoader.Load("res://Scenes/dumb_enemy_melee.tscn");
 		smart_enemy = (PackedScene)ResourceLoader.Load("res://Scenes/smart_enemy_melee.tscn");
 		level_timer = GetNode<Timer>("Level_timer");
-		pause = GetNode<CanvasLayer>("PauseLayer");
+		pause = GetTree().Root.GetNode<Label>("Main/PauseLayer/Pause");
+		GD.Print(pause);
 		level_display = GetNode<Label>("Background/Label");
 		perkSelector = GetNode<CanvasLayer>("PerkSelector");
 		menu = GetNode<Label>("Menu");
 		Input.MouseMode = MouseModeEnum.Visible;
 		level_display.Text = "G";
-		starting_pos.X = 960;
+		starting_pos.X = 850;
 		starting_pos.Y = -66;
 		pos2.X = 1151;
 		pos2.Y = 901;
@@ -43,18 +44,29 @@ public partial class main_script : Node2D
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
-	/*public override async void _Process(double delta)
+	public override void _Process(double delta)
 	{
-		if(enemies.Count > 30){
+		if(Input.IsActionJustPressed("ui_cancel") && !GameManager.dead){
+			if(!GetTree().Paused){
+				GetTree().Paused = true;
+				Input.MouseMode = MouseModeEnum.Visible;
+				pause.Visible = true;
+			}else{
+				Input.MouseMode = MouseModeEnum.Captured;
+				GetTree().Paused = false;
+				pause.Visible = false;
+			}
+		}
+		/*if(enemies.Count > 30){
 			GetTree().Paused = true;
 			Label pause_label = GetNode<Label>("Pause");
 			pause_label.Text = "The elevator is too heavy";
 			pause_label.Visible = true;
 			await ToSignal(GetTree().CreateTimer(5),"timeout");
 			GetTree().Quit();
-		}
+		}*/
 		
-	}*/
+	}
 	public async void level_switch(){
 		spawn_enemies();
 		level_timer.Start(GameManager.CurrentLevel+1*5);
@@ -64,20 +76,25 @@ public partial class main_script : Node2D
 		level_switch();
 	}
 	public void spawn_enemies(){
+
 		if(GameManager.CurrentLevel != 0){
 		for(int i = 0; i <= GameManager.CurrentLevel; i++){
 			CharacterBody2D newEnemy = (CharacterBody2D)dumb_enemy.Instantiate();
 			Vector2 Spawn_pos = starting_pos;
-			starting_pos.X += i * 20;
-			starting_pos.Y += (float)((double)(i/10))*10;
-			newEnemy.Position = starting_pos;
+			if(i%2 ==0){
+				Spawn_pos.X += 200;
+			}
+			Spawn_pos.Y += i*-150;
+			newEnemy.Position = Spawn_pos;
 			enemies.Add(newEnemy);
 			AddChild(newEnemy);
 			newEnemy = (CharacterBody2D)dumb_enemy.Instantiate();
 			Spawn_pos = starting_pos;
-			starting_pos.X += i * 20;
-			starting_pos.Y += (float)((double)(i/10))*10;
-			newEnemy.Position = starting_pos;
+			if(i%2 ==0){
+				Spawn_pos.X += 200;
+			}
+			Spawn_pos.Y += i*-150;
+			newEnemy.Position = Spawn_pos;
 			enemies.Add(newEnemy);
 			AddChild(newEnemy);
 			
@@ -85,9 +102,11 @@ public partial class main_script : Node2D
 		for(int i =0; i<=GameManager.CurrentLevel-2; i++){
 			CharacterBody2D newEnemy = (CharacterBody2D)smart_enemy.Instantiate();
 			Vector2 Spawn_pos = starting_pos;
-			starting_pos.X += i * 10;
-			starting_pos.Y += (float)((double)(i/10))*10-100;
-			newEnemy.Position = starting_pos;
+			if(i%2 ==0){
+				Spawn_pos.X += 200;
+			}
+			Spawn_pos.Y += i*-150*(-100*(GameManager.CurrentLevel*2));
+			newEnemy.Position = Spawn_pos;
 			enemies.Add(newEnemy);
 			AddChild(newEnemy);
 		}
@@ -102,19 +121,6 @@ public partial class main_script : Node2D
 			level_switch();
 		}
 	}
-	public override void _Input(InputEvent @event){
-		if(@event.IsActionPressed("ui_cancel")){
-			if(!GetTree().Paused){
-				GetTree().Paused = true;
-				Input.MouseMode = MouseModeEnum.Visible;
-				pause.Visible = true;
-			}else if(GetTree().Paused){
-				GetTree().Paused = false;
-				Input.MouseMode = MouseModeEnum.Captured;
-				pause.Visible = false;
-			}
-		}
-	}
 }
 public class Upgrades{
 	public static double PlayerDamageMultiplier {get; set;} = 1;
@@ -125,8 +131,13 @@ public class Upgrades{
 	
 }
 public class GameManager{
+	public static bool dead {get; set;} = false;
 	public static int CurrentLevel {get; set;} = 0;
 	public static List<UpgradeOption> PlayerUpgrades {get; set;} = new List<UpgradeOption>();
+	public static int DamageDealt {get; set;} = 0;
+	public static DateTime StartTime {get; set;}
+	public static int Kills {get; set;} = 0;
+
 }
 
 

@@ -2,10 +2,10 @@
 
 [ext_resource type="Script" path="res://Scripts/dumb_enemy_script.cs" id="1_irgx6"]
 [ext_resource type="PackedScene" uid="uid://dtawpwuctqr5o" path="res://Scenes/heath_bar.tscn" id="2_klv58"]
-[ext_resource type="Texture2D" uid="uid://gxs5qxp7ljkj" path="res://Assets/Img/Level_1_enemy/Walking/Level_1_enemy_base_tilesheet.png" id="3_5418l"]
-[ext_resource type="Texture2D" uid="uid://beo0gcvhoc1gs" path="res://Assets/Img/Level_1_enemy/Attack/Level1_Attack_Base.png" id="4_jg7k1"]
-[ext_resource type="Texture2D" uid="uid://b5xatbaeo8h8s" path="res://Assets/Img/Level_1_enemy/Walking/Level_1_enemy_shirt_tilesheet.png" id="4_nal0q"]
-[ext_resource type="Texture2D" uid="uid://67yn2iw2l4ic" path="res://Assets/Img/Level_1_enemy/Walking/Level_1_enemy_beard_tilesheet.png" id="6_f7mkx"]
+[ext_resource type="Texture2D" uid="uid://n6dth1ns18lw" path="res://Assets/Img/Level_1_enemy/Walking/Level_1_enemy_base_tilesheet.png" id="3_5418l"]
+[ext_resource type="Texture2D" uid="uid://c2mda4l1ryy7m" path="res://Assets/Img/Level_1_enemy/Attack/Level1_Attack_Base.png" id="4_jg7k1"]
+[ext_resource type="Texture2D" uid="uid://bpa5f3qbdf4md" path="res://Assets/Img/Level_1_enemy/Walking/Level_1_enemy_shirt_tilesheet.png" id="4_nal0q"]
+[ext_resource type="Texture2D" uid="uid://pgsfi70o31e1" path="res://Assets/Img/Level_1_enemy/Walking/Level_1_enemy_beard_tilesheet.png" id="6_f7mkx"]
 [ext_resource type="Texture2D" uid="uid://d4fii0s05jk31" path="res://Assets/Img/Level_1_enemy/Attack/Level1_Attack_Shirt.png" id="6_pfq81"]
 [ext_resource type="Texture2D" uid="uid://dmpqukc4irvko" path="res://Assets/Img/Level_1_enemy/Walking/Level_1_enemy_pants_tilesheet.png" id="7_ohiph"]
 [ext_resource type="Texture2D" uid="uid://dkpn2lnt1skk1" path="res://Assets/Img/Level_1_enemy/Attack/Level1_Attack_Pants.png" id="8_sesp4"]
@@ -2243,22 +2243,22 @@ _data = {
 }
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_x2kyo"]
-size = Vector2(128, 148)
+size = Vector2(128, 152)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_oa4bp"]
 size = Vector2(27, 128)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_a1k07"]
-size = Vector2(20, 2.8125)
+[sub_resource type="CircleShape2D" id="CircleShape2D_1dmwf"]
+radius = 9.03116
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_7frw2"]
 
 [node name="Dumb_Enemy" type="CharacterBody2D"]
 process_mode = 1
-scale = Vector2(0.5, 0.5)
+scale = Vector2(0.6, 0.6)
 collision_layer = 2
-collision_mask = 4
-safe_margin = 0.1
+collision_mask = 6
+safe_margin = 1.5
 script = ExtResource("1_irgx6")
 
 [node name="Health_Bar_Container" type="Node2D" parent="."]
@@ -2307,10 +2307,8 @@ libraries = {
 }
 
 [node name="Enemy_hitbox_container" type="Area2D" parent="."]
-visible = false
 
 [node name="Enemy_hitbox" type="CollisionShape2D" parent="Enemy_hitbox_container"]
-position = Vector2(0, -10)
 shape = SubResource("RectangleShape2D_x2kyo")
 
 [node name="Hitbox_container" type="Area2D" parent="."]
@@ -2321,12 +2319,11 @@ shape = SubResource("RectangleShape2D_oa4bp")
 disabled = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, 55)
 scale = Vector2(6.32, 6.4)
-shape = SubResource("RectangleShape2D_a1k07")
+shape = SubResource("CircleShape2D_1dmwf")
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
-target_desired_distance = 0.1
+target_desired_distance = 30.0
 navigation_layers = 7
 avoidance_enabled = true
 

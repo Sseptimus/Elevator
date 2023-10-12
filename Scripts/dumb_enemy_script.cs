@@ -69,7 +69,7 @@ public partial class dumb_enemy_script : CharacterBody2D
 		{
 			newVelocity = -newVelocity * 1.5f;
 		}
-		Velocity = newVelocity;
+		newVelocity += Vector2.One*Mathf.Log(player.Position.DistanceTo(Position)+50);
 		Vector2 look_position = player.GlobalPosition - GlobalPosition;
 		float angle = look_position.Angle();
 		float look_direction = Mathf.Round(angle / (Mathf.Pi / 2)) * (Mathf.Pi / 2);
@@ -85,16 +85,16 @@ public partial class dumb_enemy_script : CharacterBody2D
 			aim_direction.Y = 0;
 		}
 		animator.Play($"{aim_direction.X} {aim_direction.Y}");
-		if (Position.DistanceTo(player.Position) <= 150)
+		if (Position.DistanceTo(MovementTarget) <= 70)
 		{
+			newVelocity = Vector2.Zero;	
 			if(enemy_anim.CurrentAnimation == ""){
 				enemy_anim.Play($"Enemy Attack {aim_direction.X} {aim_direction.Y}");
 			}
-			newVelocity = Vector2.Zero;	
+			
 		}
+		Velocity = newVelocity;
 		MoveAndSlide();
-		Area2D a = GetNode<Area2D>("Hitbox_container");
-		a.LookAt(player.Position);
 		
 		if (health.Value <= 0)
 		{

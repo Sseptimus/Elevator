@@ -2,10 +2,10 @@
 
 [ext_resource type="Script" path="res://Scripts/smart_enemy_melee.cs" id="1_vnh7x"]
 [ext_resource type="PackedScene" uid="uid://dtawpwuctqr5o" path="res://Scenes/heath_bar.tscn" id="2_8j8ry"]
-[ext_resource type="Texture2D" uid="uid://gxs5qxp7ljkj" path="res://Assets/Img/Level_1_enemy/Walking/Level_1_enemy_base_tilesheet.png" id="2_yvboa"]
-[ext_resource type="Texture2D" uid="uid://beo0gcvhoc1gs" path="res://Assets/Img/Level_1_enemy/Attack/Level1_Attack_Base.png" id="3_28rpr"]
-[ext_resource type="Texture2D" uid="uid://b5xatbaeo8h8s" path="res://Assets/Img/Level_1_enemy/Walking/Level_1_enemy_shirt_tilesheet.png" id="3_ggi2j"]
-[ext_resource type="Texture2D" uid="uid://67yn2iw2l4ic" path="res://Assets/Img/Level_1_enemy/Walking/Level_1_enemy_beard_tilesheet.png" id="5_ljkp2"]
+[ext_resource type="Texture2D" uid="uid://n6dth1ns18lw" path="res://Assets/Img/Level_1_enemy/Walking/Level_1_enemy_base_tilesheet.png" id="2_yvboa"]
+[ext_resource type="Texture2D" uid="uid://c2mda4l1ryy7m" path="res://Assets/Img/Level_1_enemy/Attack/Level1_Attack_Base.png" id="3_28rpr"]
+[ext_resource type="Texture2D" uid="uid://bpa5f3qbdf4md" path="res://Assets/Img/Level_1_enemy/Walking/Level_1_enemy_shirt_tilesheet.png" id="3_ggi2j"]
+[ext_resource type="Texture2D" uid="uid://pgsfi70o31e1" path="res://Assets/Img/Level_1_enemy/Walking/Level_1_enemy_beard_tilesheet.png" id="5_ljkp2"]
 [ext_resource type="Texture2D" uid="uid://d4fii0s05jk31" path="res://Assets/Img/Level_1_enemy/Attack/Level1_Attack_Shirt.png" id="5_udw1y"]
 [ext_resource type="Texture2D" uid="uid://dmpqukc4irvko" path="res://Assets/Img/Level_1_enemy/Walking/Level_1_enemy_pants_tilesheet.png" id="6_pvxp0"]
 [ext_resource type="Texture2D" uid="uid://dkpn2lnt1skk1" path="res://Assets/Img/Level_1_enemy/Attack/Level1_Attack_Pants.png" id="7_16y81"]
@@ -2249,15 +2249,14 @@ size = Vector2(128, 128)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_oa4bp"]
 size = Vector2(27, 128)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_a1k07"]
-size = Vector2(20, 2.8125)
+[sub_resource type="CircleShape2D" id="CircleShape2D_2knkn"]
 
 [node name="Smart_enemy_melee" type="CharacterBody2D"]
 process_mode = 1
-scale = Vector2(0.5, 0.5)
+scale = Vector2(0.6, 0.6)
 collision_layer = 2
-collision_mask = 4
-safe_margin = 0.1
+collision_mask = 6
+safe_margin = 1.5
 script = ExtResource("1_vnh7x")
 
 [node name="WeaponAnimation" type="AnimationPlayer" parent="."]
@@ -2270,23 +2269,23 @@ libraries = {
 modulate = Color(0.996078, 0.988235, 0.972549, 1)
 scale = Vector2(5, 5)
 sprite_frames = SubResource("SpriteFrames_rqp83")
-animation = &"Attack -1 0"
+animation = &"-1 0"
 
 [node name="AnimatedShirtSprite" type="AnimatedSprite2D" parent="."]
 scale = Vector2(5, 5)
 sprite_frames = SubResource("SpriteFrames_utgrf")
-animation = &"Attack -1 0"
+animation = &"-1 0"
 
 [node name="AnimatedPantsSprite" type="AnimatedSprite2D" parent="."]
 scale = Vector2(5, 5)
 sprite_frames = SubResource("SpriteFrames_hu3n6")
-animation = &"Attack -1 0"
+animation = &"-1 0"
 
 [node name="AninmatedBeardSprite" type="AnimatedSprite2D" parent="."]
 modulate = Color(1, 1, 1, 0.596078)
 scale = Vector2(5, 5)
 sprite_frames = SubResource("SpriteFrames_hlt33")
-animation = &"Attack -1 0"
+animation = &"-1 0"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 root_node = NodePath("../AnimatedBaseSprite")
@@ -2324,11 +2323,11 @@ texture = SubResource("CompressedTexture2D_waaig")
 [node name="Melee_hitbox" type="CollisionShape2D" parent="Hitbox_container"]
 position = Vector2(80.5, 0)
 shape = SubResource("RectangleShape2D_oa4bp")
+disabled = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, 55)
 scale = Vector2(6.32, 6.4)
-shape = SubResource("RectangleShape2D_a1k07")
+shape = SubResource("CircleShape2D_2knkn")
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
 target_desired_distance = 0.1

@@ -8,10 +8,10 @@ public partial class player_script : CharacterBody2D
     AnimatedSprite2D sprite_anim;
     AnimationPlayer player_anim;
     AnimationPlayer action_anim;
+    AnimationPlayer menu_anim;
     String facing;
     Sprite2D sprite;
     TextureProgressBar health;
-    Vector2 ScreenSize;
     public bool quick_attack_waiting = false;
     public bool power_attack_waiting = false;
     bool dash_waiting = false;
@@ -31,8 +31,8 @@ public partial class player_script : CharacterBody2D
         sprite_anim = GetNode<AnimatedSprite2D>("Visuals_Container/AnimatedSprite2D");
         player_anim = sprite_anim.GetNode<AnimationPlayer>("AnimationPlayer");
         action_anim = sprite_anim.GetNode<AnimationPlayer>("AnimationActions");
+        menu_anim = GetTree().Root.GetNode<AnimationPlayer>("Main/AnimationPlayer");
         health = GetNode<TextureProgressBar>("Visuals_Container/Health_Bar_Container/Health_Bar");
-        ScreenSize = GetViewportRect().Size;
         iframe_timer = GetNode<Timer>("Iframe_timer");
         mouse = GetNode<Sprite2D>("Mouse");
         visuals = GetNode<Node2D>("Visuals_Container");
@@ -133,9 +133,11 @@ public partial class player_script : CharacterBody2D
         }
         Velocity = velocity;
         MoveAndSlide();
-        if (health.Value <= 0)
+        if (health.Value <= 0 && !GetTree().Paused)
         {
-            GetTree().ReloadCurrentScene();
+            GetTree().Paused = true;
+            Input.MouseMode = Input.MouseModeEnum.Visible;
+            menu_anim.Play("Death");
         }
         health.GetParent<Node2D>().GlobalRotationDegrees = 0;
     }

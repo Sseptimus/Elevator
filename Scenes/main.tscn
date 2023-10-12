@@ -1,10 +1,69 @@
-[gd_scene load_steps=7 format=3 uid="uid://dymubtquxmn83"]
+[gd_scene load_steps=11 format=3 uid="uid://dymubtquxmn83"]
 
 [ext_resource type="Script" path="res://Scripts/main_script.cs" id="1_kqcge"]
 [ext_resource type="PackedScene" uid="uid://rlcgesiykerw" path="res://Scenes/background.tscn" id="1_q2pee"]
 [ext_resource type="PackedScene" uid="uid://dcl4rh15o2mmr" path="res://Scenes/player.tscn" id="2_f6o6o"]
-[ext_resource type="PackedScene" uid="uid://dcd6xt287t8n7" path="res://Scenes/paused.tscn" id="2_grmou"]
+[ext_resource type="PackedScene" uid="uid://cgvxmrh5x6f81" path="res://Scenes/paused.tscn" id="2_grmou"]
+[ext_resource type="Texture2D" uid="uid://cikrhv76d3b7r" path="res://Assets/Img/Death_Screen/LeftDoorBackDrop.png" id="2_hhegd"]
+[ext_resource type="Texture2D" uid="uid://boywtt2yymbsg" path="res://Assets/Img/Death_Screen/RightDoorBackDrop.png" id="3_pools"]
 [ext_resource type="PackedScene" uid="uid://53omrigpia0e" path="res://Scenes/perk_selector.tscn" id="5_c3403"]
+
+[sub_resource type="Animation" id="Animation_yb1n4"]
+resource_name = "Death"
+length = 1.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimationPlayer/LeftDeathDoor:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.5, 1.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 540), Vector2(960, 540)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimationPlayer/RightDeathDoor:position")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.5, 1.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1920, 540), Vector2(960, 540)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("AnimationPlayer/LeftDeathDoor:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("AnimationPlayer/RightDeathDoor:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_kj3bf"]
+_data = {
+"Death": SubResource("Animation_yb1n4")
+}
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_uo1bm"]
 
@@ -13,15 +72,33 @@ process_mode = 3
 scale = Vector2(1.00241, 1)
 script = ExtResource("1_kqcge")
 
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_kj3bf")
+}
+
+[node name="LeftDeathDoor" type="Sprite2D" parent="AnimationPlayer"]
+visible = false
+z_index = 4096
+position = Vector2(0, 540)
+scale = Vector2(1.00241, 1)
+texture = ExtResource("2_hhegd")
+
+[node name="RightDeathDoor" type="Sprite2D" parent="AnimationPlayer"]
+visible = false
+z_index = 4096
+position = Vector2(1920, 540)
+texture = ExtResource("3_pools")
+
 [node name="Player" parent="." instance=ExtResource("2_f6o6o")]
 process_mode = 1
 position = Vector2(953.702, 718)
 
 [node name="PauseLayer" type="CanvasLayer" parent="."]
-visible = false
 
 [node name="Pause" parent="PauseLayer" instance=ExtResource("2_grmou")]
 process_mode = 2
+visible = false
 top_level = true
 z_index = 4
 z_as_relative = false

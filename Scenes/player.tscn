@@ -629,14 +629,13 @@ polygon = PackedVector2Array(14, 14, 21, 12, 21, -2, 12, -13, 21, -23, 15, -45, 
 
 [node name="Player" type="CharacterBody2D"]
 z_index = 2
-collision_layer = 5
-collision_mask = 3
+scale = Vector2(1.1, 1.1)
 collision_priority = 0.01
 safe_margin = 0.1
 script = ExtResource("1_6ovbg")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-1.5, 25.5)
+position = Vector2(0, 26)
 scale = Vector2(1, 6.36)
 shape = SubResource("RectangleShape2D_cgkw7")
 
