@@ -69,17 +69,17 @@ public partial class smart_enemy_melee : CharacterBody2D
 		Vector2 aim_direction;
 		aim_direction.X = MathF.Round(Mathf.Cos(look_direction));
 		aim_direction.Y = MathF.Round(MathF.Sin(look_direction));
-        if(attack_delayed && Position.Y > 120){
-			newVelocity = -newVelocity;
-		}else if (knockback){
-            newVelocity = -newVelocity * 1.5f;
-        }
         if (aim_direction.X == -0){
 			aim_direction.X = 0;
 		}if (aim_direction.Y == -0){
 			aim_direction.Y = 0;
 		}
 		animator.Play($"{aim_direction.X} {aim_direction.Y}");
+        if(attack_delayed && Position.Y > 120){
+			newVelocity = -newVelocity;
+		}else if (knockback){
+            newVelocity = -newVelocity * 1.5f;
+        }
         Velocity = newVelocity;
         MoveAndSlide();
         if (Position.DistanceTo(player.Position) <= 70)

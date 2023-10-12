@@ -1,16 +1,17 @@
-[gd_scene load_steps=11 format=3 uid="uid://dymubtquxmn83"]
+[gd_scene load_steps=12 format=3 uid="uid://dymubtquxmn83"]
 
 [ext_resource type="Script" path="res://Scripts/main_script.cs" id="1_kqcge"]
 [ext_resource type="PackedScene" uid="uid://rlcgesiykerw" path="res://Scenes/background.tscn" id="1_q2pee"]
 [ext_resource type="PackedScene" uid="uid://dcl4rh15o2mmr" path="res://Scenes/player.tscn" id="2_f6o6o"]
-[ext_resource type="PackedScene" uid="uid://cgvxmrh5x6f81" path="res://Scenes/paused.tscn" id="2_grmou"]
-[ext_resource type="Texture2D" uid="uid://cikrhv76d3b7r" path="res://Assets/Img/Death_Screen/LeftDoorBackDrop.png" id="2_hhegd"]
-[ext_resource type="Texture2D" uid="uid://boywtt2yymbsg" path="res://Assets/Img/Death_Screen/RightDoorBackDrop.png" id="3_pools"]
+[ext_resource type="PackedScene" uid="uid://dcd6xt287t8n7" path="res://Scenes/paused.tscn" id="2_grmou"]
+[ext_resource type="Texture2D" uid="uid://ynjbfbmqi2js" path="res://Assets/Img/Death_Screen/LeftDoorBackDrop.png" id="2_hhegd"]
+[ext_resource type="Texture2D" uid="uid://c6d753r053pga" path="res://Assets/Img/Death_Screen/StatsBackDrop.png" id="2_tvgb0"]
+[ext_resource type="Texture2D" uid="uid://3a4qrlp0wu1u" path="res://Assets/Img/Death_Screen/RightDoorBackDrop.png" id="3_pools"]
 [ext_resource type="PackedScene" uid="uid://53omrigpia0e" path="res://Scenes/perk_selector.tscn" id="5_c3403"]
 
 [sub_resource type="Animation" id="Animation_yb1n4"]
 resource_name = "Death"
-length = 1.5
+length = 2.5
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -59,6 +60,42 @@ tracks/3/keys = {
 "update": 1,
 "values": [false, true]
 }
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("AnimationPlayer/Stats:position")
+tracks/4/interp = 2
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(1.5, 2.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(960, -540), Vector2(960, 540)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("AnimationPlayer/Stats:visible")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 1.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("CanvasModulate:color")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0, 1.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0.509804, 0.529412, 0.372549, 1), Color(0.898039, 0.898039, 0.898039, 1)]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_kj3bf"]
 _data = {
@@ -77,16 +114,22 @@ libraries = {
 "": SubResource("AnimationLibrary_kj3bf")
 }
 
-[node name="LeftDeathDoor" type="Sprite2D" parent="AnimationPlayer"]
+[node name="Stats" type="Sprite2D" parent="AnimationPlayer"]
 visible = false
 z_index = 4096
+position = Vector2(960, -540)
+texture = ExtResource("2_tvgb0")
+
+[node name="LeftDeathDoor" type="Sprite2D" parent="AnimationPlayer"]
+visible = false
+z_index = 4095
 position = Vector2(0, 540)
 scale = Vector2(1.00241, 1)
 texture = ExtResource("2_hhegd")
 
 [node name="RightDeathDoor" type="Sprite2D" parent="AnimationPlayer"]
 visible = false
-z_index = 4096
+z_index = 4095
 position = Vector2(1920, 540)
 texture = ExtResource("3_pools")
 

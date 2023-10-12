@@ -10,7 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://c4l54heam1sl0" path="res://Scenes/mouse.tscn" id="8_5l4mw"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cgkw7"]
-size = Vector2(49, 3.30189)
+size = Vector2(48, 13.3648)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_lm20w"]
 atlas = ExtResource("4_3qx1v")
@@ -629,13 +629,13 @@ polygon = PackedVector2Array(14, 14, 21, 12, 21, -2, 12, -13, 21, -23, 15, -45, 
 
 [node name="Player" type="CharacterBody2D"]
 z_index = 2
-scale = Vector2(1.1, 1.1)
+collision_layer = 5
 collision_priority = 0.01
 safe_margin = 0.1
 script = ExtResource("1_6ovbg")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, 26)
+position = Vector2(1, -6.5)
 scale = Vector2(1, 6.36)
 shape = SubResource("RectangleShape2D_cgkw7")
 
