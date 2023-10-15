@@ -10,7 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://c4l54heam1sl0" path="res://Scenes/mouse.tscn" id="8_5l4mw"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cgkw7"]
-size = Vector2(38, 10.6918)
+size = Vector2(48, 13.3648)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_lm20w"]
 atlas = ExtResource("4_3qx1v")
@@ -635,7 +635,7 @@ safe_margin = 0.1
 script = ExtResource("1_6ovbg")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, -4)
+position = Vector2(1, -6.5)
 scale = Vector2(1, 6.36)
 shape = SubResource("RectangleShape2D_cgkw7")
 

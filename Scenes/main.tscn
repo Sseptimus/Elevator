@@ -2,11 +2,11 @@
 
 [ext_resource type="Script" path="res://Scripts/main_script.cs" id="1_kqcge"]
 [ext_resource type="PackedScene" uid="uid://rlcgesiykerw" path="res://Scenes/background.tscn" id="1_q2pee"]
-[ext_resource type="Texture2D" uid="uid://cc4f0wpo0norh" path="res://Assets/Img/Death_Screen/OutOfOrder.png" id="2_0yv4l"]
+[ext_resource type="Texture2D" uid="uid://c4sckqns0l6b8" path="res://Assets/Img/Death_Screen/OutOfOrder.png" id="2_0yv4l"]
 [ext_resource type="PackedScene" uid="uid://dcl4rh15o2mmr" path="res://Scenes/player.tscn" id="2_f6o6o"]
 [ext_resource type="PackedScene" uid="uid://dcd6xt287t8n7" path="res://Scenes/paused.tscn" id="2_grmou"]
-[ext_resource type="Texture2D" uid="uid://cikrhv76d3b7r" path="res://Assets/Img/Death_Screen/LeftDoorBackDrop.png" id="2_hhegd"]
-[ext_resource type="Texture2D" uid="uid://boywtt2yymbsg" path="res://Assets/Img/Death_Screen/RightDoorBackDrop.png" id="3_pools"]
+[ext_resource type="Texture2D" uid="uid://ynjbfbmqi2js" path="res://Assets/Img/Death_Screen/LeftDoorBackDrop.png" id="2_hhegd"]
+[ext_resource type="Texture2D" uid="uid://3a4qrlp0wu1u" path="res://Assets/Img/Death_Screen/RightDoorBackDrop.png" id="3_pools"]
 [ext_resource type="PackedScene" uid="uid://53omrigpia0e" path="res://Scenes/perk_selector.tscn" id="5_c3403"]
 
 [sub_resource type="Animation" id="Animation_yb1n4"]
@@ -181,13 +181,6 @@ wait_time = 30.0
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
 process_mode = 1
 color = Color(0.509804, 0.529412, 0.372549, 1)
-
-[node name="StaticBody2D" type="StaticBody2D" parent="."]
-process_mode = 1
-collision_layer = 3
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D"]
-polygon = PackedVector2Array(721.262, -3, 712.283, -300, 1219.06, -308, 1208.09, -7, 1299.87, -12, 1285.9, -347, 650.432, -346, 655.42, -3)
 
 [node name="Level Display" type="AnimatedSprite2D" parent="."]
 process_mode = 1

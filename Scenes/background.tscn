@@ -1,9 +1,9 @@
-[gd_scene load_steps=14 format=3 uid="uid://rlcgesiykerw"]
+[gd_scene load_steps=16 format=3 uid="uid://rlcgesiykerw"]
 
 [ext_resource type="Script" path="res://Scripts/background_script.cs" id="1_rg2uo"]
 [ext_resource type="Texture2D" uid="uid://qb0asv3n47jw" path="res://Assets/Textures/Pixel_Dirty_Tiles.png" id="2_15pg3"]
 [ext_resource type="Script" path="res://Scripts/Door_script.cs" id="2_egvqq"]
-[ext_resource type="Texture2D" uid="uid://bpwxmv5tbx1sk" path="res://Assets/Textures/Pixel_Left_Door.png" id="4_pmyak"]
+[ext_resource type="Texture2D" uid="uid://dvxr8un3d3xo8" path="res://Assets/Textures/Pixel_Left_Door.png" id="4_pmyak"]
 [ext_resource type="Texture2D" uid="uid://4nlp18ivm58y" path="res://Assets/Textures/Pixel_Right_Door.png" id="5_635yg"]
 [ext_resource type="Texture2D" uid="uid://clkxhqd0qa32q" path="res://Assets/Textures/Pixel_Top_Wall_Empty.png" id="5_g4tfg"]
 [ext_resource type="Texture2D" uid="uid://bmgddpt4udtw5" path="res://Assets/Textures/Pixel_Dirty_Side_Wall.png" id="6_qi1m4"]
@@ -19,9 +19,15 @@ outlines = Array[PackedVector2Array]([PackedVector2Array(107.74, 1079, 1826.6, 1
 size = Vector2(643.452, 446.5)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_834gd"]
-size = Vector2(321.483, 7.75)
+size = Vector2(158, 8)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_0eotv"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2l16c"]
+size = Vector2(156, 8)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_m4bgw"]
+size = Vector2(314, 8)
 
 [node name="Background" type="Control"]
 layout_mode = 3
@@ -42,7 +48,6 @@ texture = ExtResource("2_15pg3")
 stretch_mode = 1
 
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
-visible = false
 navigation_polygon = SubResource("NavigationPolygon_432s0")
 
 [node name="Doors" type="Node2D" parent="."]
@@ -62,12 +67,12 @@ collision_layer = 3
 
 [node name="Sprite2D" type="Sprite2D" parent="Doors/Left_Door_Container"]
 z_index = -1
-position = Vector2(310, 50)
+position = Vector2(311, 50)
 texture = ExtResource("4_pmyak")
 
 [node name="Left_Door" type="CollisionShape2D" parent="Doors/Left_Door_Container"]
 z_index = 10
-position = Vector2(160.614, 96.875)
+position = Vector2(232, 95.875)
 shape = SubResource("RectangleShape2D_834gd")
 debug_color = Color(0.960784, 0, 0.505882, 0.419608)
 
@@ -82,11 +87,15 @@ material = SubResource("ShaderMaterial_0eotv")
 position = Vector2(-10.2269, 50)
 texture = ExtResource("5_635yg")
 
-[node name="Right_Door" type="CollisionShape2D" parent="Doors/Right_Door_Container"]
-z_index = 10
-position = Vector2(160.614, 96.875)
-shape = SubResource("RectangleShape2D_834gd")
-debug_color = Color(0.898039, 0.227451, 0.54902, 0.419608)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Doors/Right_Door_Container"]
+position = Vector2(67.773, 96)
+shape = SubResource("RectangleShape2D_2l16c")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Doors"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Doors/StaticBody2D"]
+position = Vector2(310, 96)
+shape = SubResource("RectangleShape2D_m4bgw")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 collision_layer = 3
@@ -97,7 +106,7 @@ position = Vector2(960, 50)
 texture = ExtResource("5_g4tfg")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D"]
-polygon = PackedVector2Array(650, 102, 650, 0, 0, 0, 0, 1165, 1920, 1165, 1920, 0, 1293, 0, 1293, 100, 1819, 101, 1819, 1080, 101, 1080, 100, 100)
+polygon = PackedVector2Array(650, 100, 650, 0, 0, 0, 0, 1165, 1920, 1165, 1920, 0, 1293, 0, 1293, 100, 1819, 101, 1819, 1080, 101, 1080, 100, 100)
 
 [node name="Sprite2D3" type="Sprite2D" parent="StaticBody2D"]
 position = Vector2(1869, 959)
@@ -110,7 +119,7 @@ rotation = -1.5708
 texture = ExtResource("6_qi1m4")
 
 [node name="PointLight2D2" type="PointLight2D" parent="."]
-position = Vector2(969, 595)
+position = Vector2(992, 620)
 scale = Vector2(1.59767, 1.61031)
 energy = 0.75
 texture = ExtResource("7_4ewnp")

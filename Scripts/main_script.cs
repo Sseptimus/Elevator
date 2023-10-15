@@ -24,7 +24,6 @@ public partial class main_script : Node2D
 		smart_enemy = (PackedScene)ResourceLoader.Load("res://Scenes/smart_enemy_melee.tscn");
 		level_timer = GetNode<Timer>("Level_timer");
 		pause = GetTree().Root.GetNode<Label>("Main/PauseLayer/Pause");
-		GD.Print(pause);
 		level_display = GetNode<Label>("Background/Label");
 		perkSelector = GetNode<CanvasLayer>("PerkSelector");
 		menu = GetNode<Label>("Menu");
@@ -56,8 +55,8 @@ public partial class main_script : Node2D
 			}
 			else
 			{
-				Input.MouseMode = MouseModeEnum.Captured;
 				GetTree().Paused = false;
+				Input.MouseMode = MouseModeEnum.Captured;
 				pause.Visible = false;
 			}
 		}
@@ -93,7 +92,7 @@ public partial class main_script : Node2D
 				{
 					Spawn_pos.X += 200;
 				}
-				Spawn_pos.Y += i * -150;
+				Spawn_pos.Y += i * 150;
 				newEnemy.Position = Spawn_pos;
 				enemies.Add(newEnemy);
 				AddChild(newEnemy);

@@ -69,7 +69,7 @@ public partial class dumb_enemy_script : CharacterBody2D
 		{
 			newVelocity = -newVelocity * 1.5f;
 		}
-		newVelocity *= Vector2.One*Mathf.Log(player.Position.DistanceTo(Position)+50);
+		//newVelocity *= Vector2.One*Mathf.Log(player.Position.DistanceTo(Position)+50);
 		Vector2 look_position = player.GlobalPosition - GlobalPosition;
 		float angle = look_position.Angle();
 		float look_direction = Mathf.Round(angle / (Mathf.Pi / 2)) * (Mathf.Pi / 2);

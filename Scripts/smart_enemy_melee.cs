@@ -63,7 +63,7 @@ public partial class smart_enemy_melee : CharacterBody2D
             newVelocity = Vector2.Zero;
         }
 		newVelocity *= _movementSpeed;
-        newVelocity += Vector2.One*Mathf.Log(player.Position.DistanceTo(Position)+50);
+        //newVelocity += Vector2.One*Mathf.Log(player.Position.DistanceTo(Position)+50);
 		float angle = newVelocity.Angle();
 		float look_direction = Mathf.Round(angle/(Mathf.Pi/2))*(Mathf.Pi/2);
 		Vector2 aim_direction;
