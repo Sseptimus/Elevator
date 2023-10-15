@@ -2,11 +2,11 @@
 
 [ext_resource type="Script" path="res://Scripts/main_script.cs" id="1_kqcge"]
 [ext_resource type="PackedScene" uid="uid://rlcgesiykerw" path="res://Scenes/background.tscn" id="1_q2pee"]
+[ext_resource type="Texture2D" uid="uid://cc4f0wpo0norh" path="res://Assets/Img/Death_Screen/OutOfOrder.png" id="2_0yv4l"]
 [ext_resource type="PackedScene" uid="uid://dcl4rh15o2mmr" path="res://Scenes/player.tscn" id="2_f6o6o"]
 [ext_resource type="PackedScene" uid="uid://dcd6xt287t8n7" path="res://Scenes/paused.tscn" id="2_grmou"]
-[ext_resource type="Texture2D" uid="uid://ynjbfbmqi2js" path="res://Assets/Img/Death_Screen/LeftDoorBackDrop.png" id="2_hhegd"]
-[ext_resource type="Texture2D" uid="uid://c6d753r053pga" path="res://Assets/Img/Death_Screen/StatsBackDrop.png" id="2_tvgb0"]
-[ext_resource type="Texture2D" uid="uid://3a4qrlp0wu1u" path="res://Assets/Img/Death_Screen/RightDoorBackDrop.png" id="3_pools"]
+[ext_resource type="Texture2D" uid="uid://cikrhv76d3b7r" path="res://Assets/Img/Death_Screen/LeftDoorBackDrop.png" id="2_hhegd"]
+[ext_resource type="Texture2D" uid="uid://boywtt2yymbsg" path="res://Assets/Img/Death_Screen/RightDoorBackDrop.png" id="3_pools"]
 [ext_resource type="PackedScene" uid="uid://53omrigpia0e" path="res://Scenes/perk_selector.tscn" id="5_c3403"]
 
 [sub_resource type="Animation" id="Animation_yb1n4"]
@@ -63,7 +63,7 @@ tracks/3/keys = {
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("AnimationPlayer/Stats:position")
+tracks/4/path = NodePath("AnimationPlayer/OutOfOrder:position")
 tracks/4/interp = 2
 tracks/4/loop_wrap = true
 tracks/4/keys = {
@@ -75,7 +75,7 @@ tracks/4/keys = {
 tracks/5/type = "value"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("AnimationPlayer/Stats:visible")
+tracks/5/path = NodePath("AnimationPlayer/OutOfOrder:visible")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
@@ -114,11 +114,11 @@ libraries = {
 "": SubResource("AnimationLibrary_kj3bf")
 }
 
-[node name="Stats" type="Sprite2D" parent="AnimationPlayer"]
+[node name="OutOfOrder" type="Sprite2D" parent="AnimationPlayer"]
 visible = false
 z_index = 4096
 position = Vector2(960, -540)
-texture = ExtResource("2_tvgb0")
+texture = ExtResource("2_0yv4l")
 
 [node name="LeftDeathDoor" type="Sprite2D" parent="AnimationPlayer"]
 visible = false

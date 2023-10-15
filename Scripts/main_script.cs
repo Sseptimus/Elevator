@@ -15,7 +15,7 @@ public partial class main_script : Node2D
 	CanvasLayer perkSelector;
 	Vector2 pos2;
 	Label menu;
-	
+
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
@@ -46,12 +46,16 @@ public partial class main_script : Node2D
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{
-		if(Input.IsActionJustPressed("ui_cancel") && !GameManager.dead){
-			if(!GetTree().Paused){
+		if (Input.IsActionJustPressed("ui_cancel") && !GameManager.dead)
+		{
+			if (!GetTree().Paused)
+			{
 				GetTree().Paused = true;
 				Input.MouseMode = MouseModeEnum.Visible;
 				pause.Visible = true;
-			}else{
+			}
+			else
+			{
 				Input.MouseMode = MouseModeEnum.Captured;
 				GetTree().Paused = false;
 				pause.Visible = false;
@@ -65,78 +69,90 @@ public partial class main_script : Node2D
 			await ToSignal(GetTree().CreateTimer(5),"timeout");
 			GetTree().Quit();
 		}*/
-		
+
 	}
-	public async void level_switch(){
+	public async void level_switch()
+	{
 		spawn_enemies();
-		level_timer.Start(GameManager.CurrentLevel+1*5);
-		await ToSignal(level_timer,"timeout");
+		level_timer.Start(GameManager.CurrentLevel + 1 * 5);
+		await ToSignal(level_timer, "timeout");
 		GameManager.CurrentLevel += 1;
 		level_display.Text = GameManager.CurrentLevel.ToString();
 		level_switch();
 	}
-	public void spawn_enemies(){
+	public void spawn_enemies()
+	{
 
-		if(GameManager.CurrentLevel != 0){
-		for(int i = 0; i <= GameManager.CurrentLevel; i++){
-			CharacterBody2D newEnemy = (CharacterBody2D)dumb_enemy.Instantiate();
-			Vector2 Spawn_pos = starting_pos;
-			if(i%2 ==0){
-				Spawn_pos.X += 200;
+		if (GameManager.CurrentLevel != 0)
+		{
+			for (int i = 0; i <= GameManager.CurrentLevel; i++)
+			{
+				CharacterBody2D newEnemy = (CharacterBody2D)dumb_enemy.Instantiate();
+				Vector2 Spawn_pos = starting_pos;
+				if (i % 2 == 0)
+				{
+					Spawn_pos.X += 200;
+				}
+				Spawn_pos.Y += i * -150;
+				newEnemy.Position = Spawn_pos;
+				enemies.Add(newEnemy);
+				AddChild(newEnemy);
+				newEnemy = (CharacterBody2D)dumb_enemy.Instantiate();
+				Spawn_pos = starting_pos;
+				if (i % 2 == 0)
+				{
+					Spawn_pos.X += 200;
+				}
+				Spawn_pos.Y += i * -150;
+				newEnemy.Position = Spawn_pos;
+				enemies.Add(newEnemy);
+				AddChild(newEnemy);
+
 			}
-			Spawn_pos.Y += i*-150;
-			newEnemy.Position = Spawn_pos;
-			enemies.Add(newEnemy);
-			AddChild(newEnemy);
-			newEnemy = (CharacterBody2D)dumb_enemy.Instantiate();
-			Spawn_pos = starting_pos;
-			if(i%2 ==0){
-				Spawn_pos.X += 200;
+			for (int i = 0; i <= GameManager.CurrentLevel - 2; i++)
+			{
+				CharacterBody2D newEnemy = (CharacterBody2D)smart_enemy.Instantiate();
+				Vector2 Spawn_pos = starting_pos;
+				if (i % 2 == 0)
+				{
+					Spawn_pos.X += 200;
+				}
+				Spawn_pos.Y += i * -150 * (-100 * (GameManager.CurrentLevel * 2));
+				newEnemy.Position = Spawn_pos;
+				enemies.Add(newEnemy);
+				AddChild(newEnemy);
 			}
-			Spawn_pos.Y += i*-150;
-			newEnemy.Position = Spawn_pos;
-			enemies.Add(newEnemy);
-			AddChild(newEnemy);
-			
-		}
-		for(int i =0; i<=GameManager.CurrentLevel-2; i++){
-			CharacterBody2D newEnemy = (CharacterBody2D)smart_enemy.Instantiate();
-			Vector2 Spawn_pos = starting_pos;
-			if(i%2 ==0){
-				Spawn_pos.X += 200;
-			}
-			Spawn_pos.Y += i*-150*(-100*(GameManager.CurrentLevel*2));
-			newEnemy.Position = Spawn_pos;
-			enemies.Add(newEnemy);
-			AddChild(newEnemy);
-		}
 		}
 	}
 	private void _on_quit_button_pressed()
 	{
 		GetTree().Quit();
 	}
-	private void _on_perk_selector_visibility_changed(){
-		if(!perkSelector.Visible){
+	private void _on_perk_selector_visibility_changed()
+	{
+		if (!perkSelector.Visible)
+		{
 			level_switch();
 		}
 	}
 }
-public class Upgrades{
-	public static double PlayerDamageMultiplier {get; set;} = 1;
-	public static double PlayerHealthMultiplier {get; set;} = 1;
-	public static double PlayerSpeedMultiplier{get; set;} = 1;
-	public static double EnemyDamageMultiplier {get; set;} = 1;
-	public static double EnemyHealthMultiplier {get; set;} = 1;
-	
+public class Upgrades
+{
+	public static double PlayerDamageMultiplier { get; set; } = 1;
+	public static double PlayerHealthMultiplier { get; set; } = 1;
+	public static double PlayerSpeedMultiplier { get; set; } = 1;
+	public static double EnemyDamageMultiplier { get; set; } = 1;
+	public static double EnemyHealthMultiplier { get; set; } = 1;
+
 }
-public class GameManager{
-	public static bool dead {get; set;} = false;
-	public static int CurrentLevel {get; set;} = 0;
-	public static List<UpgradeOption> PlayerUpgrades {get; set;} = new List<UpgradeOption>();
-	public static int DamageDealt {get; set;} = 0;
-	public static DateTime StartTime {get; set;}
-	public static int Kills {get; set;} = 0;
+public class GameManager
+{
+	public static bool dead { get; set; } = false;
+	public static int CurrentLevel { get; set; } = 0;
+	public static List<UpgradeOption> PlayerUpgrades { get; set; } = new List<UpgradeOption>();
+	public static int DamageDealt { get; set; } = 0;
+	public static DateTime StartTime { get; set; }
+	public static int Kills { get; set; } = 0;
 
 }
 

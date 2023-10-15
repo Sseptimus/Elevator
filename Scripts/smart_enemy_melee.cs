@@ -82,7 +82,9 @@ public partial class smart_enemy_melee : CharacterBody2D
         }
         Velocity = newVelocity;
         MoveAndSlide();
-        if (Position.DistanceTo(player.Position) <= 70)
+        Area2D a = GetNode<Area2D>("Hitbox_container");
+		a.LookAt(player.Position);
+        if (Position.DistanceTo(player.Position) <= 100)
         {
             enemy_anim.Play($"Enemy Attack {aim_direction.X} {aim_direction.Y}");
             await ToSignal(enemy_anim, "animation_finished");
