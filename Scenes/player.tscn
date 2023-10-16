@@ -234,7 +234,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"0 -1",
-"speed": 10.0
+"speed": 2.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -661,7 +661,8 @@ z_index = 2
 position = Vector2(0, 1.90735e-06)
 scale = Vector2(3, 2.811)
 sprite_frames = SubResource("SpriteFrames_t73cm")
-animation = &"0 -1"
+animation = &"1 0"
+frame_progress = 0.900111
 speed_scale = 5.0
 
 [node name="Power_attack_hitbox_container" type="Area2D" parent="Visuals_Container/AnimatedSprite2D"]

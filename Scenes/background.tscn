@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://Scripts/background_script.cs" id="1_rg2uo"]
 [ext_resource type="Texture2D" uid="uid://qb0asv3n47jw" path="res://Assets/Textures/Pixel_Dirty_Tiles.png" id="2_15pg3"]
 [ext_resource type="Script" path="res://Scripts/Door_script.cs" id="2_egvqq"]
-[ext_resource type="Texture2D" uid="uid://bpwxmv5tbx1sk" path="res://Assets/Textures/Pixel_Left_Door.png" id="4_pmyak"]
+[ext_resource type="Texture2D" uid="uid://dvxr8un3d3xo8" path="res://Assets/Textures/Pixel_Left_Door.png" id="4_pmyak"]
 [ext_resource type="Texture2D" uid="uid://4nlp18ivm58y" path="res://Assets/Textures/Pixel_Right_Door.png" id="5_635yg"]
 [ext_resource type="Texture2D" uid="uid://clkxhqd0qa32q" path="res://Assets/Textures/Pixel_Top_Wall_Empty.png" id="5_g4tfg"]
 [ext_resource type="Texture2D" uid="uid://bmgddpt4udtw5" path="res://Assets/Textures/Pixel_Dirty_Side_Wall.png" id="6_qi1m4"]
