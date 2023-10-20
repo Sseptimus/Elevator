@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using static Godot.Input;
 public partial class main_script : Node2D
 {
+	//declaring variables 
 	public List<CharacterBody2D> enemies = new List<CharacterBody2D>();
 	Timer level_timer;
 	PackedScene dumb_enemy;
@@ -19,6 +20,7 @@ public partial class main_script : Node2D
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
+		//setting variabels
 		GameManager.CurrentLevel = 0;
 		dumb_enemy = (PackedScene)ResourceLoader.Load("res://Scenes/dumb_enemy_melee.tscn");
 		smart_enemy = (PackedScene)ResourceLoader.Load("res://Scenes/smart_enemy_melee.tscn");
@@ -40,12 +42,14 @@ public partial class main_script : Node2D
 		Upgrades.EnemyHealthMultiplier = 1;
 		Upgrades.PlayerSpeedMultiplier = 1;
 		perkSelector.Visible = true;
+		GameManager.PlayerUpgrades = new List<UpgradeOption>();
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{
-		if (Input.IsActionJustPressed("ui_cancel") && !GameManager.dead)
+		//checks for player pause input then either pauses or unpauses the scene
+		if (Input.IsActionJustPressed("ui_cancel") && !GameManager.dead && !perkSelector.Visible)
 		{
 			if (!GetTree().Paused)
 			{
@@ -60,18 +64,11 @@ public partial class main_script : Node2D
 				pause.Visible = false;
 			}
 		}
-		/*if(enemies.Count > 30){
-			GetTree().Paused = true;
-			Label pause_label = GetNode<Label>("Pause");
-			pause_label.Text = "The elevator is too heavy";
-			pause_label.Visible = true;
-			await ToSignal(GetTree().CreateTimer(5),"timeout");
-			GetTree().Quit();
-		}*/
 
 	}
 	public async void level_switch()
 	{
+		//updates current level and resets timer between level
 		spawn_enemies();
 		level_timer.Start(GameManager.CurrentLevel + 1 * 5);
 		await ToSignal(level_timer, "timeout");
@@ -81,7 +78,7 @@ public partial class main_script : Node2D
 	}
 	public void spawn_enemies()
 	{
-
+		//spanws enemies, calculating spawn location
 		if (GameManager.CurrentLevel != 0)
 		{
 			for (int i = 0; i <= GameManager.CurrentLevel; i++)
@@ -92,17 +89,17 @@ public partial class main_script : Node2D
 				{
 					Spawn_pos.X += 200;
 				}
-				Spawn_pos.Y += i * 150;
+				Spawn_pos.Y += i * -150;
 				newEnemy.Position = Spawn_pos;
 				enemies.Add(newEnemy);
 				AddChild(newEnemy);
 				newEnemy = (CharacterBody2D)dumb_enemy.Instantiate();
 				Spawn_pos = starting_pos;
-				if (i % 2 == 0)
+				if (i + 1 % 2 == 0)
 				{
 					Spawn_pos.X += 200;
 				}
-				Spawn_pos.Y += i * -150;
+				Spawn_pos.Y += i + 1 * -150;
 				newEnemy.Position = Spawn_pos;
 				enemies.Add(newEnemy);
 				AddChild(newEnemy);
@@ -121,22 +118,38 @@ public partial class main_script : Node2D
 				enemies.Add(newEnemy);
 				AddChild(newEnemy);
 			}
+			try
+			{
+			}
+			finally
+			{
+
+			}
 		}
+
 	}
 	private void _on_quit_button_pressed()
 	{
+		//closes game when quit button pressed
 		GetTree().Quit();
 	}
 	private void _on_perk_selector_visibility_changed()
 	{
 		if (!perkSelector.Visible)
 		{
+			//begins game after perk select
 			level_switch();
 		}
+	}
+	private void _on_button_pressed()
+	{
+		//restarts game on button press
+		GetTree().ReloadCurrentScene();
 	}
 }
 public class Upgrades
 {
+	// setting up upgrade modifiers
 	public static double PlayerDamageMultiplier { get; set; } = 1;
 	public static double PlayerHealthMultiplier { get; set; } = 1;
 	public static double PlayerSpeedMultiplier { get; set; } = 1;
@@ -146,6 +159,7 @@ public class Upgrades
 }
 public class GameManager
 {
+	//sets up global variabels
 	public static bool dead { get; set; } = false;
 	public static int CurrentLevel { get; set; } = 0;
 	public static List<UpgradeOption> PlayerUpgrades { get; set; } = new List<UpgradeOption>();

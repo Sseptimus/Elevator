@@ -7,6 +7,7 @@ using static Godot.Input;
 
 public partial class perk : CanvasLayer
 {
+	//defining Variables
 	UpgradeOption GlassCannon;
 	UpgradeOption Nothing;
 	UpgradeOption Speed;
@@ -18,10 +19,11 @@ public partial class perk : CanvasLayer
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
+		//establishing list of possible upgrades
 		upgrades = new List<UpgradeOption>();
-		upgrades.Add(GlassCannon = new UpgradeOption(1,100,1,10000, optionImage: "res://Assets/Img/Option_Thumbnails/Glass_Cannon_Thumbnail.png"));
-		upgrades.Add(Nothing = new UpgradeOption(1,1,1,1,optionImage: "res://Assets/Img/Option 1.png"));
-		upgrades.Add(Speed = new UpgradeOption(1,1,1,1,playerSpeed: 5, optionImage: "res://Assets/Img/Option_Thumbnails/Speed_Thumbnail.png"));
+		upgrades.Add(GlassCannon = new UpgradeOption(1, 100, 1, 10000, optionImage: "res://Assets/Img/Option_Thumbnails/Glass_Cannon_Thumbnail.png"));
+		upgrades.Add(Nothing = new UpgradeOption(1, 1, 1, 1, optionImage: "res://Assets/Img/Option 1.png"));
+		upgrades.Add(Speed = new UpgradeOption(1, 1, 1, 1, playerSpeed: 5, optionImage: "res://Assets/Img/Option_Thumbnails/Speed_Thumbnail.png"));
 		rnd = new Random();
 
 	}
@@ -31,8 +33,11 @@ public partial class perk : CanvasLayer
 	{
 
 	}
-	public void _on_visibility_changed(){
-		if(Visible){
+	public void _on_visibility_changed()
+	{
+		//sets buttons to a corresponding random upgrade
+		if (Visible)
+		{
 			option1 = upgrades[rnd.Next(upgrades.Count)];
 			option2 = upgrades[rnd.Next(upgrades.Count)];
 			option3 = upgrades[rnd.Next(upgrades.Count)];
@@ -41,47 +46,60 @@ public partial class perk : CanvasLayer
 			GetNode<TextureButton>("TextureButton3").TextureNormal = (CompressedTexture2D)ResourceLoader.Load($"{option3.OptionImage}");
 		}
 	}
-	public void _on_texture_button_1_pressed(){
+	//adding upgrades based on which upgrade was selected
+	public void _on_texture_button_1_pressed()
+	{
 		GameManager.PlayerUpgrades.Add(option1);
 		UpgradeMultipliers();
 		Visible = false;
 		GetTree().Paused = false;
 		Input.MouseMode = MouseModeEnum.Captured;
 	}
-	public void _on_texture_button_2_pressed(){
+	public void _on_texture_button_2_pressed()
+	{
 		GameManager.PlayerUpgrades.Add(option2);
 		UpgradeMultipliers();
 		Visible = false;
 		GetTree().Paused = false;
 		Input.MouseMode = MouseModeEnum.Captured;
 	}
-	public void _on_texture_button_3_pressed(){
+	public void _on_texture_button_3_pressed()
+	{
 		GameManager.PlayerUpgrades.Add(option3);
 		UpgradeMultipliers();
 		Visible = false;
 		GetTree().Paused = false;
 		Input.MouseMode = MouseModeEnum.Captured;
 	}
-	void UpgradeMultipliers(){
-	if((int)GameManager.PlayerUpgrades[GameManager.PlayerUpgrades.Count-1].PlayerDamageMultiplier != 1){
-		Upgrades.PlayerDamageMultiplier = GameManager.PlayerUpgrades[GameManager.PlayerUpgrades.Count-1].PlayerDamageMultiplier;
+	void UpgradeMultipliers()
+	{
+		//adds selected upgrade to multipliers
+		if ((int)GameManager.PlayerUpgrades[GameManager.PlayerUpgrades.Count - 1].PlayerDamageMultiplier != 1)
+		{
+			Upgrades.PlayerDamageMultiplier = GameManager.PlayerUpgrades[GameManager.PlayerUpgrades.Count - 1].PlayerDamageMultiplier;
+		}
+		if (GameManager.PlayerUpgrades[GameManager.PlayerUpgrades.Count - 1].PlayerHealthMultiplier != 1)
+		{
+			Upgrades.PlayerHealthMultiplier = GameManager.PlayerUpgrades[GameManager.PlayerUpgrades.Count - 1].PlayerHealthMultiplier;
+		}
+		if (GameManager.PlayerUpgrades[GameManager.PlayerUpgrades.Count - 1].EnemyDamageMultiplier != 1)
+		{
+			Upgrades.EnemyDamageMultiplier = GameManager.PlayerUpgrades[GameManager.PlayerUpgrades.Count - 1].EnemyDamageMultiplier;
+		}
+		if (GameManager.PlayerUpgrades[GameManager.PlayerUpgrades.Count - 1].EnemyHealthMultiplier != 0)
+		{
+			Upgrades.EnemyHealthMultiplier = GameManager.PlayerUpgrades[GameManager.PlayerUpgrades.Count - 1].EnemyHealthMultiplier;
+		}
+		if (GameManager.PlayerUpgrades[GameManager.PlayerUpgrades.Count - 1].PlayerSpeedMultiplier != 0)
+		{
+			Upgrades.PlayerSpeedMultiplier = GameManager.PlayerUpgrades[GameManager.PlayerUpgrades.Count - 1].PlayerSpeedMultiplier;
+		}
 	}
-	if(GameManager.PlayerUpgrades[GameManager.PlayerUpgrades.Count-1].PlayerHealthMultiplier != 1){
-		Upgrades.PlayerHealthMultiplier = GameManager.PlayerUpgrades[GameManager.PlayerUpgrades.Count-1].PlayerHealthMultiplier;
-	}
-	if(GameManager.PlayerUpgrades[GameManager.PlayerUpgrades.Count-1].EnemyDamageMultiplier != 1){
-		Upgrades.EnemyDamageMultiplier = GameManager.PlayerUpgrades[GameManager.PlayerUpgrades.Count-1].EnemyDamageMultiplier;
-	}
-	if(GameManager.PlayerUpgrades[GameManager.PlayerUpgrades.Count-1].EnemyHealthMultiplier != 0){
-		Upgrades.EnemyHealthMultiplier = GameManager.PlayerUpgrades[GameManager.PlayerUpgrades.Count-1].EnemyHealthMultiplier;
-	}
-	if(GameManager.PlayerUpgrades[GameManager.PlayerUpgrades.Count-1].PlayerSpeedMultiplier != 0){
-		Upgrades.PlayerSpeedMultiplier = GameManager.PlayerUpgrades[GameManager.PlayerUpgrades.Count-1].PlayerSpeedMultiplier;
-	}
-}
 }
 
-public class UpgradeOption{
+public class UpgradeOption
+{
+	//setting up upgrades class
 	public double PlayerHealthMultiplier;
 	public double PlayerDamageMultiplier;
 	public double EnemyHealthMultiplier;
@@ -89,7 +107,8 @@ public class UpgradeOption{
 	public double PlayerSpeedMultiplier;
 	public string OptionImage;
 	public string OptionThumbnail;
-	public UpgradeOption([Optional]double playerHealth,[Optional]double playerDamage,[Optional] double enemyHealth,[Optional]double enemyDamage,[Optional]double playerSpeed, [Optional] string optionImage,[Optional] string thumbImage){
+	public UpgradeOption([Optional] double playerHealth, [Optional] double playerDamage, [Optional] double enemyHealth, [Optional] double enemyDamage, [Optional] double playerSpeed, [Optional] string optionImage, [Optional] string thumbImage)
+	{
 		PlayerHealthMultiplier = playerHealth;
 		PlayerDamageMultiplier = playerDamage;
 		EnemyHealthMultiplier = enemyHealth;

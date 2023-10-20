@@ -1,13 +1,13 @@
 [gd_scene load_steps=10 format=3 uid="uid://btcwan8fki3ba"]
 
 [ext_resource type="Script" path="res://Scripts/menu.cs" id="1_7rpr8"]
-[ext_resource type="Texture2D" uid="uid://dtpa0o1rd3k6f" path="res://Assets/Img/Menu_Assets/Menu_Player.png" id="1_pr7eq"]
-[ext_resource type="Texture2D" uid="uid://c1ux33haa57vv" path="res://Assets/Textures/Menu_Background.png" id="2_1n0c3"]
-[ext_resource type="Texture2D" uid="uid://ghxes2x7a2xx" path="res://Assets/Img/Menu_Assets/Menu_Shaft.png" id="3_j1woe"]
-[ext_resource type="Texture2D" uid="uid://daxcems2hu3fg" path="res://Assets/Textures/Background_Wave_1.png" id="3_vnejr"]
-[ext_resource type="Texture2D" uid="uid://3gej2s2bwcem" path="res://Assets/Textures/Background_Wave_2.png" id="4_4npvk"]
-[ext_resource type="Texture2D" uid="uid://dtdjjlvlfr5e7" path="res://Assets/Textures/Elevator_Glass_Menu.png" id="5_o8g7h"]
-[ext_resource type="Texture2D" uid="uid://dd27k44i7k4pv" path="res://Assets/Textures/Background_Wave_3.png" id="5_qk63b"]
+[ext_resource type="Texture2D" uid="uid://bew2ep772s80h" path="res://Assets/Img/Menu_Assets/Menu_Player.png" id="1_pr7eq"]
+[ext_resource type="Texture2D" uid="uid://c5q107n4ud7j7" path="res://Assets/Textures/Menu_Background.png" id="2_1n0c3"]
+[ext_resource type="Texture2D" uid="uid://buexmldfqflyx" path="res://Assets/Img/Menu_Assets/Menu_Shaft.png" id="3_j1woe"]
+[ext_resource type="Texture2D" uid="uid://c23lojqrjvxf" path="res://Assets/Textures/Background_Wave_1.png" id="3_vnejr"]
+[ext_resource type="Texture2D" uid="uid://d4bw2kuts2a62" path="res://Assets/Textures/Background_Wave_2.png" id="4_4npvk"]
+[ext_resource type="Texture2D" uid="uid://c2kja1mmrylk8" path="res://Assets/Textures/Elevator_Glass_Menu.png" id="5_o8g7h"]
+[ext_resource type="Texture2D" uid="uid://dkes2g7lwxffr" path="res://Assets/Textures/Background_Wave_3.png" id="5_qk63b"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_ufcdq"]
 animations = [{

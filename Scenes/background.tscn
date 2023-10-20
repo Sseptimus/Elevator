@@ -1,14 +1,17 @@
-[gd_scene load_steps=14 format=3 uid="uid://rlcgesiykerw"]
+[gd_scene load_steps=15 format=3 uid="uid://rlcgesiykerw"]
 
 [ext_resource type="Script" path="res://Scripts/background_script.cs" id="1_rg2uo"]
 [ext_resource type="Texture2D" uid="uid://qb0asv3n47jw" path="res://Assets/Textures/Pixel_Dirty_Tiles.png" id="2_15pg3"]
 [ext_resource type="Script" path="res://Scripts/Door_script.cs" id="2_egvqq"]
-[ext_resource type="Texture2D" uid="uid://dvxr8un3d3xo8" path="res://Assets/Textures/Pixel_Left_Door.png" id="4_pmyak"]
+[ext_resource type="Texture2D" uid="uid://bpwxmv5tbx1sk" path="res://Assets/Textures/Pixel_Left_Door.png" id="4_pmyak"]
 [ext_resource type="Texture2D" uid="uid://4nlp18ivm58y" path="res://Assets/Textures/Pixel_Right_Door.png" id="5_635yg"]
 [ext_resource type="Texture2D" uid="uid://clkxhqd0qa32q" path="res://Assets/Textures/Pixel_Top_Wall_Empty.png" id="5_g4tfg"]
 [ext_resource type="Texture2D" uid="uid://bmgddpt4udtw5" path="res://Assets/Textures/Pixel_Dirty_Side_Wall.png" id="6_qi1m4"]
 [ext_resource type="Texture2D" uid="uid://bbsnr74vn65ct" path="res://Assets/Textures/Untitled-2.png" id="7_4ewnp"]
 [ext_resource type="Texture2D" uid="uid://c05c64nm1ajwh" path="res://Assets/Textures/Untitled-1.png" id="7_w2i7n"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_iibda"]
+size = Vector2(1277, 11)
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_432s0"]
 vertices = PackedVector2Array(639.459, -344, 1281.91, -343, 1002.58, 2, 903.822, 3, 1057.45, 140, 1826.6, 110, 1826.6, 1080, 107.74, 1079, 107.74, 110, 811.045, 137)
@@ -31,6 +34,13 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_rg2uo")
+
+[node name="StaticBody2D2" type="StaticBody2D" parent="."]
+position = Vector2(332, 0)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D2"]
+position = Vector2(628.5, 97.5)
+shape = SubResource("RectangleShape2D_iibda")
 
 [node name="TextureRect" type="TextureRect" parent="."]
 layout_mode = 0
@@ -67,7 +77,7 @@ texture = ExtResource("4_pmyak")
 
 [node name="Left_Door" type="CollisionShape2D" parent="Doors/Left_Door_Container"]
 z_index = 10
-position = Vector2(160.614, 96.875)
+position = Vector2(150, 98)
 shape = SubResource("RectangleShape2D_834gd")
 debug_color = Color(0.960784, 0, 0.505882, 0.419608)
 
@@ -84,7 +94,7 @@ texture = ExtResource("5_635yg")
 
 [node name="Right_Door" type="CollisionShape2D" parent="Doors/Right_Door_Container"]
 z_index = 10
-position = Vector2(160.614, 96.875)
+position = Vector2(149.773, 98)
 shape = SubResource("RectangleShape2D_834gd")
 debug_color = Color(0.898039, 0.227451, 0.54902, 0.419608)
 
@@ -110,7 +120,7 @@ rotation = -1.5708
 texture = ExtResource("6_qi1m4")
 
 [node name="PointLight2D2" type="PointLight2D" parent="."]
-position = Vector2(969, 595)
+position = Vector2(941, 595)
 scale = Vector2(1.59767, 1.61031)
 energy = 0.75
 texture = ExtResource("7_4ewnp")
