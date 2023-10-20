@@ -61,6 +61,7 @@ position = Vector2(650, 0)
 script = ExtResource("2_egvqq")
 
 [node name="Area2D" type="Area2D" parent="Doors"]
+visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Doors/Area2D"]
 position = Vector2(321.726, -121.75)

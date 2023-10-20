@@ -2307,11 +2307,13 @@ libraries = {
 }
 
 [node name="Enemy_hitbox_container" type="Area2D" parent="."]
+visible = false
 
 [node name="Enemy_hitbox" type="CollisionShape2D" parent="Enemy_hitbox_container"]
 shape = SubResource("RectangleShape2D_x2kyo")
 
 [node name="Hitbox_container" type="Area2D" parent="."]
+visible = false
 
 [node name="Melee_hitbox" type="CollisionShape2D" parent="Hitbox_container"]
 position = Vector2(80.5, 0)
@@ -2319,6 +2321,7 @@ shape = SubResource("RectangleShape2D_oa4bp")
 disabled = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 scale = Vector2(6.32, 6.4)
 shape = SubResource("CircleShape2D_1dmwf")
 

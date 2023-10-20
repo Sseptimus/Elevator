@@ -661,7 +661,7 @@ z_index = 2
 position = Vector2(0, 1.90735e-06)
 scale = Vector2(3, 2.811)
 sprite_frames = SubResource("SpriteFrames_t73cm")
-animation = &"0 -1"
+animation = &"Melee_-1 0"
 speed_scale = 5.0
 
 [node name="Power_attack_hitbox_container" type="Area2D" parent="Visuals_Container/AnimatedSprite2D"]
